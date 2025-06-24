@@ -6,8 +6,74 @@
   <title>Qwen2.5-VL 视觉问答数据集</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
   <!-- Tailwind 配置 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模型评估表格</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style type="text/tailwindcss">
+    .table-container {
+      @apply max-w-6xl mx-auto mb-12 bg-white rounded-xl shadow-md p-6;
+    }
+    table {
+      @apply w-full text-left border-collapse;
+    }
+    thead {
+      @apply bg-gray-50;
+    }
+    th,
+    td {
+      @apply px-4 py-3 border;
+    }
+    th {
+      @apply font-semibold text-gray-700;
+    }
+    tr {
+      @apply border-b hover:bg-gray-50 transition-colors;
+    }
+    /* 新增高亮样式 */
+    .column-highlight {
+      @apply bg-highlightBg text-highlightText transition-all duration-200 font-bold;
+    }
+    .cell-hover {
+      @apply transform scale-110 z-10 shadow-lg transition-all duration-200 border-2 border-yellow-400;
+    }
+  </style>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th,
+    td {
+      border: 1px solid #d1d5db;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+    }
+    /* 数据整理表格专属样式 - 移除悬停效果 */
+    .data整理-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .data整理-table th,
+    .data整理-table td {
+      border: 1px solid #d1d5db;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .data整理-table th {
+      background-color: #f1f5f9;
+    }
+    .data整理-table tr {
+      transition: none;
+      background-color: transparent;
+    }
+    .data整理-table tr:hover {
+      background-color: transparent;
+    }
+  </style>
   <script>
     tailwind.config = {
       theme: {
@@ -16,7 +82,10 @@
             primary: '#615CED',
             secondary: '#165DFF',
             dark: '#1E293B',
-            light: '#F8FAFC'
+            light: '#F8FAFC',
+            /* 新增高亮颜色 */
+            highlightBg: '#0284C7',
+            highlightText: '#FFFFFF',
           },
           fontFamily: {
             inter: ['Inter', 'system-ui', 'sans-serif'],
@@ -40,6 +109,9 @@
       .hover-scale:hover {
         transform: scale(1.02);
       }
+      .section-title {
+        @apply text-2xl font-bold text-dark mb-4 mt-8;
+      }
     }
   </style>
 </head>
@@ -51,17 +123,13 @@
         <div class="text-primary text-2xl font-bold">Qwen</div>
         <div class="text-gray-500 text-sm">大语言模型</div>
       </div>
-      
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="#" class="text-gray-700 hover:text-primary transition-colors">首页</a>
-        <a href="#" class="text-primary font-medium">文档</a>
-        <a href="#" class="text-gray-700 hover:text-primary transition-colors">模型</a>
-        <a href="#" class="text-gray-700 hover:text-primary transition-colors">API</a>
-        <a href="#" class="text-gray-700 hover:text-primary transition-colors">社区</a>
+        <a href="#" class="text-gray-700 hover:text-primary transition-colors">前往修改</a>
+        <a href="https://github.com/embodied-vsr/example.github.io/" class="text-gray-700 hover:text-primary transition-colors">github</a>
       </nav>
       
       <div class="flex items-center space-x-4">
-        <a href="https://github.com/QwenLM/Qwen2-VL" target="_blank" class="text-gray-700 hover:text-primary transition-colors">
+        <a href="https://github.com/embodied-vsr/example.github.io" target="_blank" class="text-gray-700 hover:text-primary transition-colors">
           <i class="fa fa-github text-xl"></i>
         </a>
         <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
@@ -76,30 +144,357 @@
     <!-- 移动端菜单 -->
     <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
       <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">首页</a>
-        <a href="#" class="text-primary font-medium py-2">文档</a>
-        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">模型</a>
-        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">API</a>
-        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">社区</a>
+        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">前往修改</a>
+        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">github</a>
         <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
           试用模型
         </a>
       </div>
     </div>
   </header>
-
   <!-- 主内容区 -->
   <main class="container mx-auto px-4 py-12">
+    <!-- Qwen2.5-VL 介绍 -->
+    <section class="max-w-6xl mx-auto mb-12 bg-white rounded-xl shadow-md p-6 hover-scale">
+      <h2 class="section-title">Qwen2.5-VL 介绍</h2>
+      <p class="text-lg mb-4">
+        我们发布了 Qwen2.5-VL，Qwen 模型家族的旗舰视觉语言模型，对比此前发布的 Qwen2-VL 实现了巨大的飞跃。欢迎访问 Qwen Chat 并选择 Qwen2.5-VL-72B-Instruct 进行体验。此外，我们在 Hugging Face 和 ModelScope 上开源了 Qwen2.5-VL 的 Base 和 Instruct 模型，包含 3B、7B 和 72B 在内的 3 个模型尺寸。
+      </p>
+      
+      <h2 class="section-title">Qwen2.5-VL 的主要特点</h2>
+      <ul class="space-y-4 mb-6">
+        <li class="flex items-start">
+          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+          <span>感知更丰富的世界：Qwen2.5-VL 不仅擅长识别常见物体，如花、鸟、鱼和昆虫，还能够分析图像中的文本、图表、图标、图形和布局。</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+          <span>Agent：Qwen2.5-VL 直接作为一个视觉 Agent，可以推理并动态地使用工具，初步具备了使用电脑和使用手机的能力。</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+          <span>理解长视频和捕捉事件：Qwen2.5-VL 能够理解超过 1 小时的视频，并且这次它具备了通过精准定位相关视频片段来捕捉事件的新能力。</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+          <span>视觉定位：Qwen2.5-VL 可以通过生成 bounding boxes 或者 points 来准确定位图像中的物体，并能够为坐标和属性提供稳定的 JSON 输出。</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+          <span>结构化输出：对于发票、表单、表格等数据，Qwen2.5-VL 支持其内容的结构化输出，惠及金融、商业等领域的应用。</span>
+        </li>
+      </ul>
+      
+      <h2 class="section-title">模型性能</h2>
+      <p class="mb-4">
+        我们对视觉语言模型进行了全面的评估，比较了 SOTA 模型以及同尺寸规模模型中表现最好的模型。在旗舰模型 Qwen2.5-VL-72B-Instruct 的测试中，它在一系列涵盖多个领域和任务的基准测试中表现出色，包括大学水平的问题、数学、文档理解、视觉问答、视频理解和视觉 Agent。值得注意的是，Qwen2.5-VL 在理解文档和图表方面具有显著优势，并且能够作为视觉 Agent 进行操作，而无需特定任务的微调。
+      </p>
+    </section>
+<section class="table-container">
+    <h2 class="text-2xl font-bold text-dark mb-4">模型评估总体</h2>
+    <div class="overflow-x-auto">
+      <table id="performanceTable"> <!-- 新增表格ID -->
+        <thead>
+            <tr>
+                <th rowspan="2"></th>
+                <th rowspan="2"></th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="2">
+                  Qwen2.5-VL 72B
+                </th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="3">
+                  Gemini-2 Flash
+                </th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="4">
+                  GPT-4o
+                </th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="5">
+                  Claude3.5 Sonnet
+                </th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="6">
+                  Qwen2-VL 72B
+                </th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="7">
+                  Other Best Open LVL M
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2">College-level Problems</td>
+                <td>MMMU</td>
+                <td data-col="2">70.2</td>
+                <td data-col="3"><span style="color:red">70.7</span></td>
+                <td data-col="4">70.3</td>
+                <td data-col="5">70.4</td>
+                <td data-col="6">64.5</td>
+                <td data-col="7">70.1</td>
+            </tr>
+            <tr>
+                <td>MMMU Pro</td>
+                <td data-col="2">51.1</td>
+                <td data-col="3"><span style="color:red">57.0</span></td>
+                <td data-col="4">54.5</td>
+                <td data-col="5">54.7</td>
+                <td data-col="6">46.2</td>
+                <td data-col="7">52.7</td>
+            </tr>
+            <tr>
+                <td rowspan="4">Document and Diagrams Reading</td>
+                <td>DocVQA</td>
+                <td data-col="2">96.4</td>
+                <td data-col="3">92.1</td>
+                <td data-col="4">91.1</td>
+                <td data-col="5">95.2</td>
+                <td data-col="6"><span style="color:red">96.5</span></td>
+                <td data-col="7">96.1</td>
+            </tr>
+            <tr>
+                <td>InfoVQA</td>
+                <td data-col="2"><span style="color:red">87.3</span></td>
+                <td data-col="3">77.8</td>
+                <td data-col="4">80.7</td>
+                <td data-col="5">74.3</td>
+                <td data-col="6">84.5</td>
+                <td data-col="7">84.1</td>
+            </tr>
+            <tr>
+                <td>CC-OCR</td>
+                <td data-col="2"><span style="color:red">79.8</span></td>
+                <td data-col="3">73.0</td>
+                <td data-col="4">66.6</td>
+                <td data-col="5">62.7</td>
+                <td data-col="6">68.7</td>
+                <td data-col="7">68.7</td>
+            </tr>
+            <tr>
+                <td>OCRBenchV2</td>
+                <td data-col="2"><span style="color:red">61.5</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">46.5</td>
+                <td data-col="5">45.2</td>
+                <td data-col="6">47.8</td>
+                <td data-col="7">47.8</td>
+            </tr>
+            <tr>
+                <td rowspan="3">General Visual Question Answering</td>
+                <td>MegaBench</td>
+                <td data-col="2">51.3</td>
+                <td data-col="3"><span style="color:red">55.2</span></td>
+                <td data-col="4">54.2</td>
+                <td data-col="5">52.1</td>
+                <td data-col="6">46.8</td>
+                <td data-col="7">47.4</td>
+            </tr>
+            <tr>
+                <td>MMStar</td>
+                <td data-col="2"><span style="color:red">70.8</span></td>
+                <td data-col="3">69.4</td>
+                <td data-col="4">64.7</td>
+                <td data-col="5">65.1</td>
+                <td data-col="6">68.3</td>
+                <td data-col="7">69.5</td>
+            </tr>
+            <tr>
+                <td>MMBench1.1</td>
+                <td data-col="2"><span style="color:red">88.0</span></td>
+                <td data-col="3">83.0</td>
+                <td data-col="4">82.1</td>
+                <td data-col="5">83.4</td>
+                <td data-col="6">86.6</td>
+                <td data-col="7">87.4</td>
+            </tr>
+            <tr>
+                <td rowspan="2">Math</td>
+                <td>MathVista</td>
+                <td data-col="2"><span style="color:red">74.8</span></td>
+                <td data-col="3">73.1</td>
+                <td data-col="4">63.8</td>
+                <td data-col="5">65.4</td>
+                <td data-col="6">70.5</td>
+                <td data-col="7">72.3</td>
+            </tr>
+            <tr>
+                <td>MathVision</td>
+                <td data-col="2">38.1</td>
+                <td data-col="3"><span style="color:red">41.3</span></td>
+                <td data-col="4">30.4</td>
+                <td data-col="5">38.3</td>
+                <td data-col="6">25.9</td>
+                <td data-col="7">32.2</td>
+            </tr>
+            <tr>
+                <td rowspan="4">Video Understanding</td>
+                <td>VideoMME</td>
+                <td data-col="2"><span style="color:red">73.3</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">71.9</td>
+                <td data-col="5">60.0</td>
+                <td data-col="6">71.2</td>
+                <td data-col="7">72.1</td>
+            </tr>
+            <tr>
+                <td>MMBench-Video</td>
+                <td data-col="2"><span style="color:red">2.0</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">1.7</td>
+                <td data-col="5">1.4</td>
+                <td data-col="6">1.7</td>
+                <td data-col="7">1.9</td>
+            </tr>
+            <tr>
+                <td>LVBench</td>
+                <td data-col="2"><span style="color:red">47.3</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">30.8</td>
+                <td data-col="5">-</td>
+                <td data-col="6">-</td>
+                <td data-col="7">43.6</td>
+            </tr>
+            <tr>
+                <td>CharadesSTA</td>
+                <td data-col="2"><span style="color:red">50.9</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">35.7</td>
+                <td data-col="5">-</td>
+                <td data-col="6">-</td>
+                <td data-col="7">48.4</td>
+            </tr>
+            <tr>
+                <td rowspan="6">Visual Agent</td>
+                <td>AlTZ</td>
+                <td data-col="2"><span style="color:red">83.2</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">35.3</td>
+                <td data-col="5">-</td>
+                <td data-col="6">-</td>
+                <td data-col="7">53.3</td>
+            </tr>
+            <tr>
+                <td>Android Control</td>
+                <td data-col="2"><span style="color:red">67.4</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">-</td>
+                <td data-col="5">-</td>
+                <td data-col="6">-</td>
+                <td data-col="7">66.4</td>
+            </tr>
+            <tr>
+                <td>ScreenSpot</td>
+                <td data-col="2">87.1</td>
+                <td data-col="3">84.0</td>
+                <td data-col="4">18.1</td>
+                <td data-col="5">83.0</td>
+                <td data-col="6">-</td>
+                <td data-col="7"><span style="color:red">89.5</span></td>
+            </tr>
+            <tr>
+                <td>ScreenSpot Pro</td>
+                <td data-col="2"><span style="color:red">43.6</span></td>
+                <td data-col="3">-</td>
+                <td data-col="4">-</td>
+                <td data-col="5">17.1</td>
+                <td data-col="6">-</td>
+                <td data-col="7">38.1</td>
+            </tr>
+            <tr>
+                <td>AndroidWorld</td>
+                <td data-col="2">35.0</td>
+                <td data-col="3">-</td>
+                <td data-col="4">34.5</td>
+                <td data-col="5">27.9</td>
+                <td data-col="6">-</td>
+                <td data-col="7"><span style="color:red">46.6</span></td>
+            </tr>
+            <tr>
+                <td>OSWorld</td>
+                <td data-col="2">8.8</td>
+                <td data-col="3">-</td>
+                <td data-col="4">5.0</td>
+                <td data-col="5">14.9</td>
+                <td data-col="6">-</td>
+                <td data-col="7"><span style="color:red">22.7</span></td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+  </section>
+    <!-- 数据整理表格 -->
+    <section class="max-w-6xl mx-auto mb-12">
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-6 bg-white text-black">
+          <h2 class="text-xl font-bold mb-4">数据整理</h2>
+          <table class="data整理-table">
+            <thead>
+              <tr>
+                <!-- 第一列：分组标识 -->
+                <th>分组标识</th>
+                <!-- 第二列：数据类型 -->
+                <th>数据类型</th>
+                <!-- 第三列：大类别 - Physical Common Sense 及其子类型 -->
+                <th>Physical Common Sense（子类型）</th>
+                <!-- 第四列：大类别 - Physical Common Sense 对应数量 -->
+                <th>Physical Common Sense 数量</th>
+                <!-- 第五列：大类别 - Embodied Reasoning 及其子类型 -->
+                <th>Embodied Reasoning（子类型）</th>
+                <!-- 第六列：大类别 - Embodied Reasoning 对应数量 -->
+                <th>Embodied Reasoning 数量</th>
+                <!-- 第七列：总计 -->
+                <th>TOT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- SFT 分组数据行 -->
+              <tr>
+                <td>SFT</td>
+                <td>QA数据</td>
+                <td>
+                  <div>Physgame</div>
+                  <div>NaturalReasoning（文本）</div>
+                </td>
+                <td>
+                  <div>40K</div>
+                  <div>1M</div>
+                </td>
+                <td>
+                  <div>Agibot</div>
+                  <div>Robovqa</div>
+                </td>
+                <td>
+                  <div>200K</div>
+                  <div>800K</div>
+                </td>
+                <td>2.04M</td>
+              </tr>
+              <!-- R1 分组数据行 -->
+              <tr>
+                <td>R1</td>
+                <td>MCQ数据</td>
+                <td>Physgame</td>
+                <td>10K</td>
+                <td>
+                  <div>egolife</div>
+                  <div>embodied-r</div>
+                </td>
+                <td>
+                  <div>8k</div>
+                  <div>4k</div>
+                </td>
+                <td>22k</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
     <!-- 页面标题区 -->
     <section class="text-center mb-12">
       <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold text-dark mb-4 text-shadow">
        视觉问答数据集
       </h1>
       <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 max-w-3xl mx-auto">
-        视觉问答数据集展示，包括问题、图像和回答
+        视觉问答数据集展示，包括问题、视频/图像和回答（支持MP4等主流视频格式）
       </p>
     </section>
-
     <!-- 数据集表格部分 -->
     <section class="max-w-6xl mx-auto">
       <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
@@ -118,137 +513,126 @@
                 <th class="py-4 px-6 text-left font-semibold text-gray-700 w-1/3">回答 (Answer)</th>
               </tr>
             </thead>
-            <tbody>
-              <!-- 示例行 1 -->
+            <tbody id="table-body">
+              <!-- 示例行 1（视频示例） -->
               <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
                 <td class="py-4 px-6">
                   <div class="font-medium mb-2">What is the glitch in the game video showing vertical take-off?"</div>
                 </td>
                 <td class="py-4 px-6">
-                  <div class="relative h-40 w-full bg-gray-100 rounded-lg overflow-hidden">
-                    <img src="https://zitd5je6f7j.feishu.cn/wiki/Pm65w9vCXiy9h1kIiV4ch8HEnLU#share-NceXdYr7Dogr2JxIalJcMgCsnkg"  class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/10 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
-                    </div>
+                  <div class="h-40 w-full bg-white rounded-lg overflow-hidden">
+                    <video class="w-full h-full object-cover" controls poster="https://picsum.photos/800/400?random=1">
+                      <source src="https://zitd5je6f7j.feishu.cn/wiki/Pm65w9vCXiy9h1kIiV4ch8HEnLU#share-MD3Od7IpVoQ266xsA4Zc4wjfnSg" type="video/mp4">
+                      你的浏览器不支持视频播放
+                    </video>
                   </div>
                 </td>
                 <td class="py-4 px-6">
                   <div class="space-y-2">
                     <div>
-                     The glitch in the video shows an aircraft, typically not designed for vertical take-offs, launching vertically from the ground. This is unusual because planes of this type usually require a runway and horizontal movement to gain enough lift for flight. The sudden vertical ascent defies the typical physics expected in such a game.
+                         <ul>
+  <li>1. The glitch in the video shows an aircraft, typically not designed for vertical take-offs, launching vertically from the ground.</li>
+  <li>2. This is unusual because planes of this type usually require a runway and horizontal movement to gain enough lift for flight.</li>
+  <li>3. The sudden vertical ascent defies the typical physics expected in such a game.</li>
+                            </ul>
                   </div>
                 </td>
               </tr>
               
-              <!-- 示例行 2 -->
+              <!-- 示例行 2（视频示例） -->
               <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
                 <td class="py-4 px-6">
                   <div class="font-medium mb-2">Please reconstruct the brief description of the robot event into an intensive standardized description, covering the overall scenario objectives, environment, robot characteristics, camera perspective and movement, sub-objectives and technical action decomposition, and post-action states to form a richer and more precise narrative, with a total length of no more than 150 words.</div>
                 </td>
                 <td class="py-4 px-6">
-                  <div class="relative h-40 w-full bg-gray-100 rounded-lg overflow-hidden">
-                    <img src="https://zitd5je6f7j.feishu.cn/wiki/Pm65w9vCXiy9h1kIiV4ch8HEnLU#share-Uzq1d5k6Mo4zv2x2s3XciFX4nGk"  class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/10 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
-                    </div>
+                  <div class="h-40 w-full bg-white rounded-lg overflow-hidden">
+                    <video class="w-full h-full object-cover" controls poster="https://picsum.photos/800/400?random=2">
+                      <source src="https://zitd5je6f7j.feishu.cn/wiki/Pm65w9vCXiy9h1kIiV4ch8HEnLU#share-MD3Od7IpVoQ266xsA4Zc4wjfnSg" type="video/mp4">
+                      你的浏览器不支持视频播放
+                    </video>
                   </div>
                 </td>
                 <td class="py-4 px-6">
                   <div>
-                    The robot's primary goal is to place a blue LEGO brick into a drawer and close it. The scene takes place in an office environment with dim artificial lighting. The robot is a single-arm manipulator with a black and metallic appearance, equipped with a parallel jaw gripper. The camera is positioned in a first-person perspective, likely mounted on the robot's arm or head, providing a direct view of the workspace.\n\nThe robot's sub-goal is to insert the blue LEGO brick into the drawer. The action sequence begins with the robot perceiving the blue LEGO brick on a wooden surface. The robot executes a 'Grasp [blue LEGO brick]' action, lifting it slightly. It then performs a 'Move_arm_to [drawer_opening]' command, positioning the brick above the drawer. The robot proceeds with a 'Place [blue LEGO brick] at [inside_drawer]' action, carefully positioning the brick within the drawer. Following this, the robot executes a 'Close_drawer' action, ensuring the drawer is securely shut.\n\nAfter the action, the blue LEGO brick is neatly placed inside the closed drawer, and the robot's gripper is open and retracted from the drawer area.
+                   <ul>
+  <li>1. The robot's primary goal is to place a blue LEGO brick into a drawer and close it. The scene takes place in an office environment with dim artificial lighting. The robot is a single-arm manipulator with a black and metallic appearance, equipped with a parallel jaw gripper. The camera is positioned in a first-person perspective, likely mounted on the robot's arm or head, providing a direct view of the workspace.</li>
+  <li>2. The robot's sub-goal is to insert the blue LEGO brick into the drawer. The action sequence begins with the robot perceiving the blue LEGO brick on a wooden surface. The robot executes a 'Grasp [blue LEGO brick]' action, lifting it slightly. It then performs a 'Move_arm_to [drawer_opening]' command, positioning the brick above the drawer. The robot proceeds with a 'Place [blue LEGO brick] at [inside_drawer]' action, carefully positioning the brick within the drawer. Following this, the robot executes a 'Close_drawer' action, ensuring the drawer is securely shut.</li>
+  <li>3. After the action, the blue LEGO brick is neatly placed inside the closed drawer, and the robot's gripper is open and retracted from the drawer area.</li>
+</ul>
                   </div>
                 </td>
               </tr>
               
-              <!-- 示例行 3 -->
+              <!-- 示例行 3（图片示例，保留兼容性） -->
               <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
                 <td class="py-4 px-6">
                   <div class="font-medium mb-2">next 5 steps?</div>
                 </td>
                 <td class="py-4 px-6">
-                  <div class="relative h-40 w-full bg-gray-100 rounded-lg overflow-hidden">
-                    <img src="https://zitd5je6f7j.feishu.cn/wiki/Pm65w9vCXiy9h1kIiV4ch8HEnLU#share-KwzXd4SFcoyrnwxzjh2chHZJnne" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/10 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
-                    </div>
+                  <div class="h-40 w-full bg-white rounded-lg overflow-hidden">
+                    <img src="https://zitd5je6f7j.feishu.cn/wiki/Pm65w9vCXiy9h1kIiV4ch8HEnLU#share-MD3Od7IpVoQ266xsA4Zc4wjfnSg" class="w-full h-full object-cover">
                   </div>
                 </td>
                 <td class="py-4 px-6">
                   <div>
-                        1- put the green apple in the bowl 2- put the apple in the bowl 3- put the orange in the bowl 4- put the orange in the bowl 5- put the grapes in the bowl
+     <ul>
+  <li>1. put the green apple in the bowl</li>
+  <li>2. put the apple in the bowl</li>
+  <li>3. put the orange in the bowl</li>
+  <li>4. put the orange in the bowl</li>
+  <li>5. put the grapes in the bowl</li>
+</ul>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        
-        <!-- 添加新行按钮 -->
-        <div class="p-4 bg-gray-50 border-t border-gray-200 flex justify-end">
-          <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center">
-            <i class="fa fa-plus mr-2"></i> 添加新行
-          </button>
-        </div>
       </div>
     </section>
   </main>
-
   <!-- 页脚 -->
   <footer class="bg-dark text-white py-8">
     <div class="container mx-auto px-4 text-center">
       <p class="text-gray-400">
-        &copy; 2025 具身团队 | 视觉问答数据集表格
+        &copy; 2025 具身团队 | 视觉问答数据集表格（支持MP4、WebM等视频格式）
       </p>
     </div>
   </footer>
-
-  <!-- JavaScript -->
+  
   <script>
-    // 移动端菜单切换
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-      const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('hidden');
-    });
-    
-    // 图片点击替换功能
-    document.querySelectorAll('img').forEach(img => {
-      img.addEventListener('click', function() {
-        const newSrc = prompt('请输入新的图片URL:', this.src);
-        if (newSrc) {
-          this.src = newSrc;
-        }
-      });
-    });
-    
-    // 添加新行功能
-    document.querySelector('button').addEventListener('click', function() {
-      const tableBody = document.querySelector('tbody');
-      const newRow = document.createElement('tr');
-      newRow.className = 'border-t border-gray-200 hover:bg-gray-50 transition-colors';
+    document.addEventListener('DOMContentLoaded', function() {
+      // 只处理第二列(index=2)及以后的列
+      const startColIndex = 2;
+      const table = document.getElementById('performanceTable');
+      const cells = table.querySelectorAll('td[data-col], th[data-col]');
       
-      newRow.innerHTML = `
-        <td class="py-4 px-6">
-          <div class="font-medium mb-2">新问题</div>
-          <div class="text-sm text-gray-500">请输入问题描述</div>
-        </td>
-        <td class="py-4 px-6">
-          <div class="relative h-40 w-full bg-gray-100 rounded-lg overflow-hidden">
-            <img src="https://picsum.photos/800/400?random=5" alt="新图片" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/10 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 hover:opacity-100">
-              <span class="text-white font-medium">点击替换图片</span>
-            </div>
-          </div>
-          <div class="mt-2 text-sm text-gray-500">图片ID: 新图片</div>
-        </td>
-        <td class="py-4 px-6">
-          <div>请输入回答内容...</div>
-        </td>
-      `;
-      
-      tableBody.appendChild(newRow);
-      
-      // 为新添加的图片添加点击事件
-      newRow.querySelector('img').addEventListener('click', function() {
-        const newSrc = prompt('请输入新的图片URL:', this.src);
-        if (newSrc) {
-          this.src = newSrc;
+      cells.forEach(cell => {
+        const colIndex = parseInt(cell.getAttribute('data-col'));
+        if (colIndex >= startColIndex) {
+          cell.addEventListener('mouseenter', function() {
+            const col = this.getAttribute('data-col');
+            const colCells = table.querySelectorAll(`[data-col="${col}"]`);
+            
+            colCells.forEach(c => {
+              c.classList.add('column-highlight');
+              if (c.tagName === 'TD') {
+                c.classList.add('cell-hover');
+              }
+            });
+          });
+          
+          cell.addEventListener('mouseleave', function() {
+            const col = this.getAttribute('data-col');
+            const colCells = table.querySelectorAll(`[data-col="${col}"]`);
+            
+            colCells.forEach(c => {
+              c.classList.remove('column-highlight');
+              if (c.tagName === 'TD') {
+                c.classList.remove('cell-hover');
+              }
+            });
+          });
         }
       });
     });
