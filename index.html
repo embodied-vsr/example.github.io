@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Qwen2.5-VL 视觉问答数据集</title>
+  <title>RoboVLM 视觉问答数据集</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Tailwind 配置 -->
@@ -189,7 +189,7 @@
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
-        <div class="text-primary text-2xl font-bold">Qwen</div>
+        <div class="text-primary text-2xl font-bold">RoboVLM</div>
         <div class="text-gray-500 text-sm">大语言模型</div>
       </div>
       <nav class="hidden md:flex items-center space-x-8">
@@ -223,40 +223,40 @@
   </header>
   <!-- 主内容区 -->
   <main class="container mx-auto px-4 py-12">
-    <!-- Qwen2.5-VL 介绍 -->
+    <!-- RoboVLM 介绍 -->
     <section class="max-w-6xl mx-auto mb-12 bg-white rounded-xl shadow-md p-6 hover-scale">
-      <h2 class="section-title">Qwen2.5-VL 介绍</h2>
+      <h2 class="section-title">RoboVLM 介绍</h2>
       <p class="text-lg mb-4">
-        我们发布了 Qwen2.5-VL，Qwen 模型家族的旗舰视觉语言模型，对比此前发布的 Qwen2-VL 实现了巨大的飞跃。欢迎访问 Qwen Chat 并选择 Qwen2.5-VL-72B-Instruct 进行体验。此外，我们在 Hugging Face 和 ModelScope 上开源了 Qwen2.5-VL 的 Base 和 Instruct 模型，包含 3B、7B 和 72B 在内的 3 个模型尺寸。
+        我们发布了 RoboVLM，RoboVLM 模型家族的旗舰视觉语言模型，对比此前发布的 RoboVLM 实现了巨大的飞跃。欢迎访问 RoboVLM Chat 并选择 RoboVLM-72B-Instruct 进行体验。此外，我们在 Hugging Face 和 ModelScope 上开源了 RoboVLM 的 Base 和 Instruct 模型，包含 3B、7B 和 72B 在内的 3 个模型尺寸。
       </p>
       
-      <h2 class="section-title">Qwen2.5-VL 的主要特点</h2>
+      <h2 class="section-title">RoboVLM 的主要特点</h2>
       <ul class="space-y-4 mb-6">
         <li class="flex items-start">
           <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>感知更丰富的世界：Qwen2.5-VL 不仅擅长识别常见物体，如花、鸟、鱼和昆虫，还能够分析图像中的文本、图表、图标、图形和布局。</span>
+          <span>感知更丰富的世界：RoboVLM 不仅擅长识别常见物体，如花、鸟、鱼和昆虫，还能够分析图像中的文本、图表、图标、图形和布局。</span>
         </li>
         <li class="flex items-start">
           <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>Agent：Qwen2.5-VL 直接作为一个视觉 Agent，可以推理并动态地使用工具，初步具备了使用电脑和使用手机的能力。</span>
+          <span>Agent：RoboVLM 直接作为一个视觉 Agent，可以推理并动态地使用工具，初步具备了使用电脑和使用手机的能力。</span>
         </li>
         <li class="flex items-start">
           <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>理解长视频和捕捉事件：Qwen2.5-VL 能够理解超过 1 小时的视频，并且这次它具备了通过精准定位相关视频片段来捕捉事件的新能力。</span>
+          <span>理解长视频和捕捉事件：RoboVLM 能够理解超过 1 小时的视频，并且这次它具备了通过精准定位相关视频片段来捕捉事件的新能力。</span>
         </li>
         <li class="flex items-start">
           <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>视觉定位：Qwen2.5-VL 可以通过生成 bounding boxes 或者 points 来准确定位图像中的物体，并能够为坐标和属性提供稳定的 JSON 输出。</span>
+          <span>视觉定位：RoboVLM 可以通过生成 bounding boxes 或者 points 来准确定位图像中的物体，并能够为坐标和属性提供稳定的 JSON 输出。</span>
         </li>
         <li class="flex items-start">
           <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>结构化输出：对于发票、表单、表格等数据，Qwen2.5-VL 支持其内容的结构化输出，惠及金融、商业等领域的应用。</span>
+          <span>结构化输出：对于发票、表单、表格等数据，RoboVLM 支持其内容的结构化输出，惠及金融、商业等领域的应用。</span>
         </li>
       </ul>
       
       <h2 class="section-title">模型性能</h2>
       <p class="mb-4">
-        我们对视觉语言模型进行了全面的评估，比较了 SOTA 模型以及同尺寸规模模型中表现最好的模型。在旗舰模型 Qwen2.5-VL-72B-Instruct 的测试中，它在一系列涵盖多个领域和任务的基准测试中表现出色，包括大学水平的问题、数学、文档理解、视觉问答、视频理解和视觉 Agent。值得注意的是，Qwen2.5-VL 在理解文档和图表方面具有显著优势，并且能够作为视觉 Agent 进行操作，而无需特定任务的微调。
+        我们对视觉语言模型进行了全面的评估，比较了 SOTA 模型以及同尺寸规模模型中表现最好的模型。在旗舰模型 RoboVLM-72B-Instruct 的测试中，它在一系列涵盖多个领域和任务的基准测试中表现出色，包括大学水平的问题、数学、文档理解、视觉问答、视频理解和视觉 Agent。值得注意的是，RoboVLM 在理解文档和图表方面具有显著优势，并且能够作为视觉 Agent 进行操作，而无需特定任务的微调。
       </p>
     </section>
 <section class="table-container">
@@ -268,7 +268,7 @@
                 <th rowspan="2"></th>
                 <th rowspan="2"></th>
                 <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="2">
-                  Qwen2.5-VL 72B
+                  RoboVLM 72B
                 </th>
                 <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="3">
                   Gemini-2 Flash
@@ -280,7 +280,7 @@
                   Claude3.5 Sonnet
                 </th>
                 <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="6">
-                  Qwen2-VL 72B
+                  RoboVLM 72B
                 </th>
                 <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="7">
                   Other Best Open LVL M
