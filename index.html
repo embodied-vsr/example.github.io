@@ -7,8 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Tailwind 配置 -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>模型评估表格</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style type="text/tailwindcss">
     .table-container {
@@ -30,7 +28,6 @@
     tr {
       @apply border-b hover:bg-gray-50 transition-colors;
     }
-    /* 新增高亮样式 */
     .column-highlight {
       @apply bg-highlightBg text-highlightText transition-all duration-200 font-bold;
     }
@@ -52,26 +49,99 @@
     th {
       background-color: #f1f5f9;
     }
-    /* 数据整理表格专属样式 - 移除悬停效果 */
-    .data整理-table {
+    
+    .custom-table {
       border-collapse: collapse;
-      width: 100%;
+      width: 80%;
+      margin: 20px auto;
     }
-    .data整理-table th,
-    .data整理-table td {
-      border: 1px solid #d1d5db;
-      padding: 8px 12px;
-      text-align: left;
+    .custom-table, 
+    .custom-table th, 
+    .custom-table td {
+      border: 1px solid #ccc;
     }
-    .data整理-table th {
-      background-color: #f1f5f9;
+    .custom-table th, 
+    .custom-table td {
+      padding: 10px;
+      text-align: center;
     }
-    .data整理-table tr {
-      transition: none;
-      background-color: transparent;
+    .custom-table th {
+      background-color: #f2f2f2;
     }
-    .data整理-table tr:hover {
-      background-color: transparent;
+    .custom-table tr:hover {
+      background-color: #f5f5f5;
+    }
+    
+    /* 新增问答卡片样式 */
+    .qa-slider {
+      position: relative;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+    .qa-container {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .qa-card {
+      min-width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .qa-header {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .qa-video-container {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+    .qa-video {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .qa-answer {
+      margin-top: 15px;
+      padding: 15px;
+      background-color: #f9fafb;
+      border-left: 4px solid #0284c7;
+      border-radius: 0 8px 8px 0;
+    }
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 10px;
+    }
+    .nav-btn {
+      padding: 8px 16px;
+      background-color: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .nav-btn:hover {
+      background-color: #0369a1;
+    }
+    .slider-indicators {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+      gap: 8px;
+    }
+    .indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #d1d5db;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .indicator.active {
+      background-color: #0284c7;
     }
   </style>
   <script>
@@ -83,7 +153,6 @@
             secondary: '#165DFF',
             dark: '#1E293B',
             light: '#F8FAFC',
-            /* 新增高亮颜色 */
             highlightBg: '#0284C7',
             highlightText: '#FFFFFF',
           },
@@ -423,62 +492,50 @@
       <div class="bg-white rounded-xl shadow-md overflow-hidden">
         <div class="p-6 bg-white text-black">
           <h2 class="text-xl font-bold mb-4">数据整理</h2>
-          <table class="data整理-table">
+          <table class="custom-table">
             <thead>
               <tr>
-                <!-- 第一列：分组标识 -->
-                <th>分组标识</th>
-                <!-- 第二列：数据类型 -->
-                <th>数据类型</th>
-                <!-- 第三列：大类别 - Physical Common Sense 及其子类型 -->
-                <th>Physical Common Sense（子类型）</th>
-                <!-- 第四列：大类别 - Physical Common Sense 对应数量 -->
-                <th>Physical Common Sense 数量</th>
-                <!-- 第五列：大类别 - Embodied Reasoning 及其子类型 -->
-                <th>Embodied Reasoning（子类型）</th>
-                <!-- 第六列：大类别 - Embodied Reasoning 对应数量 -->
-                <th>Embodied Reasoning 数量</th>
-                <!-- 第七列：总计 -->
+                <th></th>
+                <th></th>
+                <th colspan="2">Physical Common Sense</th>
+                <th colspan="2">Embodied Reasoning</th>
                 <th>TOT</th>
               </tr>
             </thead>
             <tbody>
-              <!-- SFT 分组数据行 -->
               <tr>
-                <td>SFT</td>
-                <td>QA数据</td>
-                <td>
-                  <div>Physgame</div>
-                  <div>NaturalReasoning（文本）</div>
-                </td>
-                <td>
-                  <div>40K</div>
-                  <div>1M</div>
-                </td>
-                <td>
-                  <div>Agibot</div>
-                  <div>Robovqa</div>
-                </td>
-                <td>
-                  <div>200K</div>
-                  <div>800K</div>
-                </td>
+                <td rowspan="2">SFT</td>
+                <td rowspan="2">QA数据</td>
+                <td>Physgame</td>
+                <td>NaturalReasoning（文本）</td>
+                <td>Agibot</td>
+                <td>Robovqa</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>40K</td>
+                <td>1M</td>
+                <td>200K</td>
+                <td>800K</td>
                 <td>2.04M</td>
               </tr>
-              <!-- R1 分组数据行 -->
               <tr>
-                <td>R1</td>
-                <td>MCQ数据</td>
-                <td>Physgame</td>
-                <td>10K</td>
-                <td>
-                  <div>egolife</div>
-                  <div>embodied-r</div>
-                </td>
-                <td>
-                  <div>8k</div>
-                  <div>4k</div>
-                </td>
+                <td rowspan="3">R1</td>
+                <td rowspan="3">MCQ数据</td>
+                <th colspan="2">Physical Common Sense</th>
+                <th colspan="2">Embodied Reasoning</th>
+                <th></th>
+              </tr>
+              <tr>
+                <td colspan="2">Physgame</td>
+                <td>egolife</td>
+                <td>embodied-r</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td colspan="2">10K</td>
+                <td>8k</td>
+                <td>4k</td>
                 <td>22k</td>
               </tr>
             </tbody>
@@ -495,101 +552,95 @@
         视觉问答数据集展示，包括问题、视频/图像和回答（支持MP4等主流视频格式）
       </p>
     </section>
-    <!-- 数据集表格部分 -->
+    <!-- 数据集滑动卡片部分 -->
     <section class="max-w-6xl mx-auto">
       <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
         <div class="p-6 border-b border-gray-200">
-          <h2 class="text-2xl font-bold text-dark">视觉问答数据集表格</h2>
-          <p class="text-gray-600 mt-2">格式：问题 → 视频/图像 → 回答</p>
+          <h2 class="text-2xl font-bold text-dark">视觉问答数据集</h2>
+          <p class="text-gray-600 mt-2">格式：问题 → 视频/图像 → 回答（支持左右滑动浏览）</p>
         </div>
         
-        <!-- 可编辑表格 -->
-        <div class="overflow-x-auto">
-          <table class="w-full" contenteditable="true">
-            <thead>
-              <tr class="bg-gray-50">
-                <th class="py-4 px-6 text-left font-semibold text-gray-700 w-1/3">问题 (Question)</th>
-                <th class="py-4 px-6 text-left font-semibold text-gray-700 w-1/3">视频/图像 (Video/Image)</th>
-                <th class="py-4 px-6 text-left font-semibold text-gray-700 w-1/3">回答 (Answer)</th>
-              </tr>
-            </thead>
-            <tbody id="table-body">
-              <!-- 示例行 1（视频示例） -->
-              <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-                <td class="py-4 px-6">
-                  <div class="font-medium mb-2">What is the glitch in the game video showing vertical take-off?"</div>
-                </td>
-                <td class="py-4 px-6">
-                  <div class="h-40 w-full bg-white rounded-lg overflow-hidden">
-                    <video class="w-full h-full object-cover" controls poster="https://picsum.photos/800/400?random=1">
-                      <source src="videos/qhdqno.mp4" type="video/mp4">
-                      你的浏览器不支持视频播放
-                    </video>
-                  </div>
-                </td>
-                <td class="py-4 px-6">
-                  <div class="space-y-2">
-                    <div>
-                         <ul>
-  <li>1. The glitch in the video shows an aircraft, typically not designed for vertical take-offs, launching vertically from the ground.</li><br>
-  <li>2. This is unusual because planes of this type usually require a runway and horizontal movement to gain enough lift for flight.</li><br>
-  <li>3. The sudden vertical ascent defies the typical physics expected in such a game.</li>
-                            </ul>
-                  </div>
-                </td>
-              </tr>
-              
-              <!-- 示例行 2（视频示例） -->
-              <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-                <td class="py-4 px-6">
-                  <div class="font-medium mb-2">Please reconstruct the brief description of the robot event into an intensive standardized description, covering the overall scenario objectives, environment, robot characteristics, camera perspective and movement, sub-objectives and technical action decomposition, and post-action states to form a richer and more precise narrative, with a total length of no more than 150 words.</div>
-                </td>
-                <td class="py-4 px-6">
-                  <div class="h-40 w-full bg-white rounded-lg overflow-hidden">
-                    <video class="w-full h-full object-cover" controls poster="https://picsum.photos/800/400?random=2">
-                      <source src="videos/00000001.mp4" type="video/mp4">
-                      你的浏览器不支持视频播放
-                    </video>
-                  </div>
-                </td>
-                <td class="py-4 px-6">
-                  <div>
-                   <ul>
-  <li>1. The robot's primary goal is to place a blue LEGO brick into a drawer and close it. The scene takes place in an office environment with dim artificial lighting. The robot is a single-arm manipulator with a black and metallic appearance, equipped with a parallel jaw gripper. The camera is positioned in a first-person perspective, likely mounted on the robot's arm or head, providing a direct view of the workspace.</li><br>
-  <li>2. The robot's sub-goal is to insert the blue LEGO brick into the drawer. The action sequence begins with the robot perceiving the blue LEGO brick on a wooden surface. The robot executes a 'Grasp [blue LEGO brick]' action, lifting it slightly. It then performs a 'Move_arm_to [drawer_opening]' command, positioning the brick above the drawer. The robot proceeds with a 'Place [blue LEGO brick] at [inside_drawer]' action, carefully positioning the brick within the drawer. Following this, the robot executes a 'Close_drawer' action, ensuring the drawer is securely shut.</li><br>
-  <li>3. After the action, the blue LEGO brick is neatly placed inside the closed drawer, and the robot's gripper is open and retracted from the drawer area.</li>
-</ul>
-                  </div>
-                </td>
-              </tr>
-              
-              <!-- 示例行 3（图片示例，保留兼容性） -->
-              <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
-                <td class="py-4 px-6">
-                  <div class="font-medium mb-2">next 5 steps?</div>
-                </td>
-                <td class="py-4 px-6">
-                   <div class="h-40 w-full bg-white rounded-lg overflow-hidden">
-                    <video class="w-full h-full object-cover" controls poster="https://picsum.photos/800/400?random=3">
-                      <source src="videos/6718834237937147971.mp4" type="video/mp4">
-                      你的浏览器不支持视频播放
-                    </video>
-                  </div>
-                </td>
-                <td class="py-4 px-6">
-                  <div>
-                      <ul>
-                          <li>1. put the green apple in the bowl</li><br>
-                          <li>2. put the apple in the bowl</li><br>
-                          <li>3. put the orange in the bowl</li><br>
-                          <li>4. put the orange in the bowl</li><br>
-                          <li>5. put the grapes in the bowl</li>
-                      </ul>
-                 </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <!-- 问答滑动容器 -->
+        <div class="qa-slider">
+          <div class="qa-container" id="qaContainer">
+            <!-- 问答卡片1 -->
+            <div class="qa-card">
+              <div class="qa-header">
+                <h3 class="text-lg font-semibold mb-2">Question: What is the glitch in the game video showing vertical take-off?</h3>
+              </div>
+              <div class="qa-video-container">
+                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=1">
+                  <source src="videos/qhdqno.mp4" type="video/mp4">
+                  你的浏览器不支持视频播放
+                </video>
+              </div>
+              <div class="qa-answer">
+                <h4 class="font-semibold mb-2">Model_answer:</h4>
+                <ol>
+                  <li>The glitch in the video shows an aircraft, typically not designed for vertical take-offs, launching vertically from the ground.</li>
+                  <li>This is unusual because planes of this type usually require a runway and horizontal movement to gain enough lift for flight.</li>
+                  <li>The sudden vertical ascent defies the typical physics expected in such a game.</li>
+                </ol>
+              </div>
+            </div>
+            
+            <!-- 问答卡片2 -->
+            <div class="qa-card">
+              <div class="qa-header">
+                <h3 class="text-lg font-semibold mb-2">Question: Please reconstruct the brief description of the robot event into an intensive standardized description, covering the overall scenario objectives, environment, robot characteristics, camera perspective and movement, sub-objectives and technical action decomposition, and post-action states to form a richer and more precise narrative, with a total length of no more than 150 words.</h3>
+              </div>
+              <div class="qa-video-container">
+                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=2">
+                  <source src="videos/00000001.mp4" type="video/mp4">
+                  你的浏览器不支持视频播放
+                </video>
+              </div>
+              <div class="qa-answer">
+                <h4 class="font-semibold mb-2">Model_answer:</h4>
+                <ol>
+                  <li>The robot's primary goal is to place a blue LEGO brick into a drawer and close it. The scene takes place in an office environment with dim artificial lighting. The robot is a single-arm manipulator with a black and metallic appearance, equipped with a parallel jaw gripper. The camera is positioned in a first-person perspective, likely mounted on the robot's arm or head, providing a direct view of the workspace.</li>
+                  <li>The robot's sub-goal is to insert the blue LEGO brick into the drawer. The action sequence begins with the robot perceiving the blue LEGO brick on a wooden surface. The robot executes a 'Grasp [blue LEGO brick]' action, lifting it slightly. It then performs a 'Move_arm_to [drawer_opening]' command, positioning the brick above the drawer. The robot proceeds with a 'Place [blue LEGO brick] at [inside_drawer]' action, carefully positioning the brick within the drawer. Following this, the robot executes a 'Close_drawer' action, ensuring the drawer is securely shut.</li>
+                  <li>After the action, the blue LEGO brick is neatly placed inside the closed drawer, and the robot's gripper is open and retracted from the drawer area.</li>
+                </ol>
+              </div>
+            </div>
+            
+            <!-- 问答卡片3 -->
+            <div class="qa-card">
+              <div class="qa-header">
+                <h3 class="text-lg font-semibold mb-2">Question: next 5 steps?</h3>
+              </div>
+              <div class="qa-video-container">
+                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=3">
+                  <source src="videos/6718834237937147971.mp4" type="video/mp4">
+                  你的浏览器不支持视频播放
+                </video>
+              </div>
+              <div class="qa-answer">
+                <h4 class="font-semibold mb-2">Model_answer:</h4>
+                <ol>
+                  <li>put the green apple in the bowl</li>
+                  <li>put the apple in the bowl</li>
+                  <li>put the orange in the bowl</li>
+                  <li>put the orange in the bowl</li>
+                  <li>put the grapes in the bowl</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 滑动指示器 -->
+          <div class="slider-indicators" id="indicators">
+            <div class="indicator active" data-index="0"></div>
+            <div class="indicator" data-index="1"></div>
+            <div class="indicator" data-index="2"></div>
+          </div>
+          
+          <!-- 导航按钮 -->
+          <div class="slider-nav">
+            <button class="nav-btn" id="prevBtn">上一个</button>
+            <button class="nav-btn" id="nextBtn">下一个</button>
+          </div>
         </div>
       </div>
     </section>
@@ -605,17 +656,88 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // 只处理第二列(index=2)及以后的列
+      // 滑动功能实现
+      const qaContainer = document.getElementById('qaContainer');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const indicators = document.getElementById('indicators').querySelectorAll('.indicator');
+      let currentIndex = 0;
+      const cardCount = document.querySelectorAll('.qa-card').length;
+      const cardWidth = 100; // 卡片宽度百分比
+      
+      // 更新滑动位置
+      function updateSlide() {
+        const translateValue = -currentIndex * cardWidth;
+        qaContainer.style.transform = `translateX(${translateValue}%)`;
+        
+        // 更新指示器状态
+        indicators.forEach((indicator, index) => {
+          if (index === currentIndex) {
+            indicator.classList.add('active');
+          } else {
+            indicator.classList.remove('active');
+          }
+        });
+      }
+      
+      // 下一个卡片
+      nextBtn.addEventListener('click', function() {
+        currentIndex = (currentIndex + 1) % cardCount;
+        updateSlide();
+      });
+      
+      // 上一个卡片
+      prevBtn.addEventListener('click', function() {
+        currentIndex = (currentIndex - 1 + cardCount) % cardCount;
+        updateSlide();
+      });
+      
+      // 指示器点击事件
+      indicators.forEach(indicator => {
+        indicator.addEventListener('click', function() {
+          currentIndex = parseInt(this.getAttribute('data-index'));
+          updateSlide();
+        });
+      });
+      
+      // 移动端触摸滑动支持
+      let startX = 0;
+      let endX = 0;
+      
+      qaContainer.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+      }, false);
+      
+      qaContainer.addEventListener('touchend', function(e) {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+      }, false);
+      
+      function handleSwipe() {
+        if (startX - endX > 50) {
+          // 向右滑动
+          currentIndex = (currentIndex + 1) % cardCount;
+        } else if (endX - startX > 50) {
+          // 向左滑动
+          currentIndex = (currentIndex - 1 + cardCount) % cardCount;
+        }
+        updateSlide();
+      }
+      
+      // 初始化滑动
+      updateSlide();
+      
+      // 模型评估表格交互
       const startColIndex = 2;
-      const table = document.getElementById('performanceTable');
-      const cells = table.querySelectorAll('td[data-col], th[data-col]');
+      const performanceTable = document.getElementById('performanceTable');
+      const cells = performanceTable.querySelectorAll('td[data-col], th[data-col]');
       
       cells.forEach(cell => {
         const colIndex = parseInt(cell.getAttribute('data-col'));
         if (colIndex >= startColIndex) {
           cell.addEventListener('mouseenter', function() {
             const col = this.getAttribute('data-col');
-            const colCells = table.querySelectorAll(`[data-col="${col}"]`);
+            const colCells = performanceTable.querySelectorAll(`[data-col="${col}"]`);
             
             colCells.forEach(c => {
               c.classList.add('column-highlight');
@@ -627,7 +749,7 @@
           
           cell.addEventListener('mouseleave', function() {
             const col = this.getAttribute('data-col');
-            const colCells = table.querySelectorAll(`[data-col="${col}"]`);
+            const colCells = performanceTable.querySelectorAll(`[data-col="${col}"]`);
             
             colCells.forEach(c => {
               c.classList.remove('column-highlight');
