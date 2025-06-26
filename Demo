@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- 原有的头部代码保持不变 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo - 任务执行演示</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind CSS -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#F97316',
+            neutral: {
+              100: '#F3F4F6',
+              200: '#E5E7EB',
+              300: '#D1D5DB',
+              700: '#374151',
+              800: '#1F2937',
+              900: '#111827',
+            }
+          },
+          fontFamily: {
+            inter: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .transition-smooth {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .card-shadow {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+      .btn-hover {
+        @apply transform hover:scale-105 active:scale-95;
+      }
+      .video-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.5rem;
+      }
+      .video-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: rgba(59, 130, 246, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .video-overlay:hover {
+        background-color: rgba(59, 130, 246, 1);
+      }
+    }
+  </style>
+</head>
+<body class="bg-neutral-100 font-inter text-neutral-800 min-h-screen">
+  <!-- 页面头部 -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="text-primary text-2xl font-bold">RoboVLM Demo</div>
+        <div class="text-gray-500 text-sm">任务执行演示</div>
+      </div>
+      <nav class="hidden md:flex items-center space-x-8">
+        <a href="#" class="text-gray-700 hover:text-primary transition-colors">前往修改</a>
+        <a href="https://github.com/embodied-vsr/example.github.io/" class="text-gray-700 hover:text-primary transition-colors">github</a>
+        <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">返回首页</a>
+      </nav>
+      
+      <div class="flex items-center space-x-4">
+        <a href="https://github.com/embodied-vsr/example.github.io" target="_blank" class="text-gray-700 hover:text-primary transition-colors">
+          <i class="fa fa-github text-xl"></i>
+        </a>
+        <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+          试用模型
+        </a>
+        <button class="md:hidden text-gray-700" id="menu-toggle">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端菜单 -->
+    <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">前往修改</a>
+        <a href="https://github.com/embodied-vsr/example.github.io/" class="text-gray-700 hover:text-primary py-2 transition-colors">github</a>
+        <a href="index.html" class="text-gray-700 hover:text-primary py-2 transition-colors">返回首页</a>
+        <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
+          试用模型
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主要内容区域 -->
+  <main class="container mx-auto px-4 py-8">
+    <!-- 模块切换标签 -->
+    <div class="flex justify-center mb-8 border-b border-neutral-200">
+      <button class="module-tab px-6 py-3 font-medium text-primary border-b-2 border-primary" data-module="single">
+        单任务执行
+      </button>
+      <button class="module-tab px-6 py-3 font-medium text-neutral-500 hover:text-primary transition-smooth" data-module="long">
+        长程任务执行
+      </button>
+      <button class="module-tab px-6 py-3 font-medium text-neutral-500 hover:text-primary transition-smooth" data-module="multi">
+        多任务执行
+      </button>
+    </div>
+
+    <!-- 任务内容切换容器 -->
+    <div class="relative">
+      <!-- 左侧切换按钮（用于所有模块例子切换） -->
+      <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
+        <i class="fa fa-chevron-left text-2xl text-primary"></i>
+      </button>
+
+      <!-- 内容区域 -->
+      <div id="contentContainer" class="relative overflow-hidden">
+        <!-- 单任务执行卡片（模块1） -->
+        <div id="singleTask" class="task-module min-w-full px-4">
+          <div class="bg-white rounded-xl card-shadow p-6">
+            <!-- 小标题 -->
+            <div class="text-center mb-8">
+              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">单任务执行</h2>
+            </div>
+
+            <!-- 例子切换容器 -->
+            <div class="relative">
+              <!-- 例子内容区域 -->
+              <div id="singleExampleContainer" class="relative overflow-hidden">
+                <!-- 例子卡片容器（使用flex布局，便于切换） -->
+                <div id="singleExampleCards" class="flex transition-smooth duration-500">
+                  <!-- 单任务例子1 -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <!-- 视频播放区域 -->
+                      <div class="mb-6 video-container aspect-video bg-neutral-200">
+                        <video controls poster="https://picsum.photos/1200/675?random=1">
+                          <source src="videos/20250618-161309.mp4" type="video/mp4">
+                          您的浏览器不支持视频播放
+                        </video>
+                        <a href="your-video-url1.mp4" class="video-overlay absolute inset-0"></a>
+                      </div>
+
+                      <!-- 用户指令 -->
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                          <p>"看电视累了，帮我拿一个苹果给我吃，苹果在厨房的冰箱内"</p>
+                        </div>
+                      </div>
+
+                      <!-- 响应步骤 -->
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                          <li>第一步：将视角转向画面左侧，观察坐在沙发上的男性；</li>
+                          <li>第二步：听取指令内容："从冰箱拿一个苹果给我"；</li>
+                          <li>第三步：视角转向右侧，并找到前方的冰箱；</li>
+                          <li>第四步：向前移动，然后向右转向靠近冰箱；</li>
+                          <li>第五步：走到冰箱前，用视觉确认冰箱门上的标志和把手位置；</li>
+                          <li>第六步：打开冰箱门，并观察内部的物品布局；</li>
+                          <li>第七步：在冰箱的冷藏室中找到一个苹果；</li>
+                          <li>第八步：用右手抓取苹果；</li>
+                          <li>第九步：关闭冰箱门；</li>
+                          <li>第十步：拿着苹果，转身向沙发方向移动；</li>
+                          <li>第十一步：走到沙发前，将苹果递给坐在沙发上的人。</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 单任务例子2 -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <!-- 视频播放区域 -->
+                      <div class="mb-6 video-container aspect-video bg-neutral-200">
+                        <video controls poster="https://picsum.photos/1200/675?random=2">
+                          <source src="your-video-url2.mp4" type="video/mp4">
+                          您的浏览器不支持视频播放
+                        </video>
+                        <a href="your-video-url2.mp4" class="video-overlay absolute inset-0"></a>
+                      </div>
+
+                      <!-- 用户指令 -->
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                          <p>"我想喝杯水，帮我从餐厅的桌子上拿一个玻璃杯，然后接满温水。"</p>
+                        </div>
+                      </div>
+
+                      <!-- 响应步骤 -->
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                          <li>第一步：将视角转向餐厅方向，定位到餐桌位置；</li>
+                          <li>第二步：听取指令内容："从餐厅桌子拿一个玻璃杯接温水"；</li>
+                          <li>第三步：走向餐厅，观察餐桌上的物品，找到玻璃杯；</li>
+                          <li>第四步：用右手拿起玻璃杯，确认无破损；</li>
+                          <li>第五步：走到厨房的水槽或饮水机旁；</li>
+                          <li>第六步：打开温水开关，将水注入玻璃杯中，注意水位不要过满；</li>
+                          <li>第七步：关闭水源，检查是否有水滴溢出；</li>
+                          <li>第八步：拿着玻璃杯，转身走向用户所在的位置；</li>
+                          <li>第九步：走到用户面前，将玻璃杯小心递给用户；</li>
+                          <li>第十步：确认用户已握住玻璃杯后，松开手；</li>
+                          <li>第十一步：询问用户是否还需要其他帮助。</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 单任务例子3 -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <!-- 视频播放区域 -->
+                      <div class="mb-6 video-container aspect-video bg-neutral-200">
+                        <video controls poster="https://picsum.photos/1200/675?random=3">
+                          <source src="your-video-url3.mp4" type="video/mp4">
+                          您的浏览器不支持视频播放
+                        </video>
+                        <a href="your-video-url3.mp4" class="video-overlay absolute inset-0"></a>
+                      </div>
+
+                      <!-- 用户指令 -->
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                          <p>"帮我把客厅茶几上的遥控器拿过来，我想换个电视频道。"</p>
+                        </div>
+                      </div>
+
+                      <!-- 响应步骤 -->
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                          <li>第一步：将视角转向客厅茶几，定位遥控器的位置；</li>
+                          <li>第二步：听取指令内容："拿客厅茶几上的遥控器"；</li>
+                          <li>第三步：走向茶几，仔细观察桌面，找到遥控器；</li>
+                          <li>第四步：确认遥控器的类型和颜色，避免拿错；</li>
+                          <li>第五步：用右手拿起遥控器，检查是否有电池盖松动；</li>
+                          <li>第六步：转身走向用户所在的沙发位置；</li>
+                          <li>第七步：走到用户面前，将遥控器的按钮一侧朝向用户；</li>
+                          <li>第八步：轻轻将遥控器放在用户的手中；</li>
+                          <li>第九步：确认用户已握住遥控器后，松开手；</li>
+                          <li>第十步：询问用户是否需要帮助切换频道；</li>
+                          <li>第十一步：等待用户进一步指示，保持待机状态。</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 页码指示器（单任务内部例子切换） -->
+            <div class="flex justify-center mt-6 space-x-2" id="singlePageIndicators">
+              <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
+              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="1"></button>
+              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="2"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 长程任务执行卡片（模块2） -->
+        <div id="longTask" class="task-module min-w-full px-4 hidden">
+          <div class="bg-white rounded-xl card-shadow p-6">
+            <!-- 小标题 -->
+            <div class="text-center mb-8">
+              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">长程任务执行</h2>
+            </div>
+
+            <!-- 例子切换容器 -->
+            <div class="relative">
+              <!-- 例子内容区域 -->
+              <div id="longExampleContainer" class="relative overflow-hidden">
+                <!-- 例子卡片容器（使用flex布局，便于切换） -->
+                <div id="longExampleCards" class="flex transition-smooth duration-500">
+                  <!-- 长程任务例子1 -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <!-- 视频播放区域 -->
+                      <div class="mb-6 video-container aspect-video bg-neutral-200">
+                        <video controls poster="https://picsum.photos/1200/675?random=4">
+                          <source src="your-long-video-url1.mp4" type="video/mp4">
+                          您的浏览器不支持视频播放
+                        </video>
+                        <a href="your-long-video-url1.mp4" class="video-overlay absolute inset-0"></a>
+                      </div>
+
+                      <!-- 用户指令 -->
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                          <p>"我要去上班了，帮我整理一下家务"</p>
+                        </div>
+                      </div>
+
+                      <!-- 响应步骤 -->
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
+                        <div class="space-y-6">
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【任务规划】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 接收人类指令，明确需要执行的任务（整理家务）。</li>
+                              <li>2. 观察当前环境，识别需要整理的物品和区域（如衣物、床上用品、家具等）。</li>
+                              <li>3. 导航至第一个整理区域（如卧室床铺）。</li>
+                              <li>4. 抓取床上的物品（如被子、枕头），进行整理。</li>
+                              <li>5. 将整理好的物品摆放整齐，如将床上用品有序铺好。</li>
+                              <li>6. 依次检查并整理其他物品，如衣物、桌面物品等。</li>
+                              <li>7. 将乱放的衣物进行分类整理，挂放到衣架或收纳装置上。</li>
+                              <li>8. 检查整理后的环境，确认任务是否完成。</li>
+                              <li>9. 与人类进行交互，报告任务完成情况。</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【视频观察】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 机器人启动后，围绕室内快速移动，观察房间概况（包含冰箱、窗帘、柜子等）。</li>
+                              <li>2. 机器人移动到卧室，集中整理了床上物品（被子和床上用品）。</li>
+                              <li>3. 抓取床上衣物及物品，并移动到窗边衣架上进行挂置整理。</li>
+                              <li>4. 视频中显示应用了衣架挂衣物的操作，有序挂好衣物。</li>
+                              <li>5. 整个过程确认物品被放置妥当，背景包括风吹的窗帘和窗外高楼。</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【任务执行回溯】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 机器人接收指令后，启动内置程序并定位在室内客厅区域，观察到冰箱、窗帘及周边环境后评估任务重点。</li>
+                              <li>2. 机器人向卧室方向移动，识别目标床铺并抓取床上的乱叠被子和枕头，叠整整后放置回床铺相应位置。</li>
+                              <li>3. 机器人继续在床边检查其他未整理物品，识别到几件衣物后将其抓起。</li>
+                              <li>4. 机器人沿床边向房内窗户移动，根据观察视角判断窗户边应在衣架安放处。对衣物进行整理后逐一挂到衣架上，并确保衣物之间保持一定间距。</li>
+                              <li>5. 检查床铺和周围区域，确认所有可见物品均被放置整齐后，机器人结束当前整理工作并准备后续任务。</li>
+                              <li>6. 视频显示机器人在窗外高楼背景下确认整理好的衣物，检查无误后任务规划完成。</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 长程任务例子2（可扩展） -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <!-- 视频播放区域 -->
+                      <div class="mb-6 video-container aspect-video bg-neutral-200">
+                        <video controls poster="https://picsum.photos/1200/675?random=5">
+                          <source src="videos/20250618-161322.mp4" type="video/mp4">
+                          您的浏览器不支持视频播放
+                        </video>
+                        <a href="your-long-video-url2.mp4" class="video-overlay absolute inset-0"></a>
+                      </div>
+
+                      <!-- 用户指令 -->
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                          <p>"准备一场家庭聚会，帮我布置客厅并准备零食"</p>
+                        </div>
+                      </div>
+
+                      <!-- 响应步骤 -->
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
+                        <div class="space-y-6">
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【任务规划】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 确认聚会主题和人数，规划布置方案</li>
+                              <li>2. 整理客厅空间，移除杂物，调整家具布局</li>
+                              <li>3. 布置装饰物品（气球、彩带等）</li>
+                              <li>4. 准备零食和饮料，摆放到合适位置</li>
+                              <li>5. 检查灯光和音乐设置</li>
+                              <li>6. 最后检查整体布置效果</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【视频观察】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 机器人在客厅中移动，评估空间布局</li>
+                              <li>2. 从储藏室取出装饰品并开始布置</li>
+                              <li>3. 在餐桌上摆放各种零食和饮料</li>
+                              <li>4. 调整沙发位置，增加额外座椅</li>
+                              <li>5. 最终呈现整洁且装饰精美的客厅环境</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 页码指示器（长程任务内部例子切换） -->
+            <div class="flex justify-center mt-6 space-x-2" id="longPageIndicators">
+              <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
+              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="1"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 多任务执行卡片（模块3） -->
+        <div id="multiTask" class="task-module min-w-full px-4 hidden">
+          <div class="bg-white rounded-xl card-shadow p-6">
+            <!-- 小标题 -->
+            <div class="text-center mb-8">
+              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">多任务执行</h2>
+            </div>
+
+            <!-- 例子切换容器 -->
+            <div class="relative">
+              <!-- 例子内容区域 -->
+              <div id="multiExampleContainer" class="relative overflow-hidden">
+                <!-- 例子卡片容器（使用flex布局，便于切换） -->
+                <div id="multiExampleCards" class="flex transition-smooth duration-500">
+                  <!-- 多任务例子1 -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <!-- 视频播放区域 -->
+                      <div class="mb-6 video-container aspect-video bg-neutral-200">
+                        <video controls poster="https://picsum.photos/1200/675?random=6">
+                          <source src="videos/20250618-161326.mp4 " type="video/mp4">
+                          您的浏览器不支持视频播放
+                        </video>
+                        <a href="your-multi-video-url1.mp4" class="video-overlay absolute inset-0"></a>
+                      </div>
+
+                      <!-- 用户指令 -->
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200 space-y-4">
+                          <p>1. 帮我做一份烤面包当作早餐</p>
+                          <p>2. 帮我换一份烤面包</p>
+                          <p>3. 谢谢你的烤面包，再帮我拿一瓶牛奶</p>
+                        </div>
+                      </div>
+
+                      <!-- 响应步骤 -->
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
+                        <div class="space-y-8">
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【执行第一个命令】</h4>
+                            <h5 class="text-sm font-medium text-neutral-700 mb-2">### Task Plan: Make a Piece of Toasted Bread</h5>
+                            <h5 class="text-sm font-medium text-neutral-700 mb-2">#### Initial Observation:</h5>
+                            <p class="text-neutral-700 pl-5">The robot notices a man seated in a well-decorated modern living room with a visible kitchen counter setup including a sink, a refrigerator, and some decorative elements. The focus shifts to the kitchen area, showing a plate being picked up and then two slices of bread being retrieved from the refrigerator.</p>
+                            <h5 class="text-sm font-medium text-neutral-700 mb-2">#### Detailed Task Plan:</h5>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. Navigate to the Kitchen Counter ( spatial reference):
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>Move from the living area towards the kitchen.</li>
+                                  <li>Identify the direction where the counter with the sink, refrigerator, and decor is situated.</li>
+                                </ul>
+                              </li>
+                              <li>2. Retrieve a Plate ( interaction with objects):
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>Located on the kitchen counter, spot a plate near the sink area.</li>
+                                  <li>Confirm the exact position of the plate from the previous observation, and securely grasp it with the appropriate robotic grip.</li>
+                                </ul>
+                              </li>
+                              <li>3. Approach the Refrigerator ( spatial reference):
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>Orient towards the refrigerator which is positioned to the right side of the kitchen as indicated before.</li>
+                                  <li>Move your arm and body accordingly for easy access.</li>
+                                </ul>
+                              </li>
+                              <li>4. Open Refrigerator and Retrieve Bread ( interaction with objects):
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>Grasp the handle of the refrigerator and gently pull it open.</li>
+                                  <li>Inside the fridge, locate the packet or container holding the bread.</li>
+                                  <li>Retrieve a slice of bread as shown in the video, securely without crushing them.</li>
+                                </ul>
+                              </li>
+                              <li>5. Place Bread on Plate ( interaction with objects, precision):
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>Hold the plate steady with one hand while carefully placing the a slice of bread on it using the other.</li>
+                                  <li>Ensure the bread lies flat and is not overlapping.</li>
+                                </ul>
+                              </li>
+                              <li>6. Move Towards the Toaster ( spatial reference):
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>Scan the kitchen area for the location of the toaster. Typically, it is on the kitchen counter near the oven or microwave.</li>
+                                  <li>Adjust your body orientation and take steps in its direction.</li>
+                                </ul>
+                              </li>
+                              <li>7. Prepare for Toasting ( final preparation):
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>Ensure the toaster is accessible and not obstructed by any objects.</li>
+                                  <li>Position the bread slices in line with the slots of the toaster, ready for insertion.</li>
+                                  <li>Hold the plate with bread slices after it is clear that no additional steps are required.</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【第二个指令】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. Place the current plate with the slice of bread on the kitchen counter.</li>
+                              <li>2. Retrieve the initial plate with the un-toasted bread from the refrigerator and place it back inside.</li>
+                              <li>3. Retrieve a fresh slice of bread from a plate stored in the refrigerator.</li>
+                              <li>4. Put the fresh slice of bread into the toaster and close the toaster.</li>
+                              <li>5. Turn on the toaster to start toasting the bread.</li>
+                              <li>6. Wait for the toaster to finish toasting the bread.</li>
+                              <li>7. Once the bread is toasted, open the toaster and remove the bread.</li>
+                              <li>8. Place the toasted bread on a pink plate.</li>
+                              <li>9. Carry the pink plate with the toasted bread to the human sitting on the sofa.</li>
+                              <li>10. Hand the plate with the toasted bread to the human.</li>
+                            </ul>
+                          </div>
+
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【第三个指令】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 听懂指令并准备行动
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>听懂人类的语音指令：我听到人类说“谢谢你的烤面包，再帮我拿一瓶牛奶”。</li>
+                                  <li>识别人类的位置：我看到一位穿着黑色T恤的人坐在棕色沙发上，他手中拿着一个粉色的盘子，盘子上放着一块烤面包。</li>
+                                </ul>
+                              </li>
+                              <li>2. 观察并规划路径
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>向左转头观察：我朝冰箱方向观察，看到了餐桌、门前的“公司冰箱使用须知”标识和冰箱的位置。</li>
+                                  <li>规划前往冰箱的路径：我确定需要穿过房间，朝着餐桌和冰箱的方向前进。</li>
+                                </ul>
+                              </li>
+                              <li>3. 移动到冰箱位置
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>向前移动：我朝餐桌方向移动，穿过房间，经过餐桌后再向前移动，靠近冰箱。</li>
+                                  <li>向右转：当我接近冰箱时，稍微向右转了一下，以对准冰箱门。</li>
+                                </ul>
+                              </li>
+                              <li>4. 打开冰箱并取牛奶
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>打开冰箱门：我看到了左侧是空调控制面板，右侧是冰箱的上半部分和下半部分。我伸手打开冰箱门。</li>
+                                  <li>观察冰箱内容：我看到冰箱内有苹果、牛奶和其他几种饮料。</li>
+                                  <li>抓取牛奶盒：我选择并抓取了一盒名为“Pascual”品牌的全脂牛奶，容量1L。</li>
+                                </ul>
+                              </li>
+                              <li>5. 关闭冰箱门
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>关闭冰箱门：我将牛奶盒抓在手中后，关闭了冰箱门。</li>
+                                </ul>
+                              </li>
+                              <li>6. 回到人类旁边
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>向左转并移动：我拿着牛奶盒，向右转动并返回到之前的座位区域。</li>
+                                  <li>向前移动：我继续向前移动，回到了沙发前。</li>
+                                </ul>
+                              </li>
+                              <li>7. 递交牛奶给用户
+                                <ul class="list-disc pl-5 text-sm">
+                                  <li>将牛奶递给拟用户：我坐在沙发上，将手中的牛奶盒递给人类。</li>
+                                  <li>确认人类接收到牛奶：我看见人类微笑着接过牛奶，并确认他接收到物品。</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 多任务例子2（可扩展） -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <!-- 视频播放区域 -->
+                      <div class="mb-6 video-container aspect-video bg-neutral-200">
+                        <video controls poster="https://picsum.photos/1200/675?random=7">
+                          <source src="your-multi-video-url2.mp4" type="video/mp4">
+                          您的浏览器不支持视频播放
+                        </video>
+                        <a href="your-multi-video-url2.mp4" class="video-overlay absolute inset-0"></a>
+                      </div>
+
+                      <!-- 用户指令 -->
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200 space-y-4">
+                          <p>1. 帮我倒一杯咖啡</p>
+                          <p>2. 帮我拿一包糖</p>
+                          <p>3. 再帮我拿一本杂志</p>
+                        </div>
+                      </div>
+
+                      <!-- 响应步骤 -->
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
+                        <div class="space-y-8">
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【执行第一个命令】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 走向厨房，找到咖啡机</li>
+                              <li>2. 取出咖啡杯，放在咖啡机下方</li>
+                              <li>3. 选择合适的咖啡粉，放入咖啡机</li>
+                              <li>4. 启动咖啡机，等待咖啡冲泡完成</li>
+                              <li>5. 取出冲泡好的咖啡杯</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【第二个指令】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 走向厨房储物柜，寻找糖包</li>
+                              <li>2. 打开储物柜，找到糖包放置的位置</li>
+                              <li>3. 取出一包糖，确认包装完好</li>
+                              <li>4. 回到用户身边，递上糖包</li>
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 class="text-base font-semibold text-neutral-700">【第三个指令】</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
+                              <li>1. 询问用户需要哪本杂志</li>
+                              <li>2. 根据用户指示，走向杂志放置的位置</li>
+                              <li>3. 找到指定的杂志，确认封面和标题</li>
+                              <li>4. 拿起杂志，检查是否有破损</li>
+                              <li>5. 回到用户身边，递上杂志</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 页码指示器（多任务内部例子切换） -->
+            <div class="flex justify-center mt-6 space-x-2" id="multiPageIndicators">
+              <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
+              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="1"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧切换按钮（用于所有模块例子切换） -->
+      <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
+        <i class="fa fa-chevron-right text-2xl text-primary"></i>
+      </button>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-neutral-800 text-white py-6 mt-12">
+    <div class="container mx-auto px-4 text-center">
+      <p>任务执行演示界面 &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script>
+    // 模块切换和例子切换功能
+    document.addEventListener('DOMContentLoaded', function() {
+      // 模块切换标签
+      const moduleTabs = document.querySelectorAll('.module-tab');
+      const taskModules = document.querySelectorAll('.task-module');
+      
+      // 例子切换相关元素
+      const exampleContainers = {
+        single: {
+          cards: document.getElementById('singleExampleCards'),
+          indicators: document.getElementById('singlePageIndicators').querySelectorAll('button'),
+          currentIndex: 0,
+          totalExamples: 3
+        },
+        long: {
+          cards: document.getElementById('longExampleCards'),
+          indicators: document.getElementById('longPageIndicators').querySelectorAll('button'),
+          currentIndex: 0,
+          totalExamples: 2
+        },
+        multi: {
+          cards: document.getElementById('multiExampleCards'),
+          indicators: document.getElementById('multiPageIndicators').querySelectorAll('button'),
+          currentIndex: 0,
+          totalExamples: 2
+        }
+      };
+      
+      // 模块切换
+      moduleTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // 移除所有标签的激活状态
+          moduleTabs.forEach(t => {
+            t.classList.remove('text-primary', 'border-b-2', 'border-primary');
+            t.classList.add('text-neutral-500');
+          });
+          // 添加当前标签的激活状态
+          this.classList.remove('text-neutral-500');
+          this.classList.add('text-primary', 'border-b-2', 'border-primary');
+          
+          // 隐藏所有任务模块
+          taskModules.forEach(module => {
+            module.classList.add('hidden');
+          });
+          // 显示当前任务模块
+          const moduleId = this.getAttribute('data-module');
+          document.getElementById(`${moduleId}Task`).classList.remove('hidden');
+          
+          // 重置当前模块的例子切换状态
+          resetExampleSwitch(moduleId);
+        });
+      });
+      
+      // 重置例子切换状态
+      function resetExampleSwitch(moduleId) {
+        const module = exampleContainers[moduleId];
+        module.currentIndex = 0;
+        updateExample(moduleId);
+        
+        // 停止其他模块的自动播放
+        clearInterval(exampleContainers.single.autoPlayInterval);
+        clearInterval(exampleContainers.long.autoPlayInterval);
+        clearInterval(exampleContainers.multi.autoPlayInterval);
+        
+        // 启动当前模块的自动播放
+        startAutoPlay(moduleId);
+      }
+      
+      // 更新例子显示
+      function updateExample(moduleId) {
+        const module = exampleContainers[moduleId];
+        const translateX = -module.currentIndex * 100;
+        module.cards.style.transform = `translateX(${translateX}%)`;
+        
+        // 更新页码指示器
+        module.indicators.forEach((indicator, index) => {
+          if (index === module.currentIndex) {
+            indicator.classList.remove('bg-neutral-300');
+            indicator.classList.add('bg-primary');
+          } else {
+            indicator.classList.remove('bg-primary');
+            indicator.classList.add('bg-neutral-300');
+          }
+        });
+      }
+      
+      // 下一个例子
+      function nextExample(moduleId) {
+        const module = exampleContainers[moduleId];
+        module.currentIndex = (module.currentIndex + 1) % module.totalExamples;
+        updateExample(moduleId);
+      }
+      
+      // 上一个例子
+      function prevExample(moduleId) {
+        const module = exampleContainers[moduleId];
+        module.currentIndex = (module.currentIndex - 1 + module.totalExamples) % module.totalExamples;
+        updateExample(moduleId);
+      }
+      
+      // 自动播放功能
+      function startAutoPlay(moduleId) {
+        const module = exampleContainers[moduleId];
+        module.autoPlayInterval = setInterval(() => {
+          nextExample(moduleId);
+        }, 5000); // 5秒切换一次
+      }
+      
+      // 鼠标悬停时暂停自动播放，离开时继续
+      function setupHoverPause(moduleId) {
+        const containerId = `${moduleId}ExampleContainer`;
+        const container = document.getElementById(containerId);
+        const module = exampleContainers[moduleId];
+        
+        container.addEventListener('mouseenter', function() {
+          clearInterval(module.autoPlayInterval);
+        });
+        
+        container.addEventListener('mouseleave', function() {
+          startAutoPlay(moduleId);
+        });
+      }
+      
+      // 初始化例子切换按钮事件
+      function initExampleButtons() {
+        // 下一个例子按钮
+        const nextBtn = document.getElementById('nextBtn');
+        nextBtn.addEventListener('click', function() {
+          const activeModule = getActiveModule();
+          nextExample(activeModule);
+        });
+        
+        // 上一个例子按钮
+        const prevBtn = document.getElementById('prevBtn');
+        prevBtn.addEventListener('click', function() {
+          const activeModule = getActiveModule();
+          prevExample(activeModule);
+        });
+        
+        // 页码指示器点击事件
+        for (const moduleId in exampleContainers) {
+          const module = exampleContainers[moduleId];
+          module.indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', function() {
+              module.currentIndex = index;
+              updateExample(moduleId);
+              // 重置自动播放计时器
+              clearInterval(module.autoPlayInterval);
+              startAutoPlay(moduleId);
+            });
+          });
+        }
+      }
+      
+      // 获取当前激活的模块
+      function getActiveModule() {
+        for (const moduleId of ['single', 'long', 'multi']) {
+          if (!document.getElementById(`${moduleId}Task`).classList.contains('hidden')) {
+            return moduleId;
+          }
+        }
+        return 'single';
+      }
+      
+      // 初始化
+      initExampleButtons();
+      for (const moduleId of ['single', 'long', 'multi']) {
+        setupHoverPause(moduleId);
+      }
+      // 启动单任务模块的自动播放作为默认
+      startAutoPlay('single');
+    });
+  </script>
+</body>
+</html>
