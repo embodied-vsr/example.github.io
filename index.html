@@ -417,28 +417,7 @@
         <!-- 问答滑动容器 -->
         <div class="qa-slider">
           <div class="qa-container" id="qaContainer">
-            <!-- 问答卡片1 -->
-            <div class="qa-card">
-              <div class="qa-header">
-                <h3 class="text-lg font-semibold mb-2">Question: What is the glitch in the game video showing vertical take-off?</h3>
-              </div>
-              <div class="qa-video-container">
-                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=1">
-                  <source src="videos/qhdqno.mp4" type="video/mp4">
-                  你的浏览器不支持视频播放
-                </video>
-              </div>
-              <div class="qa-answer">
-                <h4 class="font-semibold mb-2">Model_answer:</h4>
-                <ol>
-                  <li>1. The glitch in the video shows an aircraft, typically not designed for vertical take-offs, launching vertically from the ground.</li><br>
-                  <li>2. This is unusual because planes of this type usually require a runway and horizontal movement to gain enough lift for flight.</li><br>
-                  <li>3. The sudden vertical ascent defies the typical physics expected in such a game.</li>
-                </ol>
-              </div>
-            </div>
-
-            <!-- 问答卡片2 -->
+            <!-- 问答卡片1（原第二张卡片） -->
             <div class="qa-card">
               <div class="qa-header">
                 <h3 class="text-lg font-semibold mb-2">Question: Please reconstruct the brief description of the robot event into an intensive standardized description, covering the overall scenario objectives, environment, robot characteristics, camera perspective and movement, sub-objectives and technical action decomposition, and post-action states to form a richer and more precise narrative, with a total length of no more than 150 words.</h3>
@@ -459,7 +438,7 @@
               </div>
             </div>
 
-            <!-- 问答卡片3 -->
+            <!-- 问答卡片2（原第三张卡片） -->
             <div class="qa-card">
               <div class="qa-header">
                 <h3 class="text-lg font-semibold mb-2">Question: next 5 steps?</h3>
@@ -481,6 +460,101 @@
                 </ol>
               </div>
             </div>
+
+            <!-- 新增问答卡片3（原第四张卡片） -->
+            <div class="qa-card">
+              <div class="qa-header">
+                <h3 class="text-lg font-semibold mb-2">Question: What are the objects and actions of the robot arm in the video?</h3>
+              </div>
+              <div class="qa-video-container">
+                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=4">
+                  <source src="#" type="video/mp4">
+                  你的浏览器不支持视频播放
+                </video>
+              </div>
+              <div class="qa-answer">
+                <h4 class="font-semibold mb-2">Model_answer:</h4>
+                <ol>
+                  <li>1. Held by the robotic arm, moving towards the whiteboard, there is an eraser which is rectangular and orange, designed for cleaning whiteboards.</li><br>
+                  <li>2. Located at the top center of the frame, mounted on the wall, there is a whiteboard which is large, white, and has some blue marker scribbles on it. It has a metallic frame at the bottom. The whiteboard is stationary and has blue marker scribbles on it.</li><br>
+                  <li>3. After this, the blue marker scribbles on the whiteboard begin to fade as the duster rubs against it.</li><br>
+                  <li>4. At the bottom of the frame, covering the lower part of the scene, there is a floor which is covered with dark, textured carpeting.</li><br>
+                  <li>5. The robotic arm is positioned on the right side of the frame, extending towards the whiteboard. It is white with yellow accents and has a mechanical, segmented structure. It holds an orange eraser in its gripper.</li><br>
+                  <li>6. The robotic arm is holding an orange duster and is positioned near the bottom right corner of the frame, pointing towards the whiteboard.</li><br>
+                  <li>7. After that, the robotic arm moves upwards and slightly to the left, bringing the duster closer to the whiteboard.</li><br>
+                  <li>8. Afterwards, the robotic arm continues to move upwards until the duster makes contact with the whiteboard.</li><br>
+                  <li>9. Finally, the robotic arm begins to rub the duster against the whiteboard, removing the blue marker scribbles.</li><br>
+                </ol>
+              </div>
+            </div>
+
+            <!-- 新增问答卡片4（原第五张卡片） -->
+            <div class="qa-card">
+              <div class="qa-header">
+                <h3 class="text-lg font-semibold mb-2">Question: What are the objects and human actions in the video?</h3>
+              </div>
+              <div class="qa-video-container">
+                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=5">
+                  <source src="#" type="video/mp4">
+                  你的浏览器不支持视频播放
+                </video>
+              </div>
+              <div class="qa-answer">
+                <h4 class="font-semibold mb-2">Model_answer:</h4>
+                <ol>
+                  <li>1. Center of the desk, serving as the main structure for the assembly, there is a white plastic base with multiple holes and slots for attaching other components. The white circular base remains stationary on the desk, serving as the foundation for the seat assembly. It has multiple holes and slots for attaching other parts.</li><br>
+                  <li>2. Attached to the circular base, extending outward, there are smooth, cylindrical rods made of white material, possibly plastic or metal. The white rods are attached to the circular base. They are being adjusted by the hands, likely being loosened or removed as part of the disassembly process.</li><br>
+                  <li>3. Scattered near the left side of the desk, there are small, round, white plastic pieces, possibly caps or connectors for the assembly. These pieces remain scattered near the left side of the desk. They do not appear to be directly involved in the current action but may be used later in the disassembly process.</li><br>
+                  <li>4. Top left corner of the desk, there is a closed black laptop with a visible keyboard. The black laptop remains closed and stationary in the top left corner of the desk. It does not interact with the disassembly process.</li><br>
+                  <li>5. Above the circular base, near the center of the desk, there is a rectangular gray mouse pad with a smooth surface. The gray mouse pad stays in place above the circular base. It serves as a background element and does not participate in the disassembly.</li><br>
+                  <li>6. Top right corner of the desk, there is a red tool, possibly a screwdriver or similar device, with a handle. The red tool remains in the top right corner of the desk. It is not used during this segment of the video.</li><br>
+                  <li>7. Top right corner of the desk, next to the red tool, there is a small black speaker with a mesh front. The black speaker stays in its position next to the red tool. It does not play a role in the current activity.</li><br>
+                  <li>8. Top right corner of the desk, near the speaker, there is a coiled black cable, possibly for connecting devices. The black cable remains coiled in the top right corner of the desk. It is not utilized in the disassembly process.</li><br>
+                  <li>9. Right side of the desk, near the bottom, there is a silver screwdriver with a black handle. The silver screwdriver with a black handle is present on the right side of the desk. It is not used in this segment of the video.</li><br>
+                  <li>10. Manipulating the white rods and base, there are two human hands, one holding the rod while the other adjusts or tightens it. The hands are actively engaged in manipulating the white rods. One hand holds the rod steady while the other adjusts or tightens it. The hands move around the base, indicating the process of disassembling the seat.</li><br>
+                </ol>
+              </div>
+            </div>
+
+            <!-- 新增问答卡片5（原第六张卡片） -->
+            <div class="qa-card">
+              <div class="qa-header">
+                <h3 class="text-lg font-semibold mb-2">Question: In the video, the robot gripper is trying to follow the instruction "moved the red fork to the center of the table". What should be the next action of the robot? Please answer the question in the following format: <think> your reasoning </think> <answer> your answer </answer>.</h3>
+              </div>
+              <div class="qa-video-container">
+                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=6">
+                  <source src="#" type="video/mp4">
+                  你的浏览器不支持视频播放
+                </video>
+              </div>
+              <div class="qa-answer">
+                <h4 class="font-semibold mb-2">Model_answer:</h4>
+                <ol>
+                  <li>1. <think>Okay, let's break this down. The user wants the next action of the robot gripper after it has placed the red fork in the center of the table. Looking at the video, the gripper just released the fork by opening and is retracting. The last action shown is releasing the fork, opening the gripper, and moving upward. Now, after placing the fork down, the gripper would probably need to move away from the center to either return to a resting position or prepare for another task. Since the instruction was only to move the red fork, and the video does not show further tasks, the next logical step would be retracting. The gripper was moving upward and opening, so continuing to retract would likely involve moving back to the left side where it started. So the next action would be moving left to retract away from the center.</think></li><br>
+                  <li>2. <answer> move left </answer></li><br>
+                </ol>
+              </div>
+            </div>
+
+            <!-- 新增问答卡片6（原第七张卡片） -->
+            <div class="qa-card">
+              <div class="qa-header">
+                <h3 class="text-lg font-semibold mb-2">Question: This is a video showing a robot performing a task: Ironing Clothes. What should be the next action of the robot? Please answer the question in the following format: <think> your reasoning </think> <answer> your answer </answer>.</h3>
+              </div>
+              <div class="qa-video-container">
+                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=7">
+                  <source src="#" type="video/mp4">
+                  你的浏览器不支持视频播放
+                </video>
+              </div>
+              <div class="qa-answer">
+                <h4 class="font-semibold mb-2">Model_answer:</h4>
+                <ol>
+                  <li>1. <think>Okay, let's try to figure out the next immediate action the robot will take. The scene has two robot arms. Robot Arm 1 is on the left, holding the shirt in place with a black glove. Robot Arm 2 was initially holding the iron and just placed it on the steamer's stand. Now that the iron is securely placed, what's next? Since the task is ironing clothes, after placing the iron, the next logical step would be to actually use the iron on the shirt. But Robot Arm 2 just moved away after placing the iron. Maybe now Robot Arm 1, which is holding the shirt steady, might adjust the shirt's position to prepare for ironing. Alternatively, Robot Arm 2 might start using the iron it just placed. Wait, but the iron was placed into a slot on the steamer. Maybe the steamer is a combination device where placing the iron in the slot activates it, and then the robot can start steaming. Or perhaps the iron needs to be picked up again to start ironing. But the video shows the robot is ironing clothes, so after positioning the iron, the next step would be to activate it. But how? Looking at the video, the shirt is on the steamer. Steaming and ironing are related but different. Maybe the robot uses the steamer to remove wrinkles, and the iron is part of that setup. If the iron was placed in the stand, maybe now the robot will start moving the iron over the shirt to steam it. Since Robot Arm 2 placed the iron, it might pick it up again to apply steam. Wait, but the video shows the iron was placed on the stand. The next action could be Robot Arm 2 picking up the iron again to start steaming the shirt. Alternatively, the steamer might start emitting steam automatically, and the robot arm adjusts the shirt. But the task is ironing, which typically involves moving the iron over the fabric. Since the iron is now in its slot, maybe the next step is activating the steam function. However, the robot's actions so far have been placing the iron. The immediate next action after placing the iron would likely be to start using it. So Robot Arm 2 might grasp the iron again from the stand and begin moving it over the shirt. Alternatively, if the iron is stationary in the stand, perhaps the robot uses another method. But given the context, the most logical next step is Robot Arm 2 picking up the iron from the stand to start ironing the shirt. However, the problem states that the robot is performing the task of ironing clothes, which may not be finished in the video. The previous action was placing the iron on the stand, so the next immediate action would be to start moving the iron over the shirt. Therefore, the prediction is that Robot Arm 2 will pick up the iron again and begin smoothing the shirt's fabric.</think></li><br>
+                  <li>2. <answer> Robot Arm 2 will grasp the iron from the steamer's stand and begin moving it across the shirt's surface to smooth wrinkles, while Robot Arm 1 adjusts the shirt's position to ensure even coverage. </answer></li><br>
+                </ol>
+              </div>
+            </div>
           </div>
 
           <!-- 滑动指示器 -->
@@ -488,6 +562,9 @@
             <div class="indicator active" data-index="0"></div>
             <div class="indicator" data-index="1"></div>
             <div class="indicator" data-index="2"></div>
+            <div class="indicator" data-index="3"></div>
+            <div class="indicator" data-index="4"></div>
+            <div class="indicator" data-index="5"></div>
           </div>
 
           <!-- 导航按钮 -->
