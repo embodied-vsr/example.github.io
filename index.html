@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RoboVLM 视觉问答数据集</title>
+  <title>RoboVLM</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Tailwind 配置 -->
@@ -12,25 +13,32 @@
     .table-container {
       @apply max-w-6xl mx-auto mb-12 bg-white rounded-xl shadow-md p-6;
     }
+
     table {
       @apply w-full text-left border-collapse;
     }
+
     thead {
       @apply bg-gray-50;
     }
+
     th,
     td {
       @apply px-4 py-3 border;
     }
+
     th {
       @apply font-semibold text-gray-700;
     }
+
     tr {
       @apply border-b hover:bg-gray-50 transition-colors;
     }
+
     .column-highlight {
       @apply bg-highlightBg text-highlightText transition-all duration-200 font-bold;
     }
+
     .cell-hover {
       @apply transform scale-110 z-10 shadow-lg transition-all duration-200 border-2 border-yellow-400;
     }
@@ -40,67 +48,79 @@
       border-collapse: collapse;
       width: 100%;
     }
+
     th,
     td {
       border: 1px solid #d1d5db;
       padding: 8px 12px;
-      text-align: left;
+      text-align: center; /* 文字居中显示 */
     }
+
     th {
       background-color: #f1f5f9;
     }
-    
+
     .custom-table {
       border-collapse: collapse;
       width: 80%;
       margin: 20px auto;
     }
-    .custom-table, 
-    .custom-table th, 
+
+    .custom-table,
+    .custom-table th,
     .custom-table td {
       border: 1px solid #ccc;
     }
-    .custom-table th, 
+
+    .custom-table th,
     .custom-table td {
       padding: 10px;
-      text-align: center;
+      text-align: center; /* 文字居中显示 */
     }
+
     .custom-table th {
       background-color: #f2f2f2;
     }
+
     .custom-table tr:hover {
       background-color: #f5f5f5;
     }
-    
+
     /* 新增问答卡片样式 */
     .qa-slider {
       position: relative;
       overflow: hidden;
       margin: 20px 0;
     }
+
     .qa-container {
       display: flex;
       transition: transform 0.5s ease;
     }
+
     .qa-card {
       min-width: 100%;
       padding: 20px;
       box-sizing: border-box;
     }
+
     .qa-header {
       text-align: center;
       margin-bottom: 15px;
     }
+
     .qa-video-container {
       display: flex;
       justify-content: center;
       margin: 15px 0;
     }
+
     .qa-video {
       max-width: 100%;
       border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+
     .qa-answer {
       margin-top: 15px;
       padding: 15px;
@@ -108,12 +128,14 @@
       border-left: 4px solid #0284c7;
       border-radius: 0 8px 8px 0;
     }
+
     .slider-nav {
       display: flex;
       justify-content: center;
       margin-top: 20px;
       gap: 10px;
     }
+
     .nav-btn {
       padding: 8px 16px;
       background-color: #0284c7;
@@ -123,15 +145,18 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     .nav-btn:hover {
       background-color: #0369a1;
     }
+
     .slider-indicators {
       display: flex;
       justify-content: center;
       margin: 15px 0;
       gap: 8px;
     }
+
     .indicator {
       width: 10px;
       height: 10px;
@@ -140,6 +165,7 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     .indicator.active {
       background-color: #0284c7;
     }
@@ -163,47 +189,45 @@
       }
     }
   </script>
-  
+
   <style type="text/tailwindcss">
     @layer utilities {
       .content-auto {
         content-visibility: auto;
       }
+
       .text-shadow {
-        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
+
       .hover-scale {
         transition: transform 0.3s ease;
       }
+
       .hover-scale:hover {
         transform: scale(1.02);
       }
+
       .section-title {
-        @apply text-2xl font-bold text-dark mb-4 mt-8;
+        @apply text-[clamp(1.8rem,4vw,3rem)] font-bold text-dark mb-4 text-shadow;
       }
     }
   </style>
 </head>
+
 <body class="font-inter bg-gray-50 text-dark">
   <!-- 导航栏 -->
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
         <div class="text-primary text-2xl font-bold">RoboVLM</div>
-        <div class="text-gray-500 text-sm">大语言模型</div>
       </div>
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="#" class="text-gray-700 hover:text-primary transition-colors">前往修改</a>
-        
-        <a href="https://github.com/embodied-vsr/example.github.io/" class="text-gray-700 hover:text-primary transition-colors">github</a>
-
+        <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
         <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors">Demo</a>
       </nav>
-      
+
       <div class="flex items-center space-x-4">
-        <a href="https://github.com/embodied-vsr/example.github.io" target="_blank" class="text-gray-700 hover:text-primary transition-colors">
-          <i class="fa fa-github text-xl"></i>
-        </a>
         <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
           试用模型
         </a>
@@ -212,12 +236,11 @@
         </button>
       </div>
     </div>
-    
+
     <!-- 移动端菜单 -->
     <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
       <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">前往修改</a>
-        <a href="https://github.com/embodied-vsr/example.github.io/" class="text-gray-700 hover:text-primary py-2 transition-colors">github</a>
+        <a href="Case.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Case</a>
         <a href="Demo.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Demo</a>
         <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
           试用模型
@@ -227,320 +250,155 @@
   </header>
   <!-- 主内容区 -->
   <main class="container mx-auto px-4 py-12">
-    <!-- RoboVLM 介绍 -->
-    <section class="max-w-6xl mx-auto mb-12 bg-white rounded-xl shadow-md p-6 hover-scale">
-      <h2 class="section-title">RoboVLM 介绍</h2>
-      <p class="text-lg mb-4">
-        我们发布了 RoboVLM，RoboVLM 模型家族的旗舰视觉语言模型，对比此前发布的 RoboVLM 实现了巨大的飞跃。欢迎访问 RoboVLM Chat 并选择 RoboVLM-72B-Instruct 进行体验。此外，我们在 Hugging Face 和 ModelScope 上开源了 RoboVLM 的 Base 和 Instruct 模型，包含 3B、7B 和 72B 在内的 3 个模型尺寸。
-      </p>
-      
-      <h2 class="section-title">RoboVLM 的主要特点</h2>
-      <ul class="space-y-4 mb-6">
-        <li class="flex items-start">
-          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>感知更丰富的世界：RoboVLM 不仅擅长识别常见物体，如花、鸟、鱼和昆虫，还能够分析图像中的文本、图表、图标、图形和布局。</span>
-        </li>
-        <li class="flex items-start">
-          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>Agent：RoboVLM 直接作为一个视觉 Agent，可以推理并动态地使用工具，初步具备了使用电脑和使用手机的能力。</span>
-        </li>
-        <li class="flex items-start">
-          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>理解长视频和捕捉事件：RoboVLM 能够理解超过 1 小时的视频，并且这次它具备了通过精准定位相关视频片段来捕捉事件的新能力。</span>
-        </li>
-        <li class="flex items-start">
-          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>视觉定位：RoboVLM 可以通过生成 bounding boxes 或者 points 来准确定位图像中的物体，并能够为坐标和属性提供稳定的 JSON 输出。</span>
-        </li>
-        <li class="flex items-start">
-          <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
-          <span>结构化输出：对于发票、表单、表格等数据，RoboVLM 支持其内容的结构化输出，惠及金融、商业等领域的应用。</span>
-        </li>
-      </ul>
-      
-      <h2 class="section-title">模型性能</h2>
-      <p class="mb-4">
-        我们对视觉语言模型进行了全面的评估，比较了 SOTA 模型以及同尺寸规模模型中表现最好的模型。在旗舰模型 RoboVLM-72B-Instruct 的测试中，它在一系列涵盖多个领域和任务的基准测试中表现出色，包括大学水平的问题、数学、文档理解、视觉问答、视频理解和视觉 Agent。值得注意的是，RoboVLM 在理解文档和图表方面具有显著优势，并且能够作为视觉 Agent 进行操作，而无需特定任务的微调。
-      </p>
+    <!-- 模型评估总体 -->
+    <section class="text-center mb-12">
+      <h2 class="section-title">模型评估总体</h2>
     </section>
-<section class="table-container">
-    <h2 class="text-2xl font-bold text-dark mb-4">模型评估总体</h2>
-    <div class="overflow-x-auto">
-      <table id="performanceTable"> <!-- 新增表格ID -->
-        <thead>
+    <section class="table-container">
+      <div class="overflow-x-auto">
+        <table id="performanceTable">
+          <thead>
             <tr>
-                <th rowspan="2"></th>
-                <th rowspan="2"></th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="2">
-                  RoboVLM - 72B
-                </th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="3">
-                  Gemini-2 Flash
-                </th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="4">
-                  GPT-4o
-                </th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="5">
-                  Claude3.5 Sonnet
-                </th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="6">
-                  RoboVLM
-                </th>
-                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="7">
-                  Other Best Open LVL M
-                </th>
+              <th data-col="1"></th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="2">
+                gemini flash2.0
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="3">
+                gpt4-0
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="4">
+                Qwen2.5 VL 72B
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="5">
+                Our
+              </th>
+              <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" data-col="6">
+                SFT lora 72B 1/10 cosmos数据 600step,将近1epoch
+              </th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             <tr>
-                <td rowspan="2">College-level Problems</td>
-                <td>MMMU</td>
-                <td data-col="2">70.2</td>
-                <td data-col="3"><span style="color:red">70.7</span></td>
-                <td data-col="4">70.3</td>
-                <td data-col="5">70.4</td>
-                <td data-col="6">64.5</td>
-                <td data-col="7">70.1</td>
+              <td data-col="1">MV-bench</td>
+              <td data-col="2">59.9</td>
+              <td data-col="3">64.6</td>
+              <td data-col="4">69.7</td>
+              <td data-col="5">68.7</td>
+              <td data-col="6"></td>
             </tr>
             <tr>
-                <td>MMMU Pro</td>
-                <td data-col="2">51.1</td>
-                <td data-col="3"><span style="color:red">57.0</span></td>
-                <td data-col="4">54.5</td>
-                <td data-col="5">54.7</td>
-                <td data-col="6">46.2</td>
-                <td data-col="7">52.7</td>
+              <td data-col="1">Egoschema</td>
+              <td data-col="2">67.6</td>
+              <td data-col="3">69.2</td>
+              <td data-col="4">72.8</td>
+              <td data-col="5">79.0</td>
+              <td data-col="6"></td>
             </tr>
             <tr>
-                <td rowspan="4">Document and Diagrams Reading</td>
-                <td>DocVQA</td>
-                <td data-col="2">96.4</td>
-                <td data-col="3">92.1</td>
-                <td data-col="4">91.1</td>
-                <td data-col="5">95.2</td>
-                <td data-col="6"><span style="color:red">96.5</span></td>
-                <td data-col="7">96.1</td>
+              <td data-col="1">RoboPoint</td>
+              <td data-col="2">28.1</td>
+              <td data-col="3">18.4</td>
+              <td data-col="4">36.7</td>
+              <td data-col="5">29.8</td>
+              <td data-col="6"></td>
             </tr>
             <tr>
-                <td>InfoVQA</td>
-                <td data-col="2"><span style="color:red">87.3</span></td>
-                <td data-col="3">77.8</td>
-                <td data-col="4">80.7</td>
-                <td data-col="5">74.3</td>
-                <td data-col="6">84.5</td>
-                <td data-col="7">84.1</td>
+              <td data-col="1">PhyX</td>
+              <td data-col="2">48.2</td>
+              <td data-col="3">42.0</td>
+              <td data-col="4">50.8</td>
+              <td data-col="5">66.3</td>
+              <td data-col="6"></td>
             </tr>
             <tr>
-                <td>CC-OCR</td>
-                <td data-col="2"><span style="color:red">79.8</span></td>
-                <td data-col="3">73.0</td>
-                <td data-col="4">66.6</td>
-                <td data-col="5">62.7</td>
-                <td data-col="6">68.7</td>
-                <td data-col="7">68.7</td>
+              <td data-col="1">Cosmos</td>
+              <td data-col="2">61.0</td>
+              <td data-col="3">45.1</td>
+              <td data-col="4">60.5</td>
+              <td data-col="5">58.6</td>
+              <td data-col="6">25.2(cot版本19.8)</td>
             </tr>
             <tr>
-                <td>OCRBenchV2</td>
-                <td data-col="2"><span style="color:red">61.5</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">46.5</td>
-                <td data-col="5">45.2</td>
-                <td data-col="6">47.8</td>
-                <td data-col="7">47.8</td>
+              <td data-col="1">ERQA</td>
+              <td data-col="2">48.8</td>
+              <td data-col="3">46.3</td>
+              <td data-col="4">43.3</td>
+              <td data-col="5">41.5</td>
+              <td data-col="6">22.5</td>
             </tr>
             <tr>
-                <td rowspan="3">General Visual Question Answering</td>
-                <td>MegaBench</td>
-                <td data-col="2">51.3</td>
-                <td data-col="3"><span style="color:red">55.2</span></td>
-                <td data-col="4">54.2</td>
-                <td data-col="5">52.1</td>
-                <td data-col="6">46.8</td>
-                <td data-col="7">47.4</td>
+              <td data-col="1">VSI-bench</td>
+              <td data-col="2">37.0</td>
+              <td data-col="3">34.0</td>
+              <td data-col="4">39.0</td>
+              <td data-col="5">37.0</td>
+              <td data-col="6"></td>
             </tr>
-            <tr>
-                <td>MMStar</td>
-                <td data-col="2"><span style="color:red">70.8</span></td>
-                <td data-col="3">69.4</td>
-                <td data-col="4">64.7</td>
-                <td data-col="5">65.1</td>
-                <td data-col="6">68.3</td>
-                <td data-col="7">69.5</td>
-            </tr>
-            <tr>
-                <td>MMBench1.1</td>
-                <td data-col="2"><span style="color:red">88.0</span></td>
-                <td data-col="3">83.0</td>
-                <td data-col="4">82.1</td>
-                <td data-col="5">83.4</td>
-                <td data-col="6">86.6</td>
-                <td data-col="7">87.4</td>
-            </tr>
-            <tr>
-                <td rowspan="2">Math</td>
-                <td>MathVista</td>
-                <td data-col="2"><span style="color:red">74.8</span></td>
-                <td data-col="3">73.1</td>
-                <td data-col="4">63.8</td>
-                <td data-col="5">65.4</td>
-                <td data-col="6">70.5</td>
-                <td data-col="7">72.3</td>
-            </tr>
-            <tr>
-                <td>MathVision</td>
-                <td data-col="2">38.1</td>
-                <td data-col="3"><span style="color:red">41.3</span></td>
-                <td data-col="4">30.4</td>
-                <td data-col="5">38.3</td>
-                <td data-col="6">25.9</td>
-                <td data-col="7">32.2</td>
-            </tr>
-            <tr>
-                <td rowspan="4">Video Understanding</td>
-                <td>VideoMME</td>
-                <td data-col="2"><span style="color:red">73.3</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">71.9</td>
-                <td data-col="5">60.0</td>
-                <td data-col="6">71.2</td>
-                <td data-col="7">72.1</td>
-            </tr>
-            <tr>
-                <td>MMBench-Video</td>
-                <td data-col="2"><span style="color:red">2.0</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">1.7</td>
-                <td data-col="5">1.4</td>
-                <td data-col="6">1.7</td>
-                <td data-col="7">1.9</td>
-            </tr>
-            <tr>
-                <td>LVBench</td>
-                <td data-col="2"><span style="color:red">47.3</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">30.8</td>
-                <td data-col="5">-</td>
-                <td data-col="6">-</td>
-                <td data-col="7">43.6</td>
-            </tr>
-            <tr>
-                <td>CharadesSTA</td>
-                <td data-col="2"><span style="color:red">50.9</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">35.7</td>
-                <td data-col="5">-</td>
-                <td data-col="6">-</td>
-                <td data-col="7">48.4</td>
-            </tr>
-            <tr>
-                <td rowspan="6">Visual Agent</td>
-                <td>AlTZ</td>
-                <td data-col="2"><span style="color:red">83.2</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">35.3</td>
-                <td data-col="5">-</td>
-                <td data-col="6">-</td>
-                <td data-col="7">53.3</td>
-            </tr>
-            <tr>
-                <td>Android Control</td>
-                <td data-col="2"><span style="color:red">67.4</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">-</td>
-                <td data-col="5">-</td>
-                <td data-col="6">-</td>
-                <td data-col="7">66.4</td>
-            </tr>
-            <tr>
-                <td>ScreenSpot</td>
-                <td data-col="2">87.1</td>
-                <td data-col="3">84.0</td>
-                <td data-col="4">18.1</td>
-                <td data-col="5">83.0</td>
-                <td data-col="6">-</td>
-                <td data-col="7"><span style="color:red">89.5</span></td>
-            </tr>
-            <tr>
-                <td>ScreenSpot Pro</td>
-                <td data-col="2"><span style="color:red">43.6</span></td>
-                <td data-col="3">-</td>
-                <td data-col="4">-</td>
-                <td data-col="5">17.1</td>
-                <td data-col="6">-</td>
-                <td data-col="7">38.1</td>
-            </tr>
-            <tr>
-                <td>AndroidWorld</td>
-                <td data-col="2">35.0</td>
-                <td data-col="3">-</td>
-                <td data-col="4">34.5</td>
-                <td data-col="5">27.9</td>
-                <td data-col="6">-</td>
-                <td data-col="7"><span style="color:red">46.6</span></td>
-            </tr>
-            <tr>
-                <td>OSWorld</td>
-                <td data-col="2">8.8</td>
-                <td data-col="3">-</td>
-                <td data-col="4">5.0</td>
-                <td data-col="5">14.9</td>
-                <td data-col="6">-</td>
-                <td data-col="7"><span style="color:red">22.7</span></td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-  </section>
-    <!-- 数据整理表格 -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- 数据整理 -->
+    <section class="text-center mb-12">
+      <h2 class="section-title">数据整理</h2>
+    </section>
     <section class="max-w-6xl mx-auto mb-12">
       <div class="bg-white rounded-xl shadow-md overflow-hidden">
         <div class="p-6 bg-white text-black">
-          <h2 class="text-xl font-bold mb-4">数据整理</h2>
           <table class="custom-table">
             <thead>
               <tr>
                 <th></th>
                 <th></th>
                 <th colspan="2">Physical Common Sense</th>
-                <th colspan="2">Embodied Reasoning</th>
+                <th>Embodied Reasoning</th>
+                <th colspan="2">Embodied Understanding</th>
                 <th>TOT</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td rowspan="2">SFT</td>
-                <td rowspan="2">QA数据</td>
+                <td>SFT</td>
+                <td>QA数据</td>
                 <td>Physgame</td>
                 <td>NaturalReasoning（文本）</td>
-                <td>Agibot</td>
-                <td>Robovqa</td>
+                <td>Cosmos-Reason-SFT</td>
+                <td colspan="2">Cosmos-Reason-SFT</td>
                 <td></td>
               </tr>
               <tr>
+                <td></td>
+                <td></td>
                 <td>40K</td>
                 <td>1M</td>
-                <td>200K</td>
-                <td>800K</td>
-                <td>2.04M</td>
+                <td>1.2M</td>
+                <td colspan="2">500K</td>
+                <td>2.74M</td>
               </tr>
               <tr>
-                <td rowspan="3">R1</td>
-                <td rowspan="3">MCQ数据</td>
-                <th colspan="2">Physical Common Sense</th>
-                <th colspan="2">Embodied Reasoning</th>
-                <th></th>
+                <td></td>
+                <td></td>
+                <td colspan="2">Physical Common Sense</td>
+                <td colspan="3">Embodied Reasoning</td>
+                <td></td>
               </tr>
               <tr>
+                <td>R1</td>
+                <td>MCQ数据</td>
                 <td colspan="2">Physgame</td>
                 <td>egolife</td>
                 <td>embodied-r</td>
+                <td>Cosmos reason1（只开源部分）</td>
                 <td></td>
               </tr>
               <tr>
+                <td></td>
+                <td></td>
                 <td colspan="2">10K</td>
                 <td>8k</td>
                 <td>4k</td>
-                <td>22k</td>
+                <td>0.6k</td>
+                <td>22.6k</td>
               </tr>
             </tbody>
           </table>
@@ -549,21 +407,13 @@
     </section>
     <!-- 页面标题区 -->
     <section class="text-center mb-12">
-      <h1 class="text-[clamp(1.8rem,4vw,3rem)] font-bold text-dark mb-4 text-shadow">
-       视觉问答数据集
+      <h1 class="section-title">
+         embodied resoning &unstanding 数据样例
       </h1>
-      <p class="text-[clamp(1rem,2vw,1.25rem)] text-gray-600 max-w-3xl mx-auto">
-        视觉问答数据集展示，包括问题、视频/图像和回答（支持MP4等主流视频格式）
-      </p>
     </section>
     <!-- 数据集滑动卡片部分 -->
     <section class="max-w-6xl mx-auto">
       <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-        <div class="p-6 border-b border-gray-200">
-          <h2 class="text-2xl font-bold text-dark">视觉问答数据集</h2>
-          <p class="text-gray-600 mt-2">格式：问题 → 视频/图像 → 回答（支持左右滑动浏览）</p>
-        </div>
-        
         <!-- 问答滑动容器 -->
         <div class="qa-slider">
           <div class="qa-container" id="qaContainer">
@@ -587,7 +437,7 @@
                 </ol>
               </div>
             </div>
-            
+
             <!-- 问答卡片2 -->
             <div class="qa-card">
               <div class="qa-header">
@@ -608,7 +458,7 @@
                 </ol>
               </div>
             </div>
-            
+
             <!-- 问答卡片3 -->
             <div class="qa-card">
               <div class="qa-header">
@@ -632,14 +482,14 @@
               </div>
             </div>
           </div>
-          
+
           <!-- 滑动指示器 -->
           <div class="slider-indicators" id="indicators">
             <div class="indicator active" data-index="0"></div>
             <div class="indicator" data-index="1"></div>
             <div class="indicator" data-index="2"></div>
           </div>
-          
+
           <!-- 导航按钮 -->
           <div class="slider-nav">
             <button class="nav-btn" id="prevBtn">上一个</button>
@@ -657,9 +507,9 @@
       </p>
     </div>
   </footer>
-  
+
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // 滑动功能实现
       const qaContainer = document.getElementById('qaContainer');
       const prevBtn = document.getElementById('prevBtn');
@@ -668,12 +518,12 @@
       let currentIndex = 0;
       const cardCount = document.querySelectorAll('.qa-card').length;
       const cardWidth = 100; // 卡片宽度百分比
-      
+
       // 更新滑动位置
       function updateSlide() {
         const translateValue = -currentIndex * cardWidth;
         qaContainer.style.transform = `translateX(${translateValue}%)`;
-        
+
         // 更新指示器状态
         indicators.forEach((indicator, index) => {
           if (index === currentIndex) {
@@ -683,40 +533,40 @@
           }
         });
       }
-      
+
       // 下一个卡片
-      nextBtn.addEventListener('click', function() {
+      nextBtn.addEventListener('click', function () {
         currentIndex = (currentIndex + 1) % cardCount;
         updateSlide();
       });
-      
+
       // 上一个卡片
-      prevBtn.addEventListener('click', function() {
+      prevBtn.addEventListener('click', function () {
         currentIndex = (currentIndex - 1 + cardCount) % cardCount;
         updateSlide();
       });
-      
+
       // 指示器点击事件
       indicators.forEach(indicator => {
-        indicator.addEventListener('click', function() {
+        indicator.addEventListener('click', function () {
           currentIndex = parseInt(this.getAttribute('data-index'));
           updateSlide();
         });
       });
-      
+
       // 移动端触摸滑动支持
       let startX = 0;
       let endX = 0;
-      
-      qaContainer.addEventListener('touchstart', function(e) {
+
+      qaContainer.addEventListener('touchstart', function (e) {
         startX = e.touches[0].clientX;
       }, false);
-      
-      qaContainer.addEventListener('touchend', function(e) {
+
+      qaContainer.addEventListener('touchend', function (e) {
         endX = e.changedTouches[0].clientX;
         handleSwipe();
       }, false);
-      
+
       function handleSwipe() {
         if (startX - endX > 50) {
           // 向右滑动
@@ -727,22 +577,22 @@
         }
         updateSlide();
       }
-      
+
       // 初始化滑动
       updateSlide();
-      
+
       // 模型评估表格交互
       const startColIndex = 2;
       const performanceTable = document.getElementById('performanceTable');
       const cells = performanceTable.querySelectorAll('td[data-col], th[data-col]');
-      
+
       cells.forEach(cell => {
         const colIndex = parseInt(cell.getAttribute('data-col'));
         if (colIndex >= startColIndex) {
-          cell.addEventListener('mouseenter', function() {
+          cell.addEventListener('mouseenter', function () {
             const col = this.getAttribute('data-col');
             const colCells = performanceTable.querySelectorAll(`[data-col="${col}"]`);
-            
+
             colCells.forEach(c => {
               c.classList.add('column-highlight');
               if (c.tagName === 'TD') {
@@ -750,11 +600,11 @@
               }
             });
           });
-          
-          cell.addEventListener('mouseleave', function() {
+
+          cell.addEventListener('mouseleave', function () {
             const col = this.getAttribute('data-col');
             const colCells = performanceTable.querySelectorAll(`[data-col="${col}"]`);
-            
+
             colCells.forEach(c => {
               c.classList.remove('column-highlight');
               if (c.tagName === 'TD') {
@@ -767,4 +617,5 @@
     });
   </script>
 </body>
+
 </html>
