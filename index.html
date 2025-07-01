@@ -132,8 +132,8 @@
       margin: 20px 0;
       border-radius: 8px;
       overflow: hidden;
-      background: #1F2937;
-      aspect-ratio: 16/9;
+      /* 去除背景色 */
+      background: none; 
     }
     
     .video-placeholder {
@@ -148,10 +148,11 @@
     }
     
     .video-container video {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+      /* 缩小视频尺寸 */
+      max-width: 400px; 
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
     
     .answer-container {
       margin-top: 20px;
@@ -296,7 +297,6 @@
     .custom-table tr:hover {
       background-color: #F0F9FF;
     }
-    
    
 
     header .flex.items-center {
@@ -621,8 +621,8 @@
             <h3>Question: Please reconstruct the brief description of the robot event into an intensive standardized description, covering the overall scenario objectives, environment, robot characteristics, camera perspective and movement, sub-objectives and technical action decomposition, and post-action states to form a richer and more precise narrative, with a total length of no more than 150 words.</h3>
           </div>
           <div class="video-container">
-            <!-- 修改视频尺寸，添加 width 属性 -->
-            <video class="qa-video" controls width="600" poster="videos/00000001_first_frame.jpg">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/00000001_first_frame.jpg">
               <source src="videos/00000001.mp4" type="video/mp4">
               您的浏览器不支持视频播放
             </video>
@@ -659,8 +659,8 @@
             <h3>Question: next 5 steps?</h3>
           </div>
           <div class="video-container">
-            <!-- 修改视频尺寸，添加 width 属性 -->
-            <video class="qa-video" controls width="600" poster="videos/6718834237937147971_first_frame.jpg">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/6718834237937147971_first_frame.jpg">
               <source src="videos/6718834237937147971.mp4" type="video/mp4">
               您的浏览器不支持视频播放
             </video>
@@ -700,8 +700,8 @@
             <h3>Question:What are the objects and actions of the robot arm in the video?</h3>
           </div>
           <div class="video-container">
-            <!-- 修改视频尺寸，添加 width 属性 -->
-            <video class="qa-video" controls width="600" poster="videos/robovqa_5544766964057593636_first_frame.jpg">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/robovqa_5544766964057593636_first_frame.jpg">
               <source src="videos/robovqa_5544766964057593636.mp4" type="video/mp4">
               您的浏览器不支持视频播放
             </video>
@@ -728,8 +728,8 @@
             <h3>Question: What are the objects and human actions in the video?</h3>
           </div>
           <div class="video-container">
-            <!-- 修改视频尺寸，添加 width 属性 -->
-            <video class="qa-video" controls width="600" poster="videos/holo_assist_z104-july-14-22-marius_disassemble_coarse_34_fine_37_first_frame.jpg">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/holo_assist_z104-july-14-22-marius_disassemble_coarse_34_fine_37_first_frame.jpg">
               <source src="videos/holo_assist_z104-july-14-22-marius_disassemble_coarse_34_fine_37.mp4" type="video/mp4">
               您的浏览器不支持视频播放
             </video>
@@ -781,8 +781,8 @@
                 What should be the next action of the robot? Please answer the question in the following format: <think> your reasoning </think> <answer> your answer </answer>.</h3>
           </div>
           <div class="video-container">
-            <!-- 修改视频尺寸，添加 width 属性 -->
-            <video class="qa-video" controls width="600" poster="videos/5_first_frame.jpg">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/5_first_frame.jpg">
               <source src="videos/5.mp4" type="video/mp4">
               您的浏览器不支持视频播放
             </video>
@@ -805,8 +805,8 @@ Looking at the video, the gripper just released the fork by opening and is retra
             <h3>Question: This is a video showing a robot performing a task: Ironing Clothes. What should be the next action of the robot? Please answer the question in the following format: <think> your reasoning </think> <answer> your answer </answer>.</h3>
           </div>
           <div class="video-container">
-            <!-- 修改视频尺寸，添加 width 属性 -->
-            <video class="qa-video" controls width="600" poster="videos/agibot_475-755570-head_color-1536-1812-7_first_frame.jpg">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/agibot_475-755570-head_color-1536-1812-7_first_frame.jpg">
               <source src="videos/agibot_475-755570-head_color-1536-1812-7.mp4" type="video/mp4">
               您的浏览器不支持视频播放
             </video>
@@ -842,7 +842,6 @@ Looking at the video, the shirt is on the steamer. Steaming and ironing are rela
     </div>
   </div>
 </div>
-注意事项
   </main>
   <!-- 页脚 -->
   <footer class="bg-dark text-white py-8">
