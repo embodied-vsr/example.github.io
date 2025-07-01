@@ -77,7 +77,7 @@
       </div>
       <nav class="hidden md:flex items-center space-x-8">
         <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
-        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors"> Demo</a>
+        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors">Demo</a>
         <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">返回首页</a>
       </nav>
       
@@ -98,7 +98,7 @@
     <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
       <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
         <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
-        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors"> Demo</a>
+        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors">Demo</a>
         <a href="index.html" class="text-gray-700 hover:text-primary py-2 transition-colors">返回首页</a>
         <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
           试用模型
@@ -148,10 +148,9 @@
                   <!-- 单任务例子1 -->
                   <div class="min-w-full px-4">
                     <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 视频播放区域 -->
-                      <div class="mb-6 video-container aspect-video bg-neutral-200">
-                        <video controls poster="https://picsum.photos/1200/675?random=1">
-                          <source src="videos/20250618-161309.mp4" type="video/mp4">
+                      <!-- 视频播放区域（宽度缩小为父容器的2/3，居中显示） -->
+                      <div class="mb-6 video-container w-2/3 mx-auto aspect-video bg-neutral-200">
+                        <video controls src="videos/20250618-161309.mp4">
                           您的浏览器不支持视频播放
                         </video>
                       </div>
@@ -183,93 +182,8 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- 单任务例子2 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 视频播放区域 -->
-                      <div class="mb-6 video-container aspect-video bg-neutral-200">
-                        <video controls poster="https://picsum.photos/1200/675?random=2">
-                          <source src="your-video-url2.mp4" type="video/mp4">
-                          您的浏览器不支持视频播放
-                        </video>
-                      </div>
-
-                      <!-- 用户指令 -->
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>"我想喝杯水，帮我从餐厅的桌子上拿一个玻璃杯，然后接满温水。"</p>
-                        </div>
-                      </div>
-
-                      <!-- 响应步骤 -->
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
-                        <ul class="list-disc pl-5 space-y-2 text-neutral-700">
-                          <li>第一步：将视角转向餐厅方向，定位到餐桌位置；</li>
-                          <li>第二步：听取指令内容："从餐厅桌子拿一个玻璃杯接温水"；</li>
-                          <li>第三步：走向餐厅，观察餐桌上的物品，找到玻璃杯；</li>
-                          <li>第四步：用右手拿起玻璃杯，确认无破损；</li>
-                          <li>第五步：走到厨房的水槽或饮水机旁；</li>
-                          <li>第六步：打开温水开关，将水注入玻璃杯中，注意水位不要过满；</li>
-                          <li>第七步：关闭水源，检查是否有水滴溢出；</li>
-                          <li>第八步：拿着玻璃杯，转身走向用户所在的位置；</li>
-                          <li>第九步：走到用户面前，将玻璃杯小心递给用户；</li>
-                          <li>第十步：确认用户已握住玻璃杯后，松开手；</li>
-                          <li>第十一步：询问用户是否还需要其他帮助。</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- 单任务例子3 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 视频播放区域 -->
-                      <div class="mb-6 video-container aspect-video bg-neutral-200">
-                        <video controls poster="https://picsum.photos/1200/675?random=3">
-                          <source src="your-video-url3.mp4" type="video/mp4">
-                          您的浏览器不支持视频播放
-                        </video>
-                      </div>
-
-                      <!-- 用户指令 -->
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>"帮我把客厅茶几上的遥控器拿过来，我想换个电视频道。"</p>
-                        </div>
-                      </div>
-
-                      <!-- 响应步骤 -->
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
-                        <ul class="list-disc pl-5 space-y-2 text-neutral-700">
-                          <li>第一步：将视角转向客厅茶几，定位遥控器的位置；</li>
-                          <li>第二步：听取指令内容："拿客厅茶几上的遥控器"；</li>
-                          <li>第三步：走向茶几，仔细观察桌面，找到遥控器；</li>
-                          <li>第四步：确认遥控器的类型和颜色，避免拿错；</li>
-                          <li>第五步：用右手拿起遥控器，检查是否有电池盖松动；</li>
-                          <li>第六步：转身走向用户所在的沙发位置；</li>
-                          <li>第七步：走到用户面前，将遥控器的按钮一侧朝向用户；</li>
-                          <li>第八步：轻轻将遥控器放在用户的手中；</li>
-                          <li>第九步：确认用户已握住遥控器后，松开手；</li>
-                          <li>第十步：询问用户是否需要帮助切换频道；</li>
-                          <li>第十一步：等待用户进一步指示，保持待机状态。</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
-            </div>
-
-            <!-- 页码指示器（单任务内部例子切换） -->
-            <div class="flex justify-center mt-6 space-x-2" id="singlePageIndicators">
-              <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
-              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="1"></button>
-              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="2"></button>
             </div>
           </div>
         </div>
@@ -291,10 +205,9 @@
                   <!-- 长程任务例子1 -->
                   <div class="min-w-full px-4">
                     <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 视频播放区域 -->
-                      <div class="mb-6 video-container aspect-video bg-neutral-200">
-                        <video controls poster="https://picsum.photos/1200/675?random=4">
-                          <source src="videos/20250618-161322.mp4" type="video/mp4">
+                      <!-- 视频播放区域（宽度缩小为父容器的2/3，居中显示） -->
+                      <div class="mb-6 video-container w-2/3 mx-auto aspect-video bg-neutral-200">
+                        <video controls src="videos/20250618-161322.mp4">
                           您的浏览器不支持视频播放
                         </video>
                       </div>
@@ -350,67 +263,11 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- 长程任务例子2（可扩展） -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 视频播放区域 -->
-                      <div class="mb-6 video-container aspect-video bg-neutral-200">
-                        <video controls poster="https://picsum.photos/1200/675?random=5">
-                          <source src="" type="video/mp4">
-                          您的浏览器不支持视频播放
-                        </video>
-                      </div>
-
-                      <!-- 用户指令 -->
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>"准备一场家庭聚会，帮我布置客厅并准备零食"</p>
-                        </div>
-                      </div>
-
-                      <!-- 响应步骤 -->
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
-                        <div class="space-y-6">
-                          <div>
-                            <h4 class="text-base font-semibold text-neutral-700">【任务规划】</h4>
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
-                              <li>1. 确认聚会主题和人数，规划布置方案</li>
-                              <li>2. 整理客厅空间，移除杂物，调整家具布局</li>
-                              <li>3. 布置装饰物品（气球、彩带等）</li>
-                              <li>4. 准备零食和饮料，摆放到合适位置</li>
-                              <li>5. 检查灯光和音乐设置</li>
-                              <li>6. 最后检查整体布置效果</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 class="text-base font-semibold text-neutral-700">【视频观察】</h4>
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
-                              <li>1. 机器人在客厅中移动，评估空间布局</li>
-                              <li>2. 从储藏室取出装饰品并开始布置</li>
-                              <li>3. 在餐桌上摆放各种零食和饮料</li>
-                              <li>4. 调整沙发位置，增加额外座椅</li>
-                              <li>5. 最终呈现整洁且装饰精美的客厅环境</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
-
-            <!-- 页码指示器（长程任务内部例子切换） -->
-            <div class="flex justify-center mt-6 space-x-2" id="longPageIndicators">
-              <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
-              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="1"></button>
-            </div>
           </div>
         </div>
-
 
         <!-- 多任务执行卡片（模块3） -->
         <div id="multiTask" class="task-module min-w-full px-4 hidden">
@@ -429,10 +286,9 @@
                   <!-- 多任务例子1 -->
                   <div class="min-w-full px-4">
                     <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 视频播放区域 -->
-                      <div class="mb-6 video-container aspect-video bg-neutral-200">
-                        <video controls poster="https://picsum.photos/1200/675?random=6">
-                          <source src="videos/20250618-161326.mp4 " type="video/mp4">
+                      <!-- 视频播放区域（宽度缩小为父容器的2/3，居中显示） -->
+                      <div class="mb-6 video-container w-2/3 mx-auto aspect-video bg-neutral-200">
+                        <video controls src="videos/20250618-161326.mp4">
                           您的浏览器不支持视频播放
                         </video>
                       </div>
@@ -572,78 +428,13 @@
                       </div>
                     </div>
                   </div>
-
-                  <!-- 多任务例子2（可扩展） -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 视频播放区域 -->
-                      <div class="mb-6 video-container aspect-video bg-neutral-200">
-                        <video controls poster="https://picsum.photos/1200/675?random=7">
-                          <source src="your-multi-video-url2.mp4" type="video/mp4">
-                          您的浏览器不支持视频播放
-                        </video>
-                      </div>
-
-                      <!-- 用户指令 -->
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">用户指令：</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200 space-y-4">
-                          <p>1. 帮我倒一杯咖啡</p>
-                          <p>2. 帮我拿一包糖</p>
-                          <p>3. 再帮我拿一本杂志</p>
-                        </div>
-                      </div>
-
-                      <!-- 响应步骤 -->
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">Response：</h3>
-                        <div class="space-y-8">
-                          <div>
-                            <h4 class="text-base font-semibold text-neutral-700">【第一个指令】</h4>
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
-                              <li>1. 走向厨房，找到咖啡机</li>
-                              <li>2. 取出咖啡杯，放在咖啡机下方</li>
-                              <li>3. 选择合适的咖啡粉，放入咖啡机</li>
-                              <li>4. 启动咖啡机，等待咖啡冲泡完成</li>
-                              <li>5. 取出冲泡好的咖啡杯</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 class="text-base font-semibold text-neutral-700">【第二个指令】</h4>
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
-                              <li>1. 走向厨房储物柜，寻找糖包</li>
-                              <li>2. 打开储物柜，找到糖包放置的位置</li>
-                              <li>3. 取出一包糖，确认包装完好</li>
-                              <li>4. 回到用户身边，递上糖包</li>
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 class="text-base font-semibold text-neutral-700">【第三个指令】</h4>
-                            <ul class="list-disc pl-5 space-y-2 text-neutral-700">
-                              <li>1. 询问用户需要哪本杂志</li>
-                              <li>2. 根据用户指示，走向杂志放置的位置</li>
-                              <li>3. 找到指定的杂志，确认封面和标题</li>
-                              <li>4. 拿起杂志，检查是否有破损</li>
-                              <li>5. 回到用户身边，递上杂志</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
-            </div>
-
-            <!-- 页码指示器（多任务内部例子切换） -->
-            <div class="flex justify-center mt-6 space-x-2" id="multiPageIndicators">
-              <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
-              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="1"></button>
             </div>
           </div>
         </div>
       </div>
-
+      
       <!-- 右侧切换按钮（用于所有模块例子切换） -->
       <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
         <i class="fa fa-chevron-right text-2xl text-primary"></i>
@@ -665,25 +456,22 @@
       const moduleTabs = document.querySelectorAll('.module-tab');
       const taskModules = document.querySelectorAll('.task-module');
       
-      // 例子切换相关元素
+      // 例子切换相关元素（优化：仅保留单例子逻辑）
       const exampleContainers = {
         single: {
           cards: document.getElementById('singleExampleCards'),
-          indicators: document.getElementById('singlePageIndicators').querySelectorAll('button'),
           currentIndex: 0,
-          totalExamples: 3
+          totalExamples: 1
         },
         long: {
           cards: document.getElementById('longExampleCards'),
-          indicators: document.getElementById('longPageIndicators').querySelectorAll('button'),
           currentIndex: 0,
-          totalExamples: 2
+          totalExamples: 1
         },
         multi: {
           cards: document.getElementById('multiExampleCards'),
-          indicators: document.getElementById('multiPageIndicators').querySelectorAll('button'),
           currentIndex: 0,
-          totalExamples: 2
+          totalExamples: 1
         }
       };
       
@@ -717,72 +505,34 @@
         const module = exampleContainers[moduleId];
         module.currentIndex = 0;
         updateExample(moduleId);
-        
-        // 停止其他模块的自动播放
-        clearInterval(exampleContainers.single.autoPlayInterval);
-        clearInterval(exampleContainers.long.autoPlayInterval);
-        clearInterval(exampleContainers.multi.autoPlayInterval);
-        
-        // 启动当前模块的自动播放
-        startAutoPlay(moduleId);
       }
       
-      // 更新例子显示
+      // 更新例子显示（优化：简化为单例子切换）
       function updateExample(moduleId) {
         const module = exampleContainers[moduleId];
         const translateX = -module.currentIndex * 100;
         module.cards.style.transform = `translateX(${translateX}%)`;
-        
-        // 更新页码指示器
-        module.indicators.forEach((indicator, index) => {
-          if (index === module.currentIndex) {
-            indicator.classList.remove('bg-neutral-300');
-            indicator.classList.add('bg-primary');
-          } else {
-            indicator.classList.remove('bg-primary');
-            indicator.classList.add('bg-neutral-300');
-          }
-        });
       }
       
-      // 下一个例子
+      // 下一个例子（优化：单例子时禁用切换）
       function nextExample(moduleId) {
         const module = exampleContainers[moduleId];
-        module.currentIndex = (module.currentIndex + 1) % module.totalExamples;
-        updateExample(moduleId);
+        if (module.totalExamples > 1) {
+          module.currentIndex = (module.currentIndex + 1) % module.totalExamples;
+          updateExample(moduleId);
+        }
       }
       
-      // 上一个例子
+      // 上一个例子（优化：单例子时禁用切换）
       function prevExample(moduleId) {
         const module = exampleContainers[moduleId];
-        module.currentIndex = (module.currentIndex - 1 + module.totalExamples) % module.totalExamples;
-        updateExample(moduleId);
+        if (module.totalExamples > 1) {
+          module.currentIndex = (module.currentIndex - 1 + module.totalExamples) % module.totalExamples;
+          updateExample(moduleId);
+        }
       }
       
-      // 自动播放功能
-      function startAutoPlay(moduleId) {
-        const module = exampleContainers[moduleId];
-        module.autoPlayInterval = setInterval(() => {
-          nextExample(moduleId);
-        }, 5000); // 5秒切换一次
-      }
-      
-      // 鼠标悬停时暂停自动播放，离开时继续
-      function setupHoverPause(moduleId) {
-        const containerId = `${moduleId}ExampleContainer`;
-        const container = document.getElementById(containerId);
-        const module = exampleContainers[moduleId];
-        
-        container.addEventListener('mouseenter', function() {
-          clearInterval(module.autoPlayInterval);
-        });
-        
-        container.addEventListener('mouseleave', function() {
-          startAutoPlay(moduleId);
-        });
-      }
-      
-      // 初始化例子切换按钮事件
+      // 初始化例子切换按钮事件（优化：保留切换逻辑但单例子时无效果）
       function initExampleButtons() {
         // 下一个例子按钮
         const nextBtn = document.getElementById('nextBtn');
@@ -797,20 +547,6 @@
           const activeModule = getActiveModule();
           prevExample(activeModule);
         });
-        
-        // 页码指示器点击事件
-        for (const moduleId in exampleContainers) {
-          const module = exampleContainers[moduleId];
-          module.indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', function() {
-              module.currentIndex = index;
-              updateExample(moduleId);
-              // 重置自动播放计时器
-              clearInterval(module.autoPlayInterval);
-              startAutoPlay(moduleId);
-            });
-          });
-        }
       }
       
       // 获取当前激活的模块
@@ -825,11 +561,7 @@
       
       // 初始化
       initExampleButtons();
-      for (const moduleId of ['single', 'long', 'multi']) {
-        setupHoverPause(moduleId);
-      }
-      // 启动单任务模块的自动播放作为默认
-      startAutoPlay('single');
+      // 移除自动播放和页码指示器逻辑（单例子无需自动切换）
     });
   </script>
 </body>
