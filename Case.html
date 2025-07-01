@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <!-- 原有的头部代码保持不变 -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Case - 案例展示</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <!-- 配置Tailwind CSS -->
   <script>
     tailwind.config = {
       theme: {
@@ -132,362 +130,488 @@
     </div>
     <!-- 任务内容切换容器 -->
     <div class="relative">
-      <!-- 左侧切换按钮（用于所有模块例子切换） -->
-      <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
-        <i class="fa fa-chevron-left text-2xl text-primary"></i>
-      </button>
-      <!-- 右侧切换按钮 -->
-      <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
-        <i class="fa fa-chevron-right text-2xl text-primary"></i>
-      </button>
       <!-- 内容区域 -->
       <div id="contentContainer" class="relative overflow-hidden">
         <!-- 正面案例卡片 -->
-        <div id="positiveTask" class="task-module min-w-full px-4">
-          <div class="bg-white rounded-xl card-shadow p-6">
-            <!-- 小标题 -->
-            <div class="text-center mb-8">
-              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">正面案例</h2>
-            </div>
-            <!-- 例子切换容器 -->
-            <div class="relative">
-              <!-- 例子内容区域 -->
-              <div id="positiveExampleContainer" class="relative overflow-hidden">
-                <!-- 例子卡片容器（使用flex布局，便于切换） -->
-                <div id="positiveExampleCards" class="flex transition-smooth duration-500">
-                  <!-- 原有的正面案例1 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <!-- 数据展示 -->
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
-                        <div class="formatted-content">
-                          <ol>
-                            <li>This is an image taken from a robot's gripper camera, in order to open the cap of the toothpaste, how should the gripper move? Choices:</li>
-                            <li>A. Arrow 1.</li>
-                            <li>B. Arrow 3.</li>
-                            <li>C. Arrow 6.</li>
-                            <li>D. Arrow 9.</li>
-                            <li>Please answer directly with only the letter of the correct option and nothing else.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <!-- 多模态输入 -->
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
-                        <div class="formatted-content">
-                          ##{这个多模态输入为视频或图片展示}
-                        </div>
-                      </div>
-                      <!-- 推理过程 -->
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
-                        <div class="formatted-content">
-                          <h4 class="font-semibold mb-2">Model_answer:</h4>
-                          <ol class="cot-list">
-                            <li>To determine the correct movement for the gripper to open the cap of the toothpaste, let's analyze the image and the options provided:</li>
-                            <li>Identify the Object: The object in question is a toothpaste tube with a cap that needs to be opened.</li>
-                            <li>Analyze the Gripper Position: The gripper is positioned above the cap, and the arrows indicate possible directions of movement.</li>
-                            <li>Consider the Objective: The goal is to open the cap, which typically involves either pulling it upwards or twisting it.</li>
-                            <li>Now, let's evaluate each option:</li>
-                            <li>Arrow 1: This arrow points upwards. If the cap can be removed by pulling it straight up, this could be a valid choice.</li>
-                            <li>Arrow 3: This arrow points to the left. Pulling the cap to the left might not be effective unless the cap has a specific mechanism that allows it to be removed in that direction.</li>
-                            <li>Arrow 6: This arrow points downwards. Pushing the cap down would likely not help in removing it.</li>
-                            <li>Arrow 9: This arrow points to the right. Similar to Arrow 3, pulling the cap to the right might not be effective unless there is a specific mechanism for it.</li>
-                            <li>Given that most toothpaste caps are designed to be pulled upwards to be removed, the most logical choice is: <span class="font-mono">\boxed{1}</span></li>
-                          </ol>
-                        </div>
-                      </div>
-                      <!-- 详情 -->
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>能够分辨出牙膏的正确打开方式，并分辨箭头的方向</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- 新增的正面案例2 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
-                        <div class="formatted-content">
-                          <ol>
-                            <li>Identify the three key phases of c's actions in the video and explain the significance of each phase.</li>
-                            <li>A. The three key phases of c's actions in the video are preparation, assembly, and cleaning.</li>
-                            <li>B. In the video, the three crucial key phases of c's actions consist of thorough preparation, careful disassembly, and meticulous cleaning.</li>
-                            <li>C. In the video, the three key crucial phases of c's actions notably include assembly, disassembly, and thorough cleaning.</li>
-                            <li>D. The three key phases of c's actions in the video are preparation, testing, and cleaning.</li>
-                            <li>E. In the video, the three crucial key phases of c's actions consist of assembly, meticulous testing, and thorough cleaning.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态展示:</h3>
-                        <div class="formatted-content">
-                          ##
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
-                        <div class="formatted-content">
-                          <h4 class="font-semibold mb-2">Model_answer:</h4>
-                          <ol class="cot-list">
-                            <li>To determine the correct answer, let's analyze the video step by step and identify the key phases of C's actions.</li>
-                            <li>Preparation Phase: C is seen wearing black gloves, which suggests a focus on cleanliness and precision. The workspace is organized with various tools and materials, indicating that C has prepared the area for the task. C picks up a small metal object and examines it closely, suggesting that the preparation phase involves inspecting and selecting the necessary components.</li>
-                            <li>Assembly Phase: C begins to assemble the metal object, carefully fitting parts together. The use of tools like a screwdriver and a small metal rod indicates that C is methodically putting the components together. C's actions are deliberate and precise, showing a focus on ensuring that the assembly is done correctly.</li>
-                            <li>Cleaning Phase: After the assembly, C uses a cloth to clean the metal object. The workspace is also cleaned, with tools and materials being put away. This phase is important to ensure that the final product is free from any contaminants and is in a usable condition.</li>
-                            <li>Given this analysis, the key phases of C's actions in the video are preparation, assembly, and cleaning. The other options either include incorrect phases (like disassembly or testing) or do not accurately reflect the sequence of actions shown in the video.</li>
-                            <li>Therefore, the correct answer is <span class="font-mono">\boxed{A}</span>.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>长视频内容识别</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- 新增的正面案例3 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
-                        <div class="formatted-content">
-                          <ol>
-                            <li>These are frames of a video.</li>
-                            <li>If I am standing by the stove and facing the table, is the refrigerator to my front-left, front-right, back-left, or back-right?</li>
-                            <li>The directions refer to the quadrants of a Cartesian plane (if I am standing at the origin and facing along the positive y-axis).</li>
-                            <li>Options:</li>
-                            <li>A. front-right</li>
-                            <li>B. front-left</li>
-                            <li>C. back-right</li>
-                            <li>D. back-left</li>
-                            <li>Please reason step by step and put the final answer within \boxed{}.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
-                        <div class="formatted-content">
-                          ###
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
-                        <div class="formatted-content">
-                          <h4 class="font-semibold mb-2">Model_answer:</h4>
-                          <ol class="cot-list">
-                            <li>To determine the position of the refrigerator relative to the stove and the table, let's analyze the video frames step by step:</li>
-                            <li>Identify the stove and the table:</li>
-                              <li>The stove is located in the middle of the kitchen, with a black oven and a wooden cutting board on top.</li>
-                              <li>The table is located towards the back of the kitchen, with a blue chair and some items on it.</li>
-                            <li>Identify the refrigerator:</li>
-                              <li>The refrigerator is located on the right side of the kitchen, near the wall, and has a water dispenser on the door.</li>
-                            <li>Determine the direction:</li>
-                              <li>If you are standing by the stove and facing the table, you are facing towards the back of the kitchen.</li>
-                              <li>The refrigerator is to the right of the stove when you are facing the table.</li>
-                            <li>Given this information, the refrigerator is to the front-right of the stove when facing the table.</li>
-                            <li><span class="font-mono">\boxed{A}</span></li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>物品识别和相对位置推断</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- 新增的正面案例4 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
-                        <div class="formatted-content">
-                          <ol>
-                            <li>The overall goal is to "Cook vegetables with oven". The agent in the video is currently performing one subtask out of many to complete this goal. For the agent in the video, what is the most plausible next immediate subtask from the choices below?</li>
-                            <li>A: Pour the seasoning held in the right arm onto the potato on the baking tray.</li>
-                            <li>B: Press the oven start button with the right arm.</li>
-                            <li>C: Place the seasoning bottle back on the table with the right arm.</li>
-                            <li>D: Lift the baking tray containing potato with the right arm.</li>
-                            <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
-                        <div class="formatted-content">
-                          ###
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
-                        <div class="formatted-content">
-                          <h4 class="font-semibold mb-2">Model_answer:</h4>
-                          <ol class="cot-list">
-                            <li>To determine the most plausible next immediate subtask for the agent in the video, let's analyze the current situation and the options provided:</li>
-                            <li>Current Situation: The agent has opened the oven door using its left arm. The right arm is positioned near the baking tray containing a potato.</li>
-                            <li>Options Analysis:</li>
-                            <ul>
-                              <li>Pour the seasoning held in the right arm onto the potato on the baking tray.</li>
-                              <ul>
-                                <li>There is no indication that the right arm is holding any seasoning. This option seems unlikely.</li>
-                              </ul>
-                              <li>Press the oven start button with the right arm.</li>
-                              <ul>
-                                <li>The oven door is open, so it would be premature to press the start button before placing the food inside.</li>
-                              </ul>
-                              <li>Place the seasoning bottle back on the table with the right arm.</li>
-                              <ul>
-                                <li>There is no seasoning bottle in the right arm, making this option irrelevant.</li>
-                              </ul>
-                              <li>Lift the baking tray containing potato with the right arm.</li>
-                              <ul>
-                                <li>The right arm is positioned near the baking tray, suggesting it might be the next action to lift the tray and place it into the oven.</li>
-                              </ul>
-                            </ul>
-                            <li>Given the context, the most logical next step is to lift the baking tray containing the potato with the right arm and place it into the oven.</li>
-                            <li><span class="font-mono">\boxed{D}</span></li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>动作预测</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- 新增的正面案例5 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
-                        <div class="formatted-content">
-                          <ol>
-                            <li>The overall goal is "The student screws the washer and the bolt into the peg.". The agent in the video is currently performing one subtask out of many to complete this goal. For the agent in the video, what is the most plausible next immediate subtask from the choices below?</li>
-                            <li>A: slide ratchet_adjuster</li>
-                            <li>B: grab ratchet</li>
-                            <li>C: drop ratchet</li>
-                            <li>D: grab bolt</li>
-                            <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
-                        <div class="formatted-content">
-                          ####
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
-                        <div class="formatted-content">
-                          <h4 class="font-semibold mb-2">Model_answer:</h4>
-                          <ol class="cot-list">
-                            <li>To determine the most plausible next immediate subtask, let's analyze the current situation and the goal:</li>
-                            <li>Current Situation: The person is holding a tool (likely a ratchet) near a bolt on the motorcycle engine. The bolt appears to be partially inserted into a hole, suggesting that the person is in the process of securing it.</li>
-                            <li>Goal: The overall goal is to screw the washer and the bolt into the peg. This implies that the bolt needs to be fully tightened.</li>
-                            <li>Possible Next Steps:</li>
-                            <ul>
-                              <li>slide ratchet_adjuster: This suggests adjusting the ratchet, which might be necessary if the ratchet needs to be set for the correct torque or direction.</li>
-                              <li>grab ratchet: This implies picking up the ratchet, but since the person already has the ratchet in hand, this step seems redundant.</li>
-                              <li>drop ratchet: Dropping the ratchet would not help in achieving the goal of tightening the bolt.</li>
-                              <li>grab bolt: Grabbing the bolt again doesn't make sense because the bolt is already in place and partially secured.</li>
-                            </ul>
-                            <li>Given these points, the most logical next step would be to ensure the ratchet is correctly adjusted to tighten the bolt further. Therefore, the most plausible next immediate subtask is to adjust the ratchet.</li>
-                            <li><span class="font-mono">\boxed{A}</span></li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>动作预测</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- 新增的正面案例6 -->
-                  <div class="min-w-full px-4">
-                    <div class="bg-white rounded-xl card-shadow p-6">
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
-                        <div class="formatted-content">
-                          <ol>
-                            <li>When the light ray illustrated in figure passes through the glass block of index of refraction $$n = 1.50$$, it is shifted laterally by the distance $$d$$. Find the time interval required for the light to pass through the glass block.</li>
-                            <li>A: "$$1.33\times 10^{-10} \text{ s}$$",</li>
-                            <li>B: "$$2.06\times 10^{-10} \text{ s}$$",</li>
-                            <li>C: "$$1.06\times 10^{-10} \text{ s}$$",</li>
-                            <li>D: "$$1.92\times 10^{-10} \text{ s}$$"</li>
-                            <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
-                        <div class="formatted-content">
-                          ###
-                        </div>
-                      </div>
-                      <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
-                        <div class="formatted-content">
-                          <h4 class="font-semibold mb-2">Model_answer:</h4>
-                          <ol class="cot-list">
-                            <li>To solve this problem, we need to determine the time interval required for the light to pass through the glass block. Here's the step-by-step reasoning:</li>
-                            <li>Identify the given parameters:</li>
-                            <ul>
-                              <li>Index of refraction of the glass, $$n = 1.50$$</li>
-                              <li>Thickness of the glass block, $$t = 2.00 \,\text{cm}=0.02\,\text{m}$$</li>
-                              <li>Angle of incidence, $$\theta_i = 30.0^\circ$$</li>
-                            </ul>
-                            <li>Use Snell's Law to find the angle of refraction:</li>
-                            <ul>
-                              <li>$$n_1\sin\theta_i=n_2\sin\theta_r$$ where $$n_1 = 1$$ (air) and $$n_2 = 1.50$$ (glass).</li>
-                              <li>$$1 \cdot \sin 30.0^\circ = 1.50 \cdot \sin \theta_r$$</li>
-                              <li>$$\sin \theta_r = \frac{\sin 30.0^\circ}{1.50} = \frac{0.5}{1.50} = \frac{1}{3}$$</li>
-                              <li>$$\theta_r = \sin^{-1}\left(\frac{1}{3}\right) \approx 19.47^\circ$$</li>
-                            </ul>
-                            <li>Calculate the path length inside the glass block:</li>
-                            <ul>
-                              <li>The light travels along a slanted path inside the glass block. The path length $$L$$ can be found using the thickness $$t$$ and the angle of refraction $$\theta_r$$:</li>
-                              <li>$$L = \frac{t}{\cos \theta_r}$$</li>
-                              <li>$$\cos \theta_r = \cos 19.47^\circ \approx 0.943$$</li>
-                              <li>$$L = \frac{0.02 \, \text{m}}{0.943} \approx 0.0212 \, \text{m}$$</li>
-                            </ul>
-                            <li>Calculate the speed of light in the glass:</li>
-                            <ul>
-                              <li>The speed of light in the glass $$v$$ is given by: $$v = \frac{c}{n}$$</li>
-                              <li>where $$c = 3 \times 10^8 \, \text{m/s}$$ is the speed of light in vacuum.</li>
-                              <li>$$v = \frac{3 \times 10^8 \, \text{m/s}}{1.50} = 2 \times 10^8 \, \text{m/s}$$</li>
-                            </ul>
-                            <li>Calculate the time interval required for the light to pass through the glass block:</li>
-                            <ul>
-                              <li>The time $$t$$ is given by: $$t = \frac{L}{v}$$</li>
-                              <li>$$t = \frac{0.0212 \, \text{m}}{2 \times 10^8 \, \text{m/s}} = 1.06 \times 10^{-10} \, \text{s}$$</li>
-                            </ul>
-                            <li>Thus, the correct option is <span class="font-mono">\boxed{C}</span>.</li>
-                          </ol>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
-                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>物理题</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+          <div id="positiveTask" class="task-module min-w-full px-4">
+  <div class="bg-white rounded-xl card-shadow p-6">
+    <!-- 小标题 -->
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">正面案例</h2>
+    </div>
+    <!-- 例子切换容器 -->
+    <div class="relative">
+      <!-- 左侧切换按钮 -->
+      <button id="positivePrevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
+        <i class="fa fa-chevron-left text-2xl text-primary"></i>
+      </button>
+      <!-- 右侧切换按钮 -->
+      <button id="positiveNextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
+        <i class="fa fa-chevron-right text-2xl text-primary"></i>
+      </button>
+      <!-- 例子内容区域 -->
+      <div id="positiveExampleContainer" class="relative overflow-hidden">
+        <!-- 例子卡片容器（使用flex布局，便于切换） -->
+        <div id="positiveExampleCards" class="flex transition-smooth duration-500">
+          <!-- 原有的正面案例1 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <!-- 数据展示 -->
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>This is an image taken from a robot's gripper camera, in order to open the cap of the toothpaste, how should the gripper move? Choices:</li>
+                    <li>A. Arrow 1.</li>
+                    <li>B. Arrow 3.</li>
+                    <li>C. Arrow 6.</li>
+                    <li>D. Arrow 9.</li>
+                    <li>Please answer directly with only the letter of the correct option and nothing else.</li>
+                  </ol>
+                </div>
+              </div>
+              <!-- 多模态输入 -->
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+                <div class="formatted-content">
+                  <img src="img/1280X1280.JPEG" alt="多模态输入图片1" class="w-full h-auto">
+                </div>
+              </div>
+              <!-- 推理过程 -->
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                <div class="formatted-content">
+                  <h4 class="font-semibold mb-2">Model_answer:</h4>
+                  <ol class="cot-list">
+                    <li>To determine the correct movement for the gripper to open the cap of the toothpaste, let's analyze the image and the options provided:</li>
+                    <li>Identify the Object: The object in question is a toothpaste tube with a cap that needs to be opened.</li>
+                    <li>Analyze the Gripper Position: The gripper is positioned above the cap, and the arrows indicate possible directions of movement.</li>
+                    <li>Consider the Objective: The goal is to open the cap, which typically involves either pulling it upwards or twisting it.</li>
+                    <li>Now, let's evaluate each option:</li>
+                    <li>Arrow 1: This arrow points upwards. If the cap can be removed by pulling it straight up, this could be a valid choice.</li>
+                    <li>Arrow 3: This arrow points to the left. Pulling the cap to the left might not be effective unless the cap has a specific mechanism that allows it to be removed in that direction.</li>
+                    <li>Arrow 6: This arrow points downwards. Pushing the cap down would likely not help in removing it.</li>
+                    <li>Arrow 9: This arrow points to the right. Similar to Arrow 3, pulling the cap to the right might not be effective unless there is a specific mechanism for it.</li>
+                    <li>Given that most toothpaste caps are designed to be pulled upwards to be removed, the most logical choice is: <span class="font-mono">\boxed{1}</span></li>
+                  </ol>
+                </div>
+              </div>
+              <!-- 详情 -->
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                  <p>能够分辨出牙膏的正确打开方式，并分辨箭头的方向</p>
                 </div>
               </div>
             </div>
+          </div>
+          <!-- 新增的正面案例2 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>Identify the three key phases of c's actions in the video and explain the significance of each phase.</li>
+                    <li>A. The three key phases of c's actions in the video are preparation, assembly, and cleaning.</li>
+                    <li>B. In the video, the three crucial key phases of c's actions consist of thorough preparation, careful disassembly, and meticulous cleaning.</li>
+                    <li>C. In the video, the three key crucial phases of c's actions notably include assembly, disassembly, and thorough cleaning.</li>
+                    <li>D. The three key phases of c's actions in the video are preparation, testing, and cleaning.</li>
+                    <li>E. In the video, the three crucial key phases of c's actions consist of assembly, meticulous testing, and thorough cleaning.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态展示:</h3>
+                <div class="formatted-content">
+                  <video controls width="100%">
+                    <source src="videos/0750fa27-b049-4ded-9dd1-d495ffe23e75.mp4" type="video/mp4">
+                    您的浏览器不支持播放此视频。
+                  </video>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                <div class="formatted-content">
+                  <h4 class="font-semibold mb-2">Model_answer:</h4>
+                  <ol class="cot-list">
+                    <li>To determine the correct answer, let's analyze the video step by step and identify the key phases of C's actions.</li>
+                    <li>Preparation Phase: C is seen wearing black gloves, which suggests a focus on cleanliness and precision. The workspace is organized with various tools and materials, indicating that C has prepared the area for the task. C picks up a small metal object and examines it closely, suggesting that the preparation phase involves inspecting and selecting the necessary components.</li>
+                    <li>Assembly Phase: C begins to assemble the metal object, carefully fitting parts together. The use of tools like a screwdriver and a small metal rod indicates that C is methodically putting the components together. C's actions are deliberate and precise, showing a focus on ensuring that the assembly is done correctly.</li>
+                    <li>Cleaning Phase: After the assembly, C uses a cloth to clean the metal object. The workspace is also cleaned, with tools and materials being put away. This phase is important to ensure that the final product is free from any contaminants and is in a usable condition.</li>
+                    <li>Given this analysis, the key phases of C's actions in the video are preparation, assembly, and cleaning. The other options either include incorrect phases (like disassembly or testing) or do not accurately reflect the sequence of actions shown in the video.</li>
+                    <li>Therefore, the correct answer is <span class="font-mono">\boxed{A}</span>.</li>
+                  </ol>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                  <p>长视频内容识别</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 新增的正面案例3 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>These are frames of a video.</li>
+                    <li>If I am standing by the stove and facing the table, is the refrigerator to my front-left, front-right, back-left, or back-right?</li>
+                    <li>The directions refer to the quadrants of a Cartesian plane (if I am standing at the origin and facing along the positive y-axis).</li>
+                    <li>Options:</li>
+                    <li>A. front-right</li>
+                    <li>B. front-left</li>
+                    <li>C. back-right</li>
+                    <li>D. back-left</li>
+                    <li>Please reason step by step and put the final answer within \boxed{}.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+                <div class="formatted-content">
+                  <video controls width="100%">
+                    <source src="videos/41159525.mp4" type="video/mp4">
+                    您的浏览器不支持播放此视频。
+                  </video>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                <div class="formatted-content">
+                  <h4 class="font-semibold mb-2">Model_answer:</h4>
+                  <ol class="cot-list">
+                    <li>To determine the position of the refrigerator relative to the stove and the table, let's analyze the video frames step by step:</li>
+                    <li>Identify the stove and the table:</li>
+                      <li>The stove is located in the middle of the kitchen, with a black oven and a wooden cutting board on top.</li>
+                      <li>The table is located towards the back of the kitchen, with a blue chair and some items on it.</li>
+                    <li>Identify the refrigerator:</li>
+                      <li>The refrigerator is located on the right side of the kitchen, near the wall, and has a water dispenser on the door.</li>
+                    <li>Determine the direction:</li>
+                      <li>If you are standing by the stove and facing the table, you are facing towards the back of the kitchen.</li>
+                      <li>The refrigerator is to the right of the stove when you are facing the table.</li>
+                    <li>Given this information, the refrigerator is to the front-right of the stove when facing the table.</li>
+                    <li><span class="font-mono">\boxed{A}</span></li>
+                  </ol>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                  <p>物品识别和相对位置推断</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 新增的正面案例4 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>The overall goal is to "Cook vegetables with oven". The agent in the video is currently performing one subtask out of many to complete this goal. For the agent in the video, what is the most plausible next immediate subtask from the choices below?</li>
+                    <li>A: Pour the seasoning held in the right arm onto the potato on the baking tray.</li>
+                    <li>B: Press the oven start button with the right arm.</li>
+                    <li>C: Place the seasoning bottle back on the table with the right arm.</li>
+                    <li>D: Lift the baking tray containing potato with the right arm.</li>
+                    <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+                <div class="formatted-content">
+                  <video controls width="100%">
+                    <source src="videos/368-661591-head_color-1642-2169-6.mp4" type="video/mp4">
+                    您的浏览器不支持播放此视频。
+                  </video>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                <div class="formatted-content">
+                  <h4 class="font-semibold mb-2">Model_answer:</h4>
+                  <ol class="cot-list">
+                    <li>To determine the most plausible next immediate subtask for the agent in the video, let's analyze the current situation and the options provided:</li>
+                    <li>Current Situation: The agent has opened the oven door using its left arm. The right arm is positioned near the baking tray containing a potato.</li>
+                    <li>Options Analysis:</li>
+                    <ul>
+                      <li>Pour the seasoning held in the right arm onto the potato on the baking tray.</li>
+                      <ul>
+                        <li>There is no indication that the right arm is holding any seasoning. This option seems unlikely.</li>
+                      </ul>
+                      <li>Press the oven start button with the right arm.</li>
+                      <ul>
+                        <li>The oven door is open, so it would be premature to press the start button before placing the food inside.</li>
+                      </ul>
+                      <li>Place the seasoning bottle back on the table with the right arm.</li>
+                      <ul>
+                        <li>There is no seasoning bottle in the right arm, making this option irrelevant.</li>
+                      </ul>
+                      <li>Lift the baking tray containing potato with the right arm.</li>
+                      <ul>
+                        <li>The right arm is positioned near the baking tray, suggesting it might be the next action to lift the tray and place it into the oven.</li>
+                      </ul>
+                    </ul>
+                    <li>Given the context, the most logical next step is to lift the baking tray containing the potato with the right arm and place it into the oven.</li>
+                    <li><span class="font-mono">\boxed{D}</span></li>
+                  </ol>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                  <p>动作预测</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 新增的正面案例5 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>The overall goal is "The student screws the washer and the bolt into the peg.". The agent in the video is currently performing one subtask out of many to complete this goal. For the agent in the video, what is the most plausible next immediate subtask from the choices below?</li>
+                    <li>A: slide ratchet_adjuster</li>
+                    <li>B: grab ratchet</li>
+                    <li>C: drop ratchet</li>
+                    <li>D: grab bolt</li>
+                    <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+                <div class="formatted-content">
+                  <video controls width="100%">
+                    <source src="C:/Users/A/example.github.io/videos/R190-24Oct-ATV_coarse_28_fine_142.mp4" type="video/mp4">
+                    您的浏览器不支持播放此视频。
+                  </video>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                <div class="formatted-content">
+                  <h4 class="font-semibold mb-2">Model_answer:</h4>
+                  <ol class="cot-list">
+                    <li>To determine the most plausible next immediate subtask, let's analyze the current situation and the goal:</li>
+                    <li>Current Situation: The person is holding a tool (likely a ratchet) near a bolt on the motorcycle engine. The bolt appears to be partially inserted into a hole, suggesting that the person is in the process of securing it.</li>
+                    <li>Goal: The overall goal is to screw the washer and the bolt into the peg. This implies that the bolt needs to be fully tightened.</li>
+                    <li>Possible Next Steps:</li>
+                    <ul>
+                      <li>slide ratchet_adjuster: This suggests adjusting the ratchet, which might be necessary if the ratchet needs to be set for the correct torque or direction.</li>
+                      <li>grab ratchet: This implies picking up the ratchet, but since the person already has the ratchet in hand, this step seems redundant.</li>
+                      <li>drop ratchet: Dropping the ratchet would not help in achieving the goal of tightening the bolt.</li>
+                      <li>grab bolt: Grabbing the bolt again doesn't make sense because the bolt is already in place and partially secured.</li>
+                    </ul>
+                    <li>Given these points, the most logical next step would be to ensure the ratchet is correctly adjusted to tighten the bolt further. Therefore, the most plausible next immediate subtask is to adjust the ratchet.</li>
+                    <li><span class="font-mono">\boxed{A}</span></li>
+                  </ol>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                  <p>动作预测</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 新增的正面案例6 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>When the light ray illustrated in figure passes through the glass block of index of refraction $$n = 1.50$$, it is shifted laterally by the distance $$d$$. Find the time interval required for the light to pass through the glass block.</li>
+                    <li>A: "$$1.33\times 10^{-10} \text{ s}$$",</li>
+                    <li>B: "$$2.06\times 10^{-10} \text{ s}$$",</li>
+                    <li>C: "$$1.06\times 10^{-10} \text{ s}$$",</li>
+                    <li>D: "$$1.92\times 10^{-10} \text{ s}$$"</li>
+                    <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+                <div class="formatted-content">
+                  <img src="img/09ac89c0-a6c0-4b79-ae41-748a2e1384ff.png" alt="多模态输入图片2" class="w-full h-auto">
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                <div class="formatted-content">
+                  <h4 class="font-semibold mb-2">Model_answer:</h4>
+                  <ol class="cot-list">
+                    <li>To solve this problem, we need to determine the time interval required for the light to pass through the glass block. Here's the step-by-step reasoning:</li>
+                    <li>Identify the given parameters:</li>
+                    <ul>
+                      <li>Index of refraction of the glass, $$n = 1.50$$</li>
+                      <li>Thickness of the glass block, $$t = 2.00 \,\text{cm}=0.02\,\text{m}$$</li>
+                      <li>Angle of incidence, $$\theta_i = 30.0^\circ$$</li>
+                    </ul>
+                    <li>Use Snell's Law to find the angle of refraction:</li>
+                    <ul>
+                      <li>$$n_1\sin\theta_i=n_2\sin\theta_r$$ where $$n_1 = 1$$ (air) and $$n_2 = 1.50$$ (glass).</li>
+                      <li>$$1 \cdot \sin 30.0^\circ = 1.50 \cdot \sin \theta_r$$</li>
+                      <li>$$\sin \theta_r = \frac{\sin 30.0^\circ}{1.50} = \frac{0.5}{1.50} = \frac{1}{3}$$</li>
+                      <li>$$\theta_r = \sin^{-1}\left(\frac{1}{3}\right) \approx 19.47^\circ$$</li>
+                    </ul>
+                    <li>Calculate the path length inside the glass block:</li>
+                    <ul>
+                      <li>The light travels along a slanted path inside the glass block. The path length $$L$$ can be found using the thickness $$t$$ and the angle of refraction $$\theta_r$$:</li>
+                      <li>$$L = \frac{t}{\cos \theta_r}$$</li>
+                      <li>$$\cos \theta_r = \cos 19.47^\circ \approx 0.943$$</li>
+                      <li>$$L = \frac{0.02 \, \text{m}}{0.943} \approx 0.0212 \, \text{m}$$</li>
+                    </ul>
+                    <li>Calculate the speed of light in the glass:</li>
+                    <ul>
+                      <li>The speed of light in the glass $$v$$ is given by: $$v = \frac{c}{n}$$</li>
+                      <li>where $$c = 3 \times 10^8 \, \text{m/s}$$ is the speed of light in vacuum.</li>
+                      <li>$$v = \frac{3 \times 10^8 \, \text{m/s}}{1.50} = 2 \times 10^8 \, \text{m/s}$$</li>
+                    </ul>
+                    <li>Calculate the time interval required for the light to pass through the glass block:</li>
+                    <ul>
+                      <li>The time $$t$$ is given by: $$t = \frac{L}{v}$$</li>
+                      <li>$$t = \frac{0.0212 \, \text{m}}{2 \times 10^8 \, \text{m/s}} = 1.06 \times 10^{-10} \, \text{s}$$</li>
+                    </ul>
+                    <li>Thus, the correct option is <span class="font-mono">\boxed{C}</span>.</li>
+                  </ol>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                  <p>物理题</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 新增的正面案例7 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>Locate some places in the free space between the green part and the white part on the left side of the table. Your answer should be formatted as a list of tuples, i.e. [(x1, y1), (x2, y2), ...], where each tuple contains the x and y coordinates of a point satisfying the conditions above. The coordinates should be between 0 and 1, indicating the normalized pixel locations of the points in the image.</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+                <div class="formatted-content">
+                  <img src="img/overlay_0054.png" alt="多模态输入图片" class="w-full h-auto">
+                </div>
+              </div>
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                <div class="formatted-content">
+                  <h4 class="font-semibold mb-2">Model_answer:</h4>
+                  <ol class="cot-list">
+                    <li>To solve this problem, we need to identify points that lie in the free space between the green part and the white part on the left side of the table. Here's the step-by-step reasoning:</li>
+                    <li><b>Identify the green part and the white part</b>:
+                      <ul>
+                        <li>The green part is located at the bottom left of the image.</li>
+                        <li>The white part is located towards the top left of the image.</li>
+                      </ul>
+                    </li>
+                    <li><b>Determine the "left side of the table"</b>:
+                      <ul>
+                        <li>The left side of the table corresponds to the left portion of the image.</li>
+                      </ul>
+                    </li>
+                    <li><b>Find the free space between these parts</b>:
+                      <ul>
+                        <li>The free space is the area that is neither occupied by the green part nor the white part.</li>
+                      </ul>
+                    </li>
+                    <li><b>Normalize the coordinates</b>:
+                      <ul>
+                        <li>The coordinates should be between 0 and 1, where (0, 0) is the top-left corner and (1, 1) is the bottom-right corner.</li>
+                      </ul>
+                    </li>
+                    <li><b>Select points in the free space</b>:
+                      <ul>
+                        <li>We need to select points that lie between the green and white parts on the left side of the table.</li>
+                      </ul>
+                    </li>
+                    <li>Based on the image, a suitable point in the free space could be approximately at (0.2, 0.6).</li>
+                    <li>Thus, the final answer is: <span class="font-mono">\boxed{[(0.2, 0.6)]}</span></li>
+                  </ol>
+                </div>
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                  <p>图像中特定区域位置识别</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 新增的正面案例8 -->
+          <div class="min-w-full px-4">
+            <div class="bg-white rounded-xl card-shadow p-6">
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                <div class="formatted-content">
+                  <ol>
+                    <li>Find some points within the space that is in front of the soap dispenser and ontop of the gray pencil case. Your answer should be formatted as a list of tuples, i.e. [(x1, y1), (x2, y2), ...], where each tuple contains the x and y coordinates of a point satisfying the conditions above. The coordinates should be between 0 and 1, indicating the normalized pixel locations of the points in the image.</li>
+                  </ol>
+                </div>
+              </div>
+               <div class="mb-6">
+        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+        <div class="formatted-content">
+          <img src="img/overlay_0097.png" alt="多模态输入图片" class="w-full h-auto">
+        </div>
+      </div>
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+        <div class="formatted-content">
+          <h4 class="font-semibold mb-2">Model_answer:</h4>
+          <ol class="cot-list">
+            <li>To find a few points in the vacant space in front of the glass bottle on the left, let's follow these steps:</li>
+            <li>Identify the glass bottle on the left: It is the one closer to the Primarius box.</li>
+            <li>Determine the "vacant space" in front of this bottle: This would be the area directly in front of the bottle, not occupied by any other objects.</li>
+            <li>Normalize the coordinates: Since the coordinates need to be between 0 and 1, we will consider the entire image as a unit square and map the points accordingly.</li>
+            <li>Based on the image:
+              <ul>
+                <li>The glass bottle on the left is located roughly at the center-left of the image.</li>
+                <li>The vacant space in front of it appears to be a small area just in front of the bottle, not overlapping with the other objects.</li>
+              </ul>
+            </li>
+            <li>Considering these observations, some points in the vacant space in front of the glass bottle on the left could be approximately:
+              <ul>
+                <li>(0.35, 0.65)</li>
+                <li>(0.40, 0.65)</li>
+                <li>(0.37, 0.70)</li>
+              </ul>
+            </li>
+            <li>Normalizing these points to fit within the range [0, 1]: <span class="font-mono">\boxed{[(0.35, 0.65), (0.40, 0.65), (0.37, 0.70)]}</span></li>
+          </ol>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+          <p>图像中特定区域点坐标确定</p>
+        </div>
+     </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
             <!-- 页码指示器（正面案例内部例子切换） -->
             <div class="flex justify-center mt-6 space-x-2" id="positivePageIndicators">
               <button class="w-3 h-3 rounded-full bg-primary" data-index="0"></button>
@@ -496,9 +620,12 @@
               <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="3"></button>
               <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="4"></button>
               <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="5"></button>
+              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="6"></button>
+              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="7"></button> 
             </div>
           </div>
         </div>
+       
         <!-- 负面案例卡片 -->
         <div id="negativeTask" class="task-module min-w-full px-4 hidden">
           <div class="bg-white rounded-xl card-shadow p-6">
@@ -508,6 +635,14 @@
             </div>
             <!-- 例子切换容器 -->
             <div class="relative">
+              <!-- 左侧切换按钮 -->
+              <button id="negativePrevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
+                <i class="fa fa-chevron-left text-2xl text-primary"></i>
+              </button>
+              <!-- 右侧切换按钮 -->
+              <button id="negativeNextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full w-12 h-12 flex items-center justify-center shadow-md btn-hover z-10">
+                <i class="fa fa-chevron-right text-2xl text-primary"></i>
+              </button>
               <!-- 例子内容区域 -->
               <div id="negativeExampleContainer" class="relative overflow-hidden">
                 <!-- 例子卡片容器（使用flex布局，便于切换） -->
@@ -531,7 +666,7 @@
                       <div class="mb-6">
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
                         <div class="formatted-content">
-                          ###
+                          <img src="img/3cbb335d-862a-4160-b0f2-f0cadc5ea254.jpg" alt="多模态输入图片3" class="w-full h-auto">
                         </div>
                       </div>
                       <div class="mb-6">
@@ -581,7 +716,10 @@
                       <div class="mb-6">
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
                         <div class="formatted-content">
-                          ###
+                          <video width="100%" controls poster="./images/dog_mat_thumbnail.jpg">
+                            <source src="videos/049249dc-bdad-48c4-bdc0-511814c5781c.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放
+                          </video>
                         </div>
                       </div>
                       <div class="mb-6">
@@ -610,7 +748,7 @@
                       <div>
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
                         <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>cot过程中认为有Drying这个动作导致无法分辨A和E选项（可能和视频主体不完全出现在视频中相关）</p>
+                          <p>Cot过程中错误认为有Drying动作（实际视频中未显示 drying 环节）</p>
                         </div>
                       </div>
                     </div>
@@ -635,7 +773,10 @@
                       <div class="mb-6">
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
                         <div class="formatted-content">
-                          ###
+                          <video width="100%" controls poster="./images/telephone_thumbnail.jpg">
+                            <source src="videos/38d58a7a31.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放
+                          </video>
                         </div>
                       </div>
                       <div class="mb-6">
@@ -660,7 +801,7 @@
                       <div>
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
                         <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>视频数据集长，评测抽帧少，对于长视频数据集无法覆盖全面，导致没有正确识别出物品具体位置</p>
+                          <p>视频数据集长，评测抽帧少，未捕捉到电话实际安装位置（实际电话在桌子旁）</p>
                         </div>
                       </div>
                     </div>
@@ -672,11 +813,11 @@
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
                         <div class="formatted-content">
                           <ol>
-                            <li>The robot gripper is instructed to "place the banana inside the pot". The robot in the video is currently performing one action out of many to complete this instruction. The camera is mounted on the robot. Given what the robot has done in the video, what is the most plausible next immediate action from the choices below?</li>
-                            <li>A:move backward right</li>
-                            <li>B:move backward left</li>
-                            <li>C:move forward</li>
-                            <li>D:move up</li>
+                            <li>The overall goal is to "Produce ice with an ice maker". The agent in the video is currently performing one subtask out of many to complete this goal. For the agent in the video, what is the most plausible next immediate subtask from the choices below?</li>
+                            <li>A: Close the ice maker's lid with left arm.</li>
+                            <li>B: Pour the water from pink flower kettle into the ice maker with right arm.</li>
+                            <li>C: Place the pink flower kettle on the table with right arm.</li>
+                            <li>D: Press the ice maker's switch with right arm.</li>
                             <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
                           </ol>
                         </div>
@@ -684,7 +825,73 @@
                       <div class="mb-6">
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
                         <div class="formatted-content">
-                          ###
+                          <video width="100%" controls poster="./images/ice_maker_thumbnail.jpg">
+                            <source src="videos/574-809829-head_center_fisheye_color-1224-1508-3.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放
+                          </video>
+                        </div>
+                      </div>
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">COT:</h3>
+                        <div class="formatted-content">
+                          <h4 class="font-semibold mb-2">Model_answer:</h4>
+                          <ol class="cot-list">
+                            <li>To determine the most plausible next immediate subtask for the agent in the video, let's analyze the current situation and the options provided:</li>
+                            <li>Current Situation: The agent has a pink flower kettle and appears to be interacting with it. The ice maker is open, and there is no visible ice inside yet.</li>
+                            <li>Option A: Close the ice maker's lid with left arm.</li>
+                            <ul>
+                              <li>This action would be logical if the ice maker was ready to start producing ice. However, since the ice maker is open and there is no ice inside, it seems premature to close the lid at this point.</li>
+                            </ul>
+                            <li>Option B: Pour the water from pink flower kettle into the ice maker with right arm.</li>
+                            <ul>
+                              <li>This makes sense because water is needed to use the ice maker to produce ice. The agent holding the kettle suggests that pouring water is a likely next step.</li>
+                            </ul>
+                            <li>Option C: Place the pink flower kettle on the table with right arm.</li>
+                            <ul>
+                              <li>This action could be a preparatory step before pouring water. However, it doesn't directly contribute to the goal of producing ice unless followed by pouring the water.</li>
+                            </ul>
+                            <li>Option D: Press the ice maker's switch with right arm.</li>
+                            <ul>
+                              <li>This action would be appropriate after the ice maker is filled with water. Since the ice maker is not filled yet, pressing the switch now would be premature.</li>
+                            </ul>
+                            <li>Given the analysis, the most logical next step is to pour the water from the pink flower kettle into the ice maker.</li>
+                            <li>However, since the question asks for the most plausible next immediate subtask and considering the sequence of actions, placing the kettle back on the table (Option C) might be a preparatory step before pouring the water.</li>
+                            <li>But the most direct and immediate action towards the goal of producing ice is to pour the water.</li>
+                            <li>Since the options do not perfectly align but we need to choose the most plausible, the best fit is: <span class="font-mono">\boxed{C}</span></li>
+                          </ol>
+                        </div>
+                      </div>
+                      <div>
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
+                        <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
+                          <p>视频缺少前置片段，无法判断是否已注水（错误选择放置水壶）</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 新增的负面案例5 -->
+                  <div class="min-w-full px-4">
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">数据:</h3>
+                        <div class="formatted-content">
+                          <ol>
+                            <li>The robot gripper is instructed to "place the banana inside the pot". The robot in the video is currently performing one action out of many to complete this instruction. The camera is mounted on the robot. Given what the robot has done in the video, what is the most plausible next immediate action from the choices below?</li>
+                            <li>A: move backward right</li>
+                            <li>B: move backward left</li>
+                            <li>C: move forward</li>
+                            <li>D: move up</li>
+                            <li>Please answer the question directly with only the letter of the correct option and nothing else.</li>
+                          </ol>
+                        </div>
+                      </div>
+                      <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
+                        <div class="formatted-content">
+                          <video width="100%" controls poster="./images/banana_thumbnail.jpg">
+                            <source src="videos/numpy_256-rss-toykitchen2-pnp_sweep-135-val.1.totalframe048.clipframe019.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放
+                          </video>
                         </div>
                       </div>
                       <div class="mb-6">
@@ -712,12 +919,12 @@
                       <div>
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
                         <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>问题中对什么是前后左右没有明确定义</p>
+                          <p>问题中未定义坐标系，错误将"forward"理解为朝向锅的方向（实际应根据机器人坐标系判断）</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- 新增的负面案例5 -->
+                  <!-- 新增的负面案例6 -->
                   <div class="min-w-full px-4">
                     <div class="bg-white rounded-xl card-shadow p-6">
                       <div class="mb-6">
@@ -731,7 +938,7 @@
                       <div class="mb-6">
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
                         <div class="formatted-content">
-                          overlay_0037.png
+                          <img src="img/overlay_0037.png" alt="多模态输入图片" class="w-full h-auto">
                         </div>
                       </div>
                       <div class="mb-6">
@@ -743,31 +950,32 @@
                             <li>Identify the glass bottle on the left: It is the one closer to the Primarius box.</li>
                             <li>Determine the "vacant space" in front of this bottle: This would be the area directly in front of the bottle, not occupied by any other objects.</li>
                             <li>Normalize the coordinates: Since the coordinates need to be between 0 and 1, we will consider the entire image as a unit square and map the points accordingly.</li>
-                            <li>Based on the image:</li>
-                            <ul>
-                              <li>The glass bottle on the left is located roughly at the center - left of the image.</li>
-                              <li>The vacant space in front of it appears to be a small area just in front of the bottle, not overlapping with the other objects.</li>
-                            </ul>
-                            <li>Considering these observations, some points in the vacant space in front of the glass bottle on the left could be approximately:</li>
-                            <ul>
-                              <li>(0.35, 0.65)</li>
-                              <li>(0.40, 0.65)</li>
-                              <li>(0.37, 0.70)</li>
-                            </ul>
-                            <li>Normalizing these points to fit within the range [0, 1]:</li>
-                            <li><span class="font-mono">\boxed{[(0.35, 0.65), (0.40, 0.65), (0.37, 0.70)]}</span></li>
+                            <li>Based on the image:
+                              <ul>
+                                <li>The glass bottle on the left is located roughly at the center-left of the image.</li>
+                                <li>The vacant space in front of it appears to be a small area just in front of the bottle, not overlapping with the other objects.</li>
+                              </ul>
+                            </li>
+                            <li>Considering these observations, some points in the vacant space in front of the glass bottle on the left could be approximately:
+                              <ul>
+                                <li>(0.35, 0.65)</li>
+                                <li>(0.40, 0.65)</li>
+                                <li>(0.37, 0.70)</li>
+                              </ul>
+                            </li>
+                            <li>Normalizing these points to fit within the range [0, 1]: <span class="font-mono">\boxed{[(0.35, 0.65), (0.40, 0.65), (0.37, 0.70)]}</span></li>
                           </ol>
                         </div>
                       </div>
                       <div>
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
                         <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>未明确指出图像分析可能存在的误差或不确定性，导致结果可能不准确</p>
+                          <p>图像中特定区域点坐标确定错误（坐标点不在指定区域内）</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- 新增的负面案例6 -->
+                  <!-- 新增的负面案例7 -->
                   <div class="min-w-full px-4">
                     <div class="bg-white rounded-xl card-shadow p-6">
                       <div class="mb-6">
@@ -781,7 +989,7 @@
                       <div class="mb-6">
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">多模态输入:</h3>
                         <div class="formatted-content">
-                          /overlay_0064.png
+                          <img src="img/overlay_0064.png" alt="多模态输入图片" class="w-full h-auto">
                         </div>
                       </div>
                       <div class="mb-6">
@@ -793,33 +1001,29 @@
                             <li>Identify the leftmost bowl and the leftmost plate.</li>
                             <li>Determine the area between them.</li>
                             <li>Select points within this area and normalize their coordinates.</li>
-                            <li>### Step 1: Identify the leftmost bowl and the leftmost plate</li>
-                            <ul>
-                              <li>The leftmost bowl is the blue bowl located at the top left.</li>
-                              <li>The leftmost plate is the orange plate located at the bottom left.</li>
-                            </ul>
-                            <li>### Step 2: Determine the area between them</li>
-                            <li>The area between the blue bowl and the orange plate is roughly a vertical strip extending from the top left corner of the blue bowl down to the bottom left corner of the orange plate.</li>
-                            <li>### Step 3: Select points within this area and normalize their coordinates</li>
-                            <li>We can select a few points within this area and then normalize their coordinates. For simplicity, let's choose two points:</li>
-                            <ul>
-                              <li>Point 1: Midway between the blue bowl and the orange plate horizontally and slightly below the blue bowl vertically.</li>
-                              <li>Point 2: Midway between the blue bowl and the orange plate horizontally and slightly above the orange plate vertically.</li>
-                            </ul>
-                            <li>Let's assume the image dimensions are 640x480 pixels for normalization purposes.</li>
-                            <ul>
-                              <li>Point 1: (100, 200) -> Normalized: (100/640, 200/480) = (0.15625, 0.4167)</li>
-                              <li>Point 2: (100, 300) -> Normalized: (100/640, 300/480) = (0.15625, 0.625)</li>
-                            </ul>
-                            <li>Thus, the points in the free space between the leftmost bowl and the leftmost plate are approximately:</li>
-                            <li><span class="font-mono">\boxed{[(0.15625, 0.4167), (0.15625, 0.625)]}</span></li>
+                            <li>Identify the leftmost bowl: The leftmost bowl is the blue bowl located at the top left.</li>
+                            <li>Identify the leftmost plate: The leftmost plate is the orange plate located at the bottom left.</li>
+                            <li>Determine the area between them: The area between the blue bowl and the orange plate is roughly a vertical strip extending from the top left corner of the blue bowl down to the bottom left corner of the orange plate.</li>
+                            <li>Select points within this area: We can select a few points within this area and then normalize their coordinates. For simplicity, let's choose two points:
+                              <ul>
+                                <li>Point 1: Midway between the blue bowl and the orange plate horizontally and slightly below the blue bowl vertically.</li>
+                                <li>Point 2: Midway between the blue bowl and the orange plate horizontally and slightly above the orange plate vertically.</li>
+                              </ul>
+                            </li>
+                            <li>Assume the image dimensions are 640x480 pixels for normalization purposes:
+                              <ul>
+                                <li>Point 1: (100, 200) → Normalized: (100/640, 200/480) = (0.15625, 0.4167)</li>
+                                <li>Point 2: (100, 300) → Normalized: (100/640, 300/480) = (0.15625, 0.625)</li>
+                              </ul>
+                            </li>
+                            <li>Thus, the points in the free space between the leftmost bowl and the leftmost plate are approximately: <span class="font-mono">\boxed{[(0.15625, 0.4167), (0.15625, 0.625)]}</span></li>
                           </ol>
                         </div>
                       </div>
                       <div>
                         <h3 class="text-lg font-semibold text-neutral-700 mb-2">详情:</h3>
                         <div class="bg-neutral-100 p-4 rounded-lg border border-neutral-200">
-                          <p>假设图像尺寸进行归一化，可能与实际图像尺寸不符，导致坐标不准确</p>
+                          <p>图像中特定区域点坐标确定错误（坐标点不在指定区域内）</p>
                         </div>
                       </div>
                     </div>
@@ -835,6 +1039,7 @@
               <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="3"></button>
               <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="4"></button>
               <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="5"></button>
+              <button class="w-3 h-3 rounded-full bg-neutral-300" data-index="6"></button>
             </div>
           </div>
         </div>
@@ -866,15 +1071,17 @@
         });
       });
     });
+    
     // 正面案例切换功能
     const positiveExampleCards = document.getElementById('positiveExampleCards');
     const positivePageIndicators = document.getElementById('positivePageIndicators').children;
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    let currentIndex = 0;
-    function updatePageIndicators() {
+    const positivePrevBtn = document.getElementById('positivePrevBtn');
+    const positiveNextBtn = document.getElementById('positiveNextBtn');
+    let positiveCurrentIndex = 0;
+    
+    function updatePositivePageIndicators() {
       Array.from(positivePageIndicators).forEach((indicator, index) => {
-        if (index === currentIndex) {
+        if (index === positiveCurrentIndex) {
           indicator.classList.add('bg-primary');
           indicator.classList.remove('bg-neutral-300');
         } else {
@@ -883,30 +1090,38 @@
         }
       });
     }
-    function showExample(index) {
+    
+    function showPositiveExample(index) {
       positiveExampleCards.style.transform = `translateX(-${index * 100}%)`;
-      currentIndex = index;
-      updatePageIndicators();
+      positiveCurrentIndex = index;
+      updatePositivePageIndicators();
     }
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0) {
-        showExample(currentIndex - 1);
+    
+    positivePrevBtn.addEventListener('click', () => {
+      if (positiveCurrentIndex > 0) {
+        showPositiveExample(positiveCurrentIndex - 1);
       }
     });
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < positivePageIndicators.length - 1) {
-        showExample(currentIndex + 1);
+    
+    positiveNextBtn.addEventListener('click', () => {
+      if (positiveCurrentIndex < positivePageIndicators.length - 1) {
+        showPositiveExample(positiveCurrentIndex + 1);
       }
     });
+    
     Array.from(positivePageIndicators).forEach((indicator, index) => {
       indicator.addEventListener('click', () => {
-        showExample(index);
+        showPositiveExample(index);
       });
     });
+    
     // 负面案例切换功能
     const negativeExampleCards = document.getElementById('negativeExampleCards');
     const negativePageIndicators = document.getElementById('negativePageIndicators').children;
+    const negativePrevBtn = document.getElementById('negativePrevBtn');
+    const negativeNextBtn = document.getElementById('negativeNextBtn');
     let negativeCurrentIndex = 0;
+    
     function updateNegativePageIndicators() {
       Array.from(negativePageIndicators).forEach((indicator, index) => {
         if (index === negativeCurrentIndex) {
@@ -918,25 +1133,25 @@
         }
       });
     }
+    
     function showNegativeExample(index) {
       negativeExampleCards.style.transform = `translateX(-${index * 100}%)`;
       negativeCurrentIndex = index;
       updateNegativePageIndicators();
     }
-    prevBtn.addEventListener('click', () => {
-      if (document.getElementById('negativeTask').classList.contains('hidden') === false) {
-        if (negativeCurrentIndex > 0) {
-          showNegativeExample(negativeCurrentIndex - 1);
-        }
+    
+    negativePrevBtn.addEventListener('click', () => {
+      if (negativeCurrentIndex > 0) {
+        showNegativeExample(negativeCurrentIndex - 1);
       }
     });
-    nextBtn.addEventListener('click', () => {
-      if (document.getElementById('negativeTask').classList.contains('hidden') === false) {
-        if (negativeCurrentIndex < negativePageIndicators.length - 1) {
-          showNegativeExample(negativeCurrentIndex + 1);
-        }
+    
+    negativeNextBtn.addEventListener('click', () => {
+      if (negativeCurrentIndex < negativePageIndicators.length - 1) {
+        showNegativeExample(negativeCurrentIndex + 1);
       }
     });
+    
     Array.from(negativePageIndicators).forEach((indicator, index) => {
       indicator.addEventListener('click', () => {
         showNegativeExample(index);

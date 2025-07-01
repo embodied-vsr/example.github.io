@@ -74,16 +74,15 @@
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
         <div class="text-primary text-2xl font-bold">RoboVLM Demo</div>
-        <div class="text-gray-500 text-sm">任务执行演示</div>
       </div>
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="#" class="text-gray-700 hover:text-primary transition-colors">前往修改</a>
-        <a href="https://github.com/embodied-vsr/example.github.io/" class="text-gray-700 hover:text-primary transition-colors">github</a>
+        <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
+        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors"> Demo</a>
         <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">返回首页</a>
       </nav>
       
       <div class="flex items-center space-x-4">
-        <a href="https://github.com/embodied-vsr/example.github.io" target="_blank" class="text-gray-700 hover:text-primary transition-colors">
+        <a href="#" target="_blank" class="text-gray-700 hover:text-primary transition-colors">
           <i class="fa fa-github text-xl"></i>
         </a>
         <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
@@ -98,8 +97,8 @@
     <!-- 移动端菜单 -->
     <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
       <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-        <a href="#" class="text-gray-700 hover:text-primary py-2 transition-colors">前往修改</a>
-        <a href="https://github.com/embodied-vsr/example.github.io/" class="text-gray-700 hover:text-primary py-2 transition-colors">github</a>
+        <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
+        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors"> Demo</a>
         <a href="index.html" class="text-gray-700 hover:text-primary py-2 transition-colors">返回首页</a>
         <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
           试用模型
@@ -113,13 +112,13 @@
     <!-- 模块切换标签 -->
     <div class="flex justify-center mb-8 border-b border-neutral-200">
       <button class="module-tab px-6 py-3 font-medium text-primary border-b-2 border-primary" data-module="single">
-        单任务执行
+        长视频理解
       </button>
       <button class="module-tab px-6 py-3 font-medium text-neutral-500 hover:text-primary transition-smooth" data-module="long">
-        长程任务执行
+       模糊指令理解
       </button>
       <button class="module-tab px-6 py-3 font-medium text-neutral-500 hover:text-primary transition-smooth" data-module="multi">
-        多任务执行
+        主动交互
       </button>
     </div>
 
@@ -137,7 +136,7 @@
           <div class="bg-white rounded-xl card-shadow p-6">
             <!-- 小标题 -->
             <div class="text-center mb-8">
-              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">单任务执行</h2>
+              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">长视频理解</h2>
             </div>
 
             <!-- 例子切换容器 -->
@@ -280,7 +279,7 @@
           <div class="bg-white rounded-xl card-shadow p-6">
             <!-- 小标题 -->
             <div class="text-center mb-8">
-              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">长程任务执行</h2>
+              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">模糊指令理解</h2>
             </div>
 
             <!-- 例子切换容器 -->
@@ -412,12 +411,13 @@
           </div>
         </div>
 
+
         <!-- 多任务执行卡片（模块3） -->
         <div id="multiTask" class="task-module min-w-full px-4 hidden">
           <div class="bg-white rounded-xl card-shadow p-6">
             <!-- 小标题 -->
             <div class="text-center mb-8">
-              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">多任务执行</h2>
+              <h2 class="text-2xl font-bold text-neutral-800 border-b-2 border-primary pb-2 inline-block">主动交互</h2>
             </div>
 
             <!-- 例子切换容器 -->

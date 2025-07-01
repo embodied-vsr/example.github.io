@@ -318,7 +318,7 @@
   </style>
 </head>
 <body class="font-inter bg-gray-50 text-dark">
-  <!-- 导航栏 -->
+  <!-- 页面头部 -->
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
@@ -348,11 +348,11 @@
       </div>
     </div>
   </header>
-  <!-- 主内容区 -->
+  <!-- 主要内容 -->
   <main class="container mx-auto px-4 py-12">
-    <!-- 模型评估总体 -->
+    <!-- 模型性能对比表格 -->
     <section class="text-center mb-12">
-      <h2 class="section-title">模型评估总体</h2>
+      <h2 class="section-title">模型性能对比</h2>
     </section>
     <section class="table-container">
       <div class="overflow-x-auto">
@@ -364,7 +364,7 @@
                 gemini flash2.0
               </th>
               <th scope="col" class="px-6 py-4 text-left text-m font-bold font-medium text-gray-500 uppercase tracking-wider" data-col="3">
-                gpt4-0
+                gpt4-o
               </th>
               <th scope="col" class="px-6 py-4 text-left text-m font-bold font-medium text-gray-500 uppercase tracking-wider" data-col="4">
                 Qwen2.5 VL 72B
@@ -374,63 +374,63 @@
               </th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td data-col="1">MV-bench</td>
-              <td data-col="2">59.9</td>
-              <td data-col="3">64.6</td>
-              <td data-col="4">69.7</td>
-              <td data-col="5">68.7</td>
-            </tr>
-            <tr>
-              <td data-col="1">Egoschema</td>
-              <td data-col="2">67.6</td>
-              <td data-col="3">69.2</td>
-              <td data-col="4">72.8</td>
-              <td data-col="5">79.0</td>
-            </tr>
-            <tr>
-              <td data-col="1">RoboPoint</td>
-              <td data-col="2">28.1</td>
-              <td data-col="3">18.4</td>
-              <td data-col="4">36.7</td>
-              <td data-col="5">29.8</td>
-            </tr>
-            <tr>
-              <td data-col="1">PhyX</td>
-              <td data-col="2">48.2</td>
-              <td data-col="3">42.0</td>
-              <td data-col="4">50.8</td>
-              <td data-col="5">66.3</td>
-            </tr>
-            <tr>
-              <td data-col="1">Cosmos</td>
-              <td data-col="2">61.0</td>
-              <td data-col="3">45.1</td>
-              <td data-col="4">60.5</td>
-              <td data-col="5">58.6</td>
-            </tr>
-            <tr>
-              <td data-col="1">ERQA</td>
-              <td data-col="2">48.8</td>
-              <td data-col="3">46.3</td>
-              <td data-col="4">43.3</td>
-              <td data-col="5">41.5</td>
-            </tr>
-            <tr>
-              <td data-col="1">VSI-bench</td>
-              <td data-col="2">37.0</td>
-              <td data-col="3">34.0</td>
-              <td data-col="4">39.0</td>
-              <td data-col="5">37.0</td>
-            </tr>
-          </tbody>
+         <tbody>
+  <tr>
+    <td data-col="1">MV-bench</td>
+    <td data-col="2"><strong><u>61.0</u></strong></td>
+    <td data-col="3">64.6</td>
+    <td data-col="4"><strong><u>69.7</u></strong></td>
+    <td data-col="5">68.7</td>
+  </tr>
+  <tr>
+    <td data-col="1">Egoschema</td>
+    <td data-col="2">67.6</td>
+    <td data-col="3">69.2</td>
+    <td data-col="4">72.8</td>
+    <td data-col="5"><strong><u>79.0</u></strong></td>
+  </tr>
+  <tr>
+    <td data-col="1">RoboPoint</td>
+    <td data-col="2">28.1</td>
+    <td data-col="3">18.4</td>
+    <td data-col="4"><strong><u>36.7</u></strong></td>
+    <td data-col="5">29.8</td>
+  </tr>
+  <tr>
+    <td data-col="1">PhyX</td>
+    <td data-col="2">48.2</td>
+    <td data-col="3">42.0</td>
+    <td data-col="4">50.8</td>
+    <td data-col="5"><strong><u>66.3</u></strong></td>
+  </tr>
+  <tr>
+    <td data-col="1">Cosmos</td>
+    <td data-col="2"><strong><u>61.0</u></strong></td>
+    <td data-col="3">45.1</td>
+    <td data-col="4">60.5</td>
+    <td data-col="5">58.6</td>
+  </tr>
+  <tr>
+    <td data-col="1">ERQA</td>
+    <td data-col="2"><strong><u>48.8</u></strong></td>
+    <td data-col="3">46.3</td>
+    <td data-col="4">43.3</td>
+    <td data-col="5">41.5</td>
+  </tr>
+  <tr>
+    <td data-col="1">VSI-bench</td>
+    <td data-col="2">37.0</td>
+    <td data-col="3">34.0</td>
+    <td data-col="4"><strong><u>39.0</u></strong></td>
+    <td data-col="5">37.0</td>
+  </tr>
+</tbody>
         </table>
       </div>
     </section>
-    <!-- 数据整理 -->
+    <!-- 数据规模统计 -->
     <section class="text-center mb-12">
-      <h2 class="section-title">数据整理</h2>
+      <h2 class="section-title">数据规模统计</h2>
     </section>
     <section class="max-w-6xl mx-auto mb-12">
       <div class="bg-white rounded-xl shadow-md overflow-hidden">
@@ -449,9 +449,9 @@
             <tbody>
               <tr>
                 <td>SFT</td>
-                <td>QA数据</td>
+                <td>QA数据量</td>
                 <td>Physgame</td>
-                <td>NaturalReasoning（文本）</td>
+                <td>NaturalReasoning数据集</td>
                 <td>Cosmos-Reason-SFT</td>
                 <td colspan="2">Cosmos-Reason-SFT</td>
                 <td></td>
@@ -459,11 +459,11 @@
               <tr>
                 <td></td>
                 <td></td>
-                <td>40K</td>
-                <td>1M</td>
-                <td>1.2M</td>
-                <td colspan="2">500K</td>
-                <td>2.74M</td>
+                <td><strong>40K</strong></td>
+                <td><strong>1M</strong></td>
+                <td><strong>1.2M</strong></td>
+                <td colspan="2"><strong>500K</strong></td>
+                <td><strong>2.74M</strong></td>
               </tr>
               <tr>
                 <td></td>
@@ -474,34 +474,34 @@
               </tr>
               <tr>
                 <td>R1</td>
-                <td>MCQ数据</td>
+                <td>MCQ数据量</td>
                 <td colspan="2">Physgame</td>
                 <td>egolife</td>
                 <td>embodied-r</td>
-                <td>Cosmos reason1（只开源部分）</td>
+                <td>Cosmos reason1场景数据集</td>
                 <td></td>
               </tr>
               <tr>
                 <td></td>
                 <td></td>
-                <td colspan="2">10K</td>
-                <td>8k</td>
-                <td>4k</td>
-                <td>0.6k</td>
-                <td>22.6k</td>
+                <td colspan="2"><strong>10K</strong></td>
+                <td><strong>8k</strong></td>
+                <td><strong>4k</strong></td>
+                <td><strong>0.6k</strong></td>
+                <td><strong>22.6k</strong></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
-    <!-- 页面标题区 -->
+    <!-- 具身推理与理解能力 -->
     <section class="text-center mb-12">
       <h1 class="section-title">
-         embodied resoning &unstanding 数据样例
+         embodied resoning & understanding 样例展示
       </h1>
     </section>
-    <!-- 数据集模块切换标签 -->
+    <!-- 模块切换标签 -->
     <div class="module-tabs" id="moduleTabs">
       <div class="module-tab active" data-module="1">Emboided Understanding & Caption Generation</div>
       <div class="module-tab" data-module="2">Embodied Understanding & Long-range Task Planning</div>
@@ -521,7 +521,7 @@
               <div class="video-container">
                 <video class="qa-video" controls poster="https://picsum.photos/800/400?random=2">
                   <source src="videos/00000001.mp4" type="video/mp4">
-                  你的浏览器不支持视频播放
+                  您的浏览器不支持视频播放
                 </video>
               </div>
               <div class="answer-container">
@@ -558,7 +558,7 @@
               <div class="video-container">
                 <video class="qa-video" controls poster="https://picsum.photos/800/400?random=3">
                   <source src="videos/6718834237937147971.mp4" type="video/mp4">
-                  你的浏览器不支持视频播放
+                  您的浏览器不支持视频播放
                 </video>
               </div>
               <div class="answer-container">
@@ -585,12 +585,12 @@
       </div>
     </div>
     
-    <!-- 模块3内容 - 优化部分 -->
+    <!-- 模块3内容 - 具身理解 -->
     <div class="module-content" id="module3">
       <div class="card p-6">
         <div class="slider-container">
           <div class="slider-wrapper">
-            <!-- 模块3示例1 -->
+            <!-- 模块3案例1 -->
             <div class="slide">
               <div class="slide-header">
                 <h3>What are the objects and actions of the robot arm in the video?</h3>
@@ -598,7 +598,7 @@
               <div class="video-container">
                 <video class="qa-video" controls poster="https://picsum.photos/800/400?random=4">
                   <source src="#" type="video/mp4">
-                  你的浏览器不支持视频播放
+                  您的浏览器不支持视频播放
                 </video>
               </div>
               <div class="answer-container">
@@ -617,7 +617,7 @@
               </div>
             </div>
             
-            <!-- 模块3示例2 -->
+            <!-- 模块3案例2 -->
             <div class="slide">
               <div class="slide-header">
                 <h3>Question: What are the objects and human actions in the video?</h3>
@@ -625,7 +625,7 @@
               <div class="video-container">
                 <video class="qa-video" controls poster="https://picsum.photos/800/400?random=5">
                   <source src="#" type="video/mp4">
-                  你的浏览器不支持视频播放
+                  您的浏览器不支持视频播放
                 </video>
               </div>
               <div class="answer-container">
@@ -663,12 +663,12 @@
       </div>
     </div>
     
-    <!-- 模块4内容 - 优化部分 -->
+    <!-- 模块4内容 - 具身推理 -->
     <div class="module-content" id="module4">
       <div class="card p-6">
         <div class="slider-container">
           <div class="slider-wrapper">
-            <!-- 模块4示例1 -->
+            <!-- 模块4案例1 -->
             <div class="slide">
               <div class="slide-header">
                 <h3>Question: In the video, the robot gripper is trying to follow the instruction "moved the red fork to the center of the table". What should be the next action of the robot? Please answer the question in the following format: <|FunctionCallBegin|> your reasoning <|FunctionCallEnd|> <|FCResponseBegin|> your answer </RichMediaReference>.</h3>
@@ -676,7 +676,7 @@
               <div class="video-container">
                 <video class="qa-video" controls poster="https://picsum.photos/800/400?random=6">
                   <source src="#" type="video/mp4">
-                  你的浏览器不支持视频播放
+                  您的浏览器不支持视频播放
                 </video>
               </div>
               <div class="answer-container">
@@ -688,7 +688,7 @@
               </div>
             </div>
             
-            <!-- 模块4示例2 -->
+            <!-- 模块4案例2 -->
             <div class="slide">
               <div class="slide-header">
                 <h3>Question: This is a video showing a robot performing a task: Ironing Clothes. What should be the next action of the robot? Please answer the question in the following format: <RichMediaReference> your reasoning </RichMediaReference> <|FCResponseBegin|> your answer </RichMediaReference>.</h3>
@@ -696,14 +696,14 @@
               <div class="video-container">
                 <video class="qa-video" controls poster="https://picsum.photos/800/400?random=7">
                   <source src="#" type="video/mp4">
-                  你的浏览器不支持视频播放
+                  您的浏览器不支持视频播放
                 </video>
               </div>
               <div class="answer-container">
                 <h4>Model_answer:</h4>
                 <ol>
                   <li>1. <RichMediaReference>Okay, let's try to figure out the next immediate action the robot will take. The scene has two robot arms. Robot Arm 1 is on the left, holding the shirt in place with a black glove. Robot Arm 2 was initially holding the iron and just placed it on the steamer's stand. Now that the iron is securely placed, what's next? Since the task is ironing clothes, after placing the iron, the next logical step would be to actually use the iron on the shirt. But Robot Arm 2 just moved away after placing the iron. Maybe now Robot Arm 1, which is holding the shirt steady, might adjust the shirt's position to prepare for ironing. Alternatively, Robot Arm 2 might start using the iron it just placed. Wait, but the iron was placed into a slot on the steamer. Maybe the steamer is a combination device where placing the iron in the slot activates it, and then the robot can start steaming. Or perhaps the iron needs to be picked up again to start ironing. But the video shows the robot is ironing clothes, so after positioning the iron, the next step would be to activate it. But how? Looking at the video, the shirt is on the steamer. Steaming and ironing are related but different. Maybe the robot uses the steamer to remove wrinkles, and the iron is part of that setup. If the iron was placed in the stand, maybe now the robot will start moving the iron over the shirt to steam it. Since Robot Arm 2 placed the iron, it might pick it up again to apply steam. Wait, but the video shows the iron was placed on the stand. The next action could be Robot Arm 2 picking up the iron again to start steaming the shirt. Alternatively, the steamer might start emitting steam automatically, and the robot arm adjusts the shirt. But the task is ironing, which typically involves moving the iron over the fabric. Since the iron is now in its slot, maybe the next step is activating the steam function. However, the robot's actions so far have been placing the iron. The immediate next action after placing the iron would likely be to start using it. So Robot Arm 2 might grasp the iron again from the stand and begin moving it over the shirt. Alternatively, if the iron is stationary in the stand, perhaps the robot uses another method. But given the context, the most logical next step is Robot Arm 2 picking up the iron from the stand to start ironing the shirt. However, the problem states that the robot is performing the task of ironing clothes, which may not be finished in the video. The previous action was placing the iron on the stand, so the next immediate action would be to start moving the iron over the shirt. Therefore, the prediction is that Robot Arm 2 will pick up the iron again and begin smoothing the shirt's fabric.</think></li>
-                  <li>2. <|FCResponseBegin|> Robot Arm 2 will grasp the iron from the steamer's stand and begin moving it across the shirt's surface to smooth wrinkles, while Robot Arm 1 adjusts the shirt's position to ensure even coverage. <RichMediaReference></li>
+                  <li>2. <|FCResponseBegin|> Robot Arm 2 will grasp the iron from the steamer's stand and begin moving it across the shirt's surface to smooth wrinkles, while Robot Arm 1 adjusts the shirt's position to ensure even coverage. <|FunctionCallEnd|></li>
                 </ol>
               </div>
             </div>
@@ -730,7 +730,7 @@
   <footer class="bg-dark text-white py-8">
     <div class="container mx-auto px-4 text-center">
       <p class="text-gray-400">
-        &copy; 2025 具身团队 | RoboVLM 大模型
+        &copy; 2025 机器人视觉语言模型 | RoboVLM 项目团队
       </p>
     </div>
   </footer>
@@ -745,17 +745,17 @@
         tab.addEventListener('click', function() {
           const moduleId = this.dataset.module;
           
-          // 更新标签状态
+          // 移除所有标签的激活状态
           moduleTabs.forEach(t => t.classList.remove('active'));
           this.classList.add('active');
           
-          // 更新内容显示
+          // 显示对应模块内容
           moduleContents.forEach(content => content.classList.remove('active'));
           document.getElementById(`module${moduleId}`).classList.add('active');
         });
       });
       
-      // 为模块3和模块4初始化滑动功能
+      // 初始化模块3和模块4的滑块功能
       initModuleSlider('module3');
       initModuleSlider('module4');
       
@@ -774,12 +774,12 @@
         function updateSliderPosition() {
           sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
           
-          // 更新指示器
+          // 更新指示器状态
           indicators.forEach((indicator, index) => {
             indicator.classList.toggle('active', index === currentIndex);
           });
           
-          // 更新按钮状态
+          // 禁用/启用按钮
           prevBtn.disabled = currentIndex === 0;
           nextBtn.disabled = currentIndex === slideCount - 1;
         }
@@ -812,7 +812,7 @@
         updateSliderPosition();
       }
       
-      // 表格交互效果
+      // 表格列高亮功能
       const table = document.querySelector('#performanceTable');
       if (table) {
         const cells = table.querySelectorAll('td[data-col], th[data-col]');
