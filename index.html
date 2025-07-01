@@ -297,6 +297,108 @@
       background-color: #F0F9FF;
     }
     
+   
+
+    header .flex.items-center {
+      display: flex;
+      align-items: center;
+    }
+
+    header .text-primary {
+      color: var(--primary);
+    }
+
+    header .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    header .font-bold {
+      font-weight: 700;
+    }
+
+    header nav.hidden.md:flex {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      header nav.hidden.md:flex {
+        display: flex;
+      }
+    }
+
+    header nav a {
+      color: #4B5563;
+      transition: color 0.3s ease;
+      padding: 0.5rem 0.5rem;
+    }
+
+    header nav a:hover {
+      color: var(--primary);
+    }
+
+    header .flex.items-center.space-x-4 {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    header a.px-4.py-2 {
+      padding: 0.5rem 1rem;
+    }
+
+    header a.bg-primary {
+      background-color: var(--primary);
+      color: white;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    header a.bg-primary:hover {
+      background-color: rgba(97, 92, 237, 0.9);
+    }
+
+    header button.md:hidden {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      header button.md:hidden {
+        display: block;
+      }
+    }
+
+    header #mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      header #mobile-menu {
+        background-color: white;
+        border-top: 1px solid #E5E7EB;
+      }
+
+      header #mobile-menu .container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+
+      header #mobile-menu a {
+        color: #4B5563;
+        transition: color 0.3s ease;
+        padding: 0.5rem 0;
+      }
+
+      header #mobile-menu a:hover {
+        color: var(--primary);
+      }
+
+      header #mobile-menu a.bg-primary {
+        text-align: center;
+      }
+    }
+
     @media (max-width: 768px) {
       .module-tabs {
         gap: 8px;
@@ -318,36 +420,36 @@
   </style>
 </head>
 <body class="font-inter bg-gray-50 text-dark">
-  <!-- 页面头部 -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-2">
-        <div class="text-primary text-2xl font-bold">RoboVLM</div>
-      </div>
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
-        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors">Demo</a>
-      </nav>
-      <div class="flex items-center space-x-4">
-        <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
-          试用模型
-        </a>
-        <button class="md:hidden text-gray-700" id="menu-toggle">
-          <i class="fa fa-bars text-xl"></i>
-        </button>
-      </div>
+ <!-- 导航栏 -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-4"> <!-- 改为space-x-4（16px） -->
+      <div class="text-primary text-2xl font-bold">RoboVLM</div>
     </div>
-    <!-- 移动端菜单 -->
-    <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
-      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-        <a href="Case.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Case</a>
-        <a href="Demo.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Demo</a>
-        <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
-          试用模型
-        </a>
-      </div>
+    <nav class="hidden md:flex items-center space-x-4"> <!-- 改为space-x-4（16px） -->
+      <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
+      <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors">Demo</a>
+    </nav>
+    <div class="flex items-center space-x-6"> <!-- 改为space-x-6（24px） -->
+      <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+        试用模型
+      </a>
+      <button class="md:hidden text-gray-700" id="menu-toggle">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
     </div>
-  </header>
+  </div>
+  <!-- 移动端菜单间距已正确，无需修改 -->
+  <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
+    <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+      <a href="Case.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Case</a>
+      <a href="Demo.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Demo</a>
+      <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
+        试用模型
+      </a>
+    </div>
+  </div>
+</header>
   <!-- 主要内容 -->
   <main class="container mx-auto px-4 py-12">
     <!-- 模型性能对比表格 -->
