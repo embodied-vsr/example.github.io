@@ -132,8 +132,8 @@
       margin: 20px 0;
       border-radius: 8px;
       overflow: hidden;
-      background: #1F2937;
-      aspect-ratio: 16/9;
+      /* 去除背景色 */
+      background: none; 
     }
     
     .video-placeholder {
@@ -148,7 +148,8 @@
     }
     
     .video-container video {
-      max-width: 100%;
+      /* 缩小视频尺寸 */
+      max-width: 400px; 
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
@@ -296,7 +297,108 @@
     .custom-table tr:hover {
       background-color: #F0F9FF;
     }
-    
+   
+
+    header .flex.items-center {
+      display: flex;
+      align-items: center;
+    }
+
+    header .text-primary {
+      color: var(--primary);
+    }
+
+    header .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    header .font-bold {
+      font-weight: 700;
+    }
+
+    header nav.hidden.md:flex {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      header nav.hidden.md:flex {
+        display: flex;
+      }
+    }
+
+    header nav a {
+      color: #4B5563;
+      transition: color 0.3s ease;
+      padding: 0.5rem 0.5rem;
+    }
+
+    header nav a:hover {
+      color: var(--primary);
+    }
+
+    header .flex.items-center.space-x-4 {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    header a.px-4.py-2 {
+      padding: 0.5rem 1rem;
+    }
+
+    header a.bg-primary {
+      background-color: var(--primary);
+      color: white;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    header a.bg-primary:hover {
+      background-color: rgba(97, 92, 237, 0.9);
+    }
+
+    header button.md:hidden {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      header button.md:hidden {
+        display: block;
+      }
+    }
+
+    header #mobile-menu {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      header #mobile-menu {
+        background-color: white;
+        border-top: 1px solid #E5E7EB;
+      }
+
+      header #mobile-menu .container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 1rem;
+      }
+
+      header #mobile-menu a {
+        color: #4B5563;
+        transition: color 0.3s ease;
+        padding: 0.5rem 0;
+      }
+
+      header #mobile-menu a:hover {
+        color: var(--primary);
+      }
+
+      header #mobile-menu a.bg-primary {
+        text-align: center;
+      }
+    }
+
     @media (max-width: 768px) {
       .module-tabs {
         gap: 8px;
@@ -318,36 +420,36 @@
   </style>
 </head>
 <body class="font-inter bg-gray-50 text-dark">
-  <!-- 页面头部 -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-2">
-        <div class="text-primary text-2xl font-bold">RoboVLM</div>
-      </div>
-      <nav class="hidden md:flex items-center space-x-8">
-        <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
-        <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors">Demo</a>
-      </nav>
-      <div class="flex items-center space-x-4">
-        <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
-          试用模型
-        </a>
-        <button class="md:hidden text-gray-700" id="menu-toggle">
-          <i class="fa fa-bars text-xl"></i>
-        </button>
-      </div>
+ <!-- 导航栏 -->
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="flex items-center space-x-4"> <!-- 改为space-x-4（16px） -->
+      <div class="text-primary text-2xl font-bold">RoboVLM</div>
     </div>
-    <!-- 移动端菜单 -->
-    <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
-      <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
-        <a href="Case.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Case</a>
-        <a href="Demo.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Demo</a>
-        <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
-          试用模型
-        </a>
-      </div>
+    <nav class="hidden md:flex items-center space-x-4"> <!-- 改为space-x-4（16px） -->
+      <a href="Case.html" class="text-gray-700 hover:text-primary transition-colors">Case</a>
+      <a href="Demo.html" class="text-gray-700 hover:text-primary transition-colors">Demo</a>
+    </nav>
+    <div class="flex items-center space-x-6"> <!-- 改为space-x-6（24px） -->
+      <a href="#" class="hidden md:inline-block px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+        试用模型
+      </a>
+      <button class="md:hidden text-gray-700" id="menu-toggle">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
     </div>
-  </header>
+  </div>
+  <!-- 移动端菜单间距已正确，无需修改 -->
+  <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
+    <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+      <a href="Case.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Case</a>
+      <a href="Demo.html" class="text-gray-700 hover:text-primary py-2 transition-colors">Demo</a>
+      <a href="#" class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-center">
+        试用模型
+      </a>
+    </div>
+  </div>
+</header>
   <!-- 主要内容 -->
   <main class="container mx-auto px-4 py-12">
     <!-- 模型性能对比表格 -->
@@ -509,222 +611,237 @@
       <div class="module-tab" data-module="4">Embodied Reasoning</div>
     </div>
     
-    <!-- 模块1内容 -->
-    <div class="module-content active" id="module1">
-      <div class="card p-6">
-        <div class="slider-container">
-          <div class="slider-wrapper">
-            <div class="slide">
-              <div class="slide-header">
-                <h3>Question: Please reconstruct the brief description of the robot event into an intensive standardized description, covering the overall scenario objectives, environment, robot characteristics, camera perspective and movement, sub-objectives and technical action decomposition, and post-action states to form a richer and more precise narrative, with a total length of no more than 150 words.</h3>
-              </div>
-              <div class="video-container">
-                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=2">
-                  <source src="videos/00000001.mp4" type="video/mp4">
-                  您的浏览器不支持视频播放
-                </video>
-              </div>
-              <div class="answer-container">
-                <h4>Model_answer:</h4>
-                <ol>
-                  <li>1. The robot's primary goal is to place a blue LEGO brick into a drawer and close it. The scene takes place in an office environment with dim artificial lighting. The robot is a single-arm manipulator with a black and metallic appearance, equipped with a parallel jaw gripper. The camera is positioned in a first-person perspective, likely mounted on the robot's arm or head, providing a direct view of the workspace.</li>
-                  <li>2. The robot's sub-goal is to insert the blue LEGO brick into the drawer. The action sequence begins with the robot perceiving the blue LEGO brick on a wooden surface. The robot executes a 'Grasp [blue LEGO brick]' action, lifting it slightly. It then performs a 'Move_arm_to [drawer_opening]' command, positioning the brick above the drawer. The robot proceeds with a 'Place [blue LEGO brick] at [inside_drawer]' action, carefully positioning the brick within the drawer. Following this, the robot executes a 'Close_drawer' action, ensuring the drawer is securely shut.</li>
-                  <li>3. After the action, the blue LEGO brick is neatly placed inside the closed drawer, and the robot's gripper is open and retracted from the drawer area.</li>
-                </ol>
-              </div>
-            </div>
+   <!-- 模块1内容 -->
+<div class="module-content active" id="module1">
+  <div class="card p-6">
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <div class="slide">
+          <div class="slide-header">
+            <h3>Question: Please reconstruct the brief description of the robot event into an intensive standardized description, covering the overall scenario objectives, environment, robot characteristics, camera perspective and movement, sub-objectives and technical action decomposition, and post-action states to form a richer and more precise narrative, with a total length of no more than 150 words.</h3>
           </div>
-        </div>
-        <div class="slider-controls">
-          <button class="slider-btn prev-btn" disabled>
-            <i class="fa fa-chevron-left"></i> 上一个
-          </button>
-          <button class="slider-btn next-btn" disabled>
-            下一个 <i class="fa fa-chevron-right"></i>
-          </button>
+          <div class="video-container">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/00000001_first_frame.jpg">
+              <source src="videos/00000001.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+          </div>
+          <div class="answer-container">
+            <h4>Model_answer:</h4>
+            <ol>
+              <li>1. The robot's primary goal is to place a blue LEGO brick into a drawer and close it. The scene takes place in an office environment with dim artificial lighting. The robot is a single-arm manipulator with a black and metallic appearance, equipped with a parallel jaw gripper. The camera is positioned in a first-person perspective, likely mounted on the robot's arm or head, providing a direct view of the workspace.</li>
+              <li>2. The robot's sub-goal is to insert the blue LEGO brick into the drawer. The action sequence begins with the robot perceiving the blue LEGO brick on a wooden surface. The robot executes a 'Grasp [blue LEGO brick]' action, lifting it slightly. It then performs a 'Move_arm_to [drawer_opening]' command, positioning the brick above the drawer. The robot proceeds with a 'Place [blue LEGO brick] at [inside_drawer]' action, carefully positioning the brick within the drawer. Following this, the robot executes a 'Close_drawer' action, ensuring the drawer is securely shut.</li>
+              <li>3. After the action, the blue LEGO brick is neatly placed inside the closed drawer, and the robot's gripper is open and retracted from the drawer area.</li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
-    
-    <!-- 模块2内容 -->
-    <div class="module-content" id="module2">
-      <div class="card p-6">
-        <div class="slider-container">
-          <div class="slider-wrapper">
-            <div class="slide">
-              <div class="slide-header">
-                <h3>Question: next 5 steps?</h3>
-              </div>
-              <div class="video-container">
-                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=3">
-                  <source src="videos/6718834237937147971.mp4" type="video/mp4">
-                  您的浏览器不支持视频播放
-                </video>
-              </div>
-              <div class="answer-container">
-                <h4>Model_answer:</h4>
-                <ol>
-                  <li>1. put the green apple in the bowl</li>
-                  <li>2. put the apple in the bowl</li>
-                  <li>3. put the orange in the bowl</li>
-                  <li>4. put the orange in the bowl</li>
-                  <li>5. put the grapes in the bowl</li>
-                </ol>
-              </div>
-            </div>
+    <div class="slider-controls">
+      <button class="slider-btn prev-btn" disabled>
+        <i class="fa fa-chevron-left"></i> 上一个
+      </button>
+      <button class="slider-btn next-btn" disabled>
+        下一个 <i class="fa fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 模块2内容 -->
+<div class="module-content" id="module2">
+  <div class="card p-6">
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <div class="slide">
+          <div class="slide-header">
+            <h3>Question: next 5 steps?</h3>
           </div>
-        </div>
-        <div class="slider-controls">
-          <button class="slider-btn prev-btn" disabled>
-            <i class="fa fa-chevron-left"></i> 上一个
-          </button>
-          <button class="slider-btn next-btn" disabled>
-            下一个 <i class="fa fa-chevron-right"></i>
-          </button>
+          <div class="video-container">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/6718834237937147971_first_frame.jpg">
+              <source src="videos/6718834237937147971.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+          </div>
+          <div class="answer-container">
+            <h4>Model_answer:</h4>
+            <ol>
+              <li>1. put the green apple in the bowl</li>
+              <li>2. put the apple in the bowl</li>
+              <li>3. put the orange in the bowl</li>
+              <li>4. put the orange in the bowl</li>
+              <li>5. put the grapes in the bowl</li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
-    
-    <!-- 模块3内容 - 具身理解 -->
-    <div class="module-content" id="module3">
-      <div class="card p-6">
-        <div class="slider-container">
-          <div class="slider-wrapper">
-            <!-- 模块3案例1 -->
-            <div class="slide">
-              <div class="slide-header">
-                <h3>What are the objects and actions of the robot arm in the video?</h3>
-              </div>
-              <div class="video-container">
-                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=4">
-                  <source src="#" type="video/mp4">
-                  您的浏览器不支持视频播放
-                </video>
-              </div>
-              <div class="answer-container">
-                <h4>Model_answer:</h4>
-                <ol>
-                  <li>1. Held by the robotic arm, moving towards the whiteboard, there is an eraser which is rectangular and orange, designed for cleaning whiteboards.</li>
-                  <li>2. Located at the top center of the frame, mounted on the wall, there is a whiteboard which is large, white, and has some blue marker scribbles on it. It has a metallic frame at the bottom. The whiteboard is stationary and has blue marker scribbles on it.</li>
-                  <li>3. After this, the blue marker scribbles on the whiteboard begin to fade as the duster rubs against it.</li>
-                  <li>4. At the bottom of the frame, covering the lower part of the scene, there is a floor which is covered with dark, textured carpeting.</li>
-                  <li>5. The robotic arm is positioned on the right side of the frame, extending towards the whiteboard. It is white with yellow accents and has a mechanical, segmented structure. It holds an orange eraser in its gripper.</li>
-                  <li>6. The robotic arm is holding an orange duster and is positioned near the bottom right corner of the frame, pointing towards the whiteboard.</li>
-                  <li>7. After that, the robotic arm moves upwards and slightly to the left, bringing the duster closer to the whiteboard.</li>
-                  <li>8. Afterwards, the robotic arm continues to move upwards until the duster makes contact with the whiteboard.</li>
-                  <li>9. Finally, the robotic arm begins to rub the duster against the whiteboard, removing the blue marker scribbles.</li>
-                </ol>
-              </div>
-            </div>
-            
-            <!-- 模块3案例2 -->
-            <div class="slide">
-              <div class="slide-header">
-                <h3>Question: What are the objects and human actions in the video?</h3>
-              </div>
-              <div class="video-container">
-                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=5">
-                  <source src="#" type="video/mp4">
-                  您的浏览器不支持视频播放
-                </video>
-              </div>
-              <div class="answer-container">
-                <h4>Model_answer:</h4>
-                <ol>
-                  <li>1. Center of the desk, serving as the main structure for the assembly, there is a white plastic base with multiple holes and slots for attaching other components. The white circular base remains stationary on the desk, serving as the foundation for the seat assembly. It has multiple holes and slots for attaching other parts.</li>
-                  <li>2. Attached to the circular base, extending outward, there are smooth, cylindrical rods made of white material, possibly plastic or metal. The white rods are attached to the circular base. They are being adjusted by the hands, likely being loosened or removed as part of the disassembly process.</li>
-                  <li>3. Scattered near the left side of the desk, there are small, round, white plastic pieces, possibly caps or connectors for the assembly. These pieces remain scattered near the left side of the desk. They do not appear to be directly involved in the current action but may be used later in the disassembly process.</li>
-                  <li>4. Top left corner of the desk, there is a closed black laptop with a visible keyboard. The black laptop remains closed and stationary in the top left corner of the desk. It does not interact with the disassembly process.</li>
-                  <li>5. Above the circular base, near the center of the desk, there is a rectangular gray mouse pad with a smooth surface. The gray mouse pad stays in place above the circular base. It serves as a background element and does not participate in the disassembly.</li>
-                  <li>6. Top right corner of the desk, there is a red tool, possibly a screwdriver or similar device, with a handle. The red tool remains in the top right corner of the desk. It is not used during this segment of the video.</li>
-                  <li>7. Top right corner of the desk, next to the red tool, there is a small black speaker with a mesh front. The black speaker stays in its position next to the red tool. It does not play a role in the current activity.</li>
-                  <li>8. Top right corner of the desk, near the speaker, there is a coiled black cable, possibly for connecting devices. The black cable remains coiled in the top right corner of the desk. It is not utilized in the disassembly process.</li>
-                  <li>9. Right side of the desk, near the bottom, there is a silver screwdriver with a black handle. The silver screwdriver with a black handle is present on the right side of the desk. It is not used in this segment of the video.</li>
-                  <li>10. Manipulating the white rods and base, there are two human hands, one holding the rod while the other adjusts or tightens it. The hands are actively engaged in manipulating the white rods. One hand holds the rod steady while the other adjusts or tightens it. The hands move around the base, indicating the process of disassembling the seat.</li>
-                </ol>
-              </div>
-            </div>
+    <div class="slider-controls">
+      <button class="slider-btn prev-btn" disabled>
+        <i class="fa fa-chevron-left"></i> 上一个
+      </button>
+      <button class="slider-btn next-btn" disabled>
+        下一个 <i class="fa fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 模块3内容 - 具身理解 -->
+<div class="module-content" id="module3">
+  <div class="card p-6">
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <!-- 模块3案例1 -->
+        <div class="slide">
+          <div class="slide-header">
+            <h3>Question:What are the objects and actions of the robot arm in the video?</h3>
+          </div>
+          <div class="video-container">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/robovqa_5544766964057593636_first_frame.jpg">
+              <source src="videos/robovqa_5544766964057593636.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+          </div>
+          <div class="answer-container">
+            <h4>Model_answer:</h4>
+            <ol>
+              <li>1. Held by the robotic arm, moving towards the whiteboard, there is an eraser which is rectangular and orange, designed for cleaning whiteboards.</li>
+              <li>2. Located at the top center of the frame, mounted on the wall, there is a whiteboard which is large, white, and has some blue marker scribbles on it. It has a metallic frame at the bottom. The whiteboard is stationary and has blue marker scribbles on it.</li>
+              <li>3. After this, the blue marker scribbles on the whiteboard begin to fade as the duster rubs against it.</li>
+              <li>4. At the bottom of the frame, covering the lower part of the scene, there is a floor which is covered with dark, textured carpeting.</li>
+              <li>5. The robotic arm is positioned on the right side of the frame, extending towards the whiteboard. It is white with yellow accents and has a mechanical, segmented structure. It holds an orange eraser in its gripper.</li>
+              <li>6. The robotic arm is holding an orange duster and is positioned near the bottom right corner of the frame, pointing towards the whiteboard.</li>
+              <li>7. After that, the robotic arm moves upwards and slightly to the left, bringing the duster closer to the whiteboard.</li>
+              <li>8. Afterwards, the robotic arm continues to move upwards until the duster makes contact with the whiteboard.</li>
+              <li>9. Finally, the robotic arm begins to rub the duster against the whiteboard, removing the blue marker scribbles.</li>
+            </ol>
           </div>
         </div>
-        
-        <div class="indicators">
-          <div class="indicator active" data-index="0"></div>
-          <div class="indicator" data-index="1"></div>
-        </div>
-        
-        <div class="slider-controls">
-          <button class="slider-btn prev-btn">
-            <i class="fa fa-chevron-left"></i> 上一个
-          </button>
-          <button class="slider-btn next-btn">
-            下一个 <i class="fa fa-chevron-right"></i>
-          </button>
+
+        <!-- 模块3案例2 -->
+        <div class="slide">
+          <div class="slide-header">
+            <h3>Question: What are the objects and human actions in the video?</h3>
+          </div>
+          <div class="video-container">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/holo_assist_z104-july-14-22-marius_disassemble_coarse_34_fine_37_first_frame.jpg">
+              <source src="videos/holo_assist_z104-july-14-22-marius_disassemble_coarse_34_fine_37.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+          </div>
+          <div class="answer-container">
+            <h4>Model_answer:</h4>
+            <ol>
+              <li>1. Center of the desk, serving as the main structure for the assembly, there is a white plastic base with multiple holes and slots for attaching other components. The white circular base remains stationary on the desk, serving as the foundation for the seat assembly. It has multiple holes and slots for attaching other parts.</li>
+              <li>2. Attached to the circular base, extending outward, there are smooth, cylindrical rods made of white material, possibly plastic or metal. The white rods are attached to the circular base. They are being adjusted by the hands, likely being loosened or removed as part of the disassembly process.</li>
+              <li>3. Scattered near the left side of the desk, there are small, round, white plastic pieces, possibly caps or connectors for the assembly. These pieces remain scattered near the left side of the desk. They do not appear to be directly involved in the current action but may be used later in the disassembly process.</li>
+              <li>4. Top left corner of the desk, there is a closed black laptop with a visible keyboard. The black laptop remains closed and stationary in the top left corner of the desk. It does not interact with the disassembly process.</li>
+              <li>5. Above the circular base, near the center of the desk, there is a rectangular gray mouse pad with a smooth surface. The gray mouse pad stays in place above the circular base. It serves as a background element and does not participate in the disassembly.</li>
+              <li>6. Top right corner of the desk, there is a red tool, possibly a screwdriver or similar device, with a handle. The red tool remains in the top right corner of the desk. It is not used during this segment of the video.</li>
+              <li>7. Top right corner of the desk, next to the red tool, there is a small black speaker with a mesh front. The black speaker stays in its position next to the red tool. It does not play a role in the current activity.</li>
+              <li>8. Top right corner of the desk, near the speaker, there is a coiled black cable, possibly for connecting devices. The black cable remains coiled in the top right corner of the desk. It is not utilized in the disassembly process.</li>
+              <li>9. Right side of the desk, near the bottom, there is a silver screwdriver with a black handle. The silver screwdriver with a black handle is present on the right side of the desk. It is not used in this segment of the video.</li>
+              <li>10. Manipulating the white rods and base, there are two human hands, one holding the rod while the other adjusts or tightens it. The hands are actively engaged in manipulating the white rods. One hand holds the rod steady while the other adjusts or tightens it. The hands move around the base, indicating the process of disassembling the seat.</li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
-    
-    <!-- 模块4内容 - 具身推理 -->
-    <div class="module-content" id="module4">
-      <div class="card p-6">
-        <div class="slider-container">
-          <div class="slider-wrapper">
-            <!-- 模块4案例1 -->
-            <div class="slide">
-              <div class="slide-header">
-                <h3>Question: In the video, the robot gripper is trying to follow the instruction "moved the red fork to the center of the table". What should be the next action of the robot? Please answer the question in the following format: <|FunctionCallBegin|> your reasoning <|FunctionCallEnd|> <|FCResponseBegin|> your answer </RichMediaReference>.</h3>
-              </div>
-              <div class="video-container">
-                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=6">
-                  <source src="#" type="video/mp4">
-                  您的浏览器不支持视频播放
-                </video>
-              </div>
-              <div class="answer-container">
-                <h4>Model_answer:</h4>
-                <ol>
-                  <li>1. <|FunctionCallBegin|>Okay, let's break this down. The user wants the next action of the robot gripper after it has placed the red fork in the center of the table. Looking at the video, the gripper just released the fork by opening and is retracting. The last action shown is releasing the fork, opening the gripper, and moving upward. Now, after placing the fork down, the gripper would probably need to move away from the center to either return to a resting position or prepare for another task. Since the instruction was only to move the red fork, and the video does not show further tasks, the next logical step would be retracting. The gripper was moving upward and opening, so continuing to retract would likely involve moving back to the left side where it started. So the next action would be moving left to retract away from the center.</think></li>
-                  <li>2. <|FCResponseBegin|> move left </RichMediaReference></li>
-                </ol>
-              </div>
-            </div>
-            
-            <!-- 模块4案例2 -->
-            <div class="slide">
-              <div class="slide-header">
-                <h3>Question: This is a video showing a robot performing a task: Ironing Clothes. What should be the next action of the robot? Please answer the question in the following format: <RichMediaReference> your reasoning </RichMediaReference> <|FCResponseBegin|> your answer </RichMediaReference>.</h3>
-              </div>
-              <div class="video-container">
-                <video class="qa-video" controls poster="https://picsum.photos/800/400?random=7">
-                  <source src="#" type="video/mp4">
-                  您的浏览器不支持视频播放
-                </video>
-              </div>
-              <div class="answer-container">
-                <h4>Model_answer:</h4>
-                <ol>
-                  <li>1. <RichMediaReference>Okay, let's try to figure out the next immediate action the robot will take. The scene has two robot arms. Robot Arm 1 is on the left, holding the shirt in place with a black glove. Robot Arm 2 was initially holding the iron and just placed it on the steamer's stand. Now that the iron is securely placed, what's next? Since the task is ironing clothes, after placing the iron, the next logical step would be to actually use the iron on the shirt. But Robot Arm 2 just moved away after placing the iron. Maybe now Robot Arm 1, which is holding the shirt steady, might adjust the shirt's position to prepare for ironing. Alternatively, Robot Arm 2 might start using the iron it just placed. Wait, but the iron was placed into a slot on the steamer. Maybe the steamer is a combination device where placing the iron in the slot activates it, and then the robot can start steaming. Or perhaps the iron needs to be picked up again to start ironing. But the video shows the robot is ironing clothes, so after positioning the iron, the next step would be to activate it. But how? Looking at the video, the shirt is on the steamer. Steaming and ironing are related but different. Maybe the robot uses the steamer to remove wrinkles, and the iron is part of that setup. If the iron was placed in the stand, maybe now the robot will start moving the iron over the shirt to steam it. Since Robot Arm 2 placed the iron, it might pick it up again to apply steam. Wait, but the video shows the iron was placed on the stand. The next action could be Robot Arm 2 picking up the iron again to start steaming the shirt. Alternatively, the steamer might start emitting steam automatically, and the robot arm adjusts the shirt. But the task is ironing, which typically involves moving the iron over the fabric. Since the iron is now in its slot, maybe the next step is activating the steam function. However, the robot's actions so far have been placing the iron. The immediate next action after placing the iron would likely be to start using it. So Robot Arm 2 might grasp the iron again from the stand and begin moving it over the shirt. Alternatively, if the iron is stationary in the stand, perhaps the robot uses another method. But given the context, the most logical next step is Robot Arm 2 picking up the iron from the stand to start ironing the shirt. However, the problem states that the robot is performing the task of ironing clothes, which may not be finished in the video. The previous action was placing the iron on the stand, so the next immediate action would be to start moving the iron over the shirt. Therefore, the prediction is that Robot Arm 2 will pick up the iron again and begin smoothing the shirt's fabric.</think></li>
-                  <li>2. <|FCResponseBegin|> Robot Arm 2 will grasp the iron from the steamer's stand and begin moving it across the shirt's surface to smooth wrinkles, while Robot Arm 1 adjusts the shirt's position to ensure even coverage. <|FunctionCallEnd|></li>
-                </ol>
-              </div>
-            </div>
+
+    <div class="indicators">
+      <div class="indicator active" data-index="0"></div>
+      <div class="indicator" data-index="1"></div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn prev-btn">
+        <i class="fa fa-chevron-left"></i> 上一个
+      </button>
+      <button class="slider-btn next-btn">
+        下一个 <i class="fa fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 模块4内容 - 具身推理 -->
+<div class="module-content" id="module4">
+  <div class="card p-6">
+    <div class="slider-container">
+      <div class="slider-wrapper">
+        <!-- 模块4案例1 -->
+        <div class="slide">
+          <div class="slide-header">
+            <h3>Question: In the video, the robot gripper is trying to follow the instruction \"moved the red fork to the center of the table\" 
+                What should be the next action of the robot? Please answer the question in the following format: <think> your reasoning </think> <answer> your answer </answer>.</h3>
+          </div>
+          <div class="video-container">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/5_first_frame.jpg">
+              <source src="videos/5.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+          </div>
+          <div class="answer-container">
+            <h4>Model_answer:</h4>
+            <ol>
+              <li>1.<think>
+Okay, let's break this down. The user wants the next action of the robot gripper after it has placed the red fork in the center of the table.
+
+Looking at the video, the gripper just released the fork by opening and is retracting. The last action shown is releasing the fork, opening the gripper, and moving upward. Now, after placing the fork down, the gripper would probably need to move away from the center to either return to a resting position or prepare for another task. Since the instruction was only to move the red fork, and the video does not show further tasks, the next logical step would be retracting. The gripper was moving upward and opening, so continuing to retract would likely involve moving back to the left side where it started. So the next action would be moving left to retract away from the center.</think></li>
+              <li>2.<answer> move left </answer></li>
+            </ol>
           </div>
         </div>
-        
-        <div class="indicators">
-          <div class="indicator active" data-index="0"></div>
-          <div class="indicator" data-index="1"></div>
-        </div>
-        
-        <div class="slider-controls">
-          <button class="slider-btn prev-btn">
-            <i class="fa fa-chevron-left"></i> 上一个
-          </button>
-          <button class="slider-btn next-btn">
-            下一个 <i class="fa fa-chevron-right"></i>
-          </button>
+
+        <!-- 模块4案例2 -->
+        <div class="slide">
+          <div class="slide-header">
+            <h3>Question: This is a video showing a robot performing a task: Ironing Clothes. What should be the next action of the robot? Please answer the question in the following format: <think> your reasoning </think> <answer> your answer </answer>.</h3>
+          </div>
+          <div class="video-container">
+            <!-- 修改视频尺寸 -->
+            <video class="qa-video" controls poster="videos/agibot_475-755570-head_color-1536-1812-7_first_frame.jpg">
+              <source src="videos/agibot_475-755570-head_color-1536-1812-7.mp4" type="video/mp4">
+              您的浏览器不支持视频播放
+            </video>
+          </div>
+          <div class="answer-container">
+            <h4>Model_answer:</h4>
+            <ol>
+              <li>1.  <think>
+Okay, let's try to figure out the next immediate action the robot will take. The scene has two robot arms. Robot Arm 1 is on the left, holding the shirt in place with a black glove. Robot Arm 2 was initially holding the iron and just placed it on the steamer's stand. Now that the iron is securely placed, what's next?
+
+Since the task is ironing clothes, after placing the iron, the next logical step would be to actually use the iron on the shirt. But Robot Arm 2 just moved away after placing the iron. Maybe now Robot Arm 1, which is holding the shirt steady, might adjust the shirt's position to prepare for ironing. Alternatively, Robot Arm 2 might start using the iron it just placed. Wait, but the iron was placed into a slot on the steamer. Maybe the steamer is a combination device where placing the iron in the slot activates it, and then the robot can start steaming. Or perhaps the iron needs to be picked up again to start ironing. But the video shows the robot is ironing clothes, so after positioning the iron, the next step would be to activate it. But how?
+
+Looking at the video, the shirt is on the steamer. Steaming and ironing are related but different. Maybe the robot uses the steamer to remove wrinkles, and the iron is part of that setup. If the iron was placed in the stand, maybe now the robot will start moving the iron over the shirt to steam it. Since Robot Arm 2 placed the iron, it might pick it up again to apply steam. Wait, but the video shows the iron was placed on the stand. The next action could be Robot Arm 2 picking up the iron again to start steaming the shirt. Alternatively, the steamer might start emitting steam automatically, and the robot arm adjusts the shirt. But the task is ironing, which typically involves moving the iron over the fabric. Since the iron is now in its slot, maybe the next step is activating the steam function. However, the robot's actions so far have been placing the iron. The immediate next action after placing the iron would likely be to start using it. So Robot Arm 2 might grasp the iron again from the stand and begin moving it over the shirt. Alternatively, if the iron is stationary in the stand, perhaps the robot uses another method. But given the context, the most logical next step is Robot Arm 2 picking up the iron from the stand to start ironing the shirt. However, the problem states that the robot is performing the task of ironing clothes, which may not be finished in the video. The previous action was placing the iron on the stand, so the next immediate action would be to start moving the iron over the shirt. Therefore, the prediction is that Robot Arm 2 will pick up the iron again and begin smoothing the shirt's fabric.</think></li>
+              <li>2.  <answer> Robot Arm 2 will grasp the iron from the steamer's stand and begin moving it across the shirt's surface to smooth wrinkles, while Robot Arm 1 adjusts the shirt's position to ensure even coverage. </answer>.</li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="indicators">
+      <div class="indicator active" data-index="0"></div>
+      <div class="indicator" data-index="1"></div>
+    </div>
+
+    <div class="slider-controls">
+      <button class="slider-btn prev-btn">
+        <i class="fa fa-chevron-left"></i> 上一个
+      </button>
+      <button class="slider-btn next-btn">
+        下一个 <i class="fa fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
   </main>
   <!-- 页脚 -->
   <footer class="bg-dark text-white py-8">
